@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RupayVibe Games — Play Mini-Games & Earn Coins</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between font-sans">
+
+  <!-- Header -->
+  <header class="p-4 border-b border-slate-800 flex items-center justify-between max-w-2xl mx-auto w-full">
+    <div>
+      <div class="flex items-center gap-2">
+        <h1 class="text-xl font-bold text-amber-400">RupayVibe</h1>
+        <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-semibold">GAME HUB</span>
+      </div>
+      <p class="text-xs text-slate-400">Play casual games • Synced with RupayVibe App</p>
+    </div>
+    <button id="authBtn" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-semibold text-sm px-4 py-2 rounded-lg transition">
+      Sign in with Google
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-2xl mx-auto w-full p-4 space-y-5 flex-1">
+
+    <!-- Wallet Card -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-700 rounded-2xl p-5 shadow-lg">
+      <div class="flex items-center justify-between">
+        <p class="text-xs uppercase tracking-wider text-indigo-100 font-medium">RupayVibe Wallet Balance</p>
+        <span id="dailyLimitBadge" class="text-[11px] bg-black/25 text-indigo-100 px-2.5 py-0.5 rounded-full">Plays Left Today: 10/10</span>
+      </div>
+      <h2 id="coinBalance" class="text-3xl font-extrabold mt-1">0 Coins</h2>
+      <p id="inrValue" class="text-xs text-indigo-100 mt-1">≈ ₹0.00 (Withdraw via RupayVibe App)</p>
+    </div>
+
+    <!-- Ad Slot 1 (Paste Site 2 Adsterra Banner Code Here) -->
+    <div id="ad-banner-top" class="bg-slate-900 border border-dashed border-slate-700 rounded-xl p-3 text-center text-xs text-slate-500">
+      Advertisement Space (Adsterra 320x50 Banner)
+    </div>
+
+    <!-- Game Selection Grid -->
+    <div id="gameMenu" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+        <div>
+          <span class="text-2xl">🧠</span>
+          <h3 class="font-bold text-base mt-2">Memory Match</h3>
+          <p class="text-xs text-slate-400 mt-1">Match 4 emoji pairs in 25 seconds.</p>
+        </div>
+        <button onclick="startMemoryGame()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-2 rounded-xl text-xs">
+          Play (+15 Coins)
+        </button>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+        <div>
+          <span class="text-2xl">⚡</span>
+          <h3 class="font-bold text-base mt-2">Reflex Tap</h3>
+          <p class="text-xs text-slate-400 mt-1">Tap the glowing target 15 times in 12s.</p>
+        </div>
+        <button onclick="startReflexGame()" class="w-full bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-2 rounded-xl text-xs">
+          Play (+15 Coins)
+        </button>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+        <div>
+          <span class="text-2xl">🔢</span>
+          <h3 class="font-bold text-base mt-2">Math Sprint</h3>
+          <p class="text-xs text-slate-400 mt-1">Solve 5 quick math sums in 20s.</p>
+        </div>
+        <button onclick="startMathGame()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-xl text-xs">
+          Play (+20 Coins)
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Game Arena -->
+    <div id="gameArena" class="hidden bg-slate-900 border border-slate-700 rounded-2xl p-5 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 id="arenaTitle" class="font-bold text-lg text-amber-400">Game</h3>
+        <div class="flex items-center gap-3">
+          <span id="arenaTimer" class="text-xs bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full font-bold">Time: 20s</span>
+          <button onclick="closeArena()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">Exit</button>
+        </div>
+      </div>
+      <div id="arenaBody" class="min-h-[240px] flex flex-col items-center justify-center"></div>
+    </div>
+
+    <!-- Ad Slot 2 (Paste Site 2 Adsterra Native/Banner Code Here) -->
+    <div id="ad-banner-bottom" class="bg-slate-900 border border-dashed border-slate-700 rounded-xl p-3 text-center text-xs text-slate-500">
+      Advertisement Space (Adsterra Native Banner)
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="p-4 border-t border-slate-800 text-center text-xs text-slate-400 space-x-4 max-w-2xl mx-auto w-full">
+    <span>© 2026 RupayVibe Games (JP Studio)</span>
+    <a href="https://rupayvibe-web.vercel.app/privacy.html" class="text-amber-400 hover:underline">Privacy Policy</a>
+    <a href="https://rupayvibe-web.vercel.app" class="text-emerald-400 hover:underline">Survey Portal</a>
+  </footer>
+
+  <!-- Firebase + Game Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
+      authDomain: "rupayvibe.firebaseapp.com",
+      projectId: "rupayvibe",
+      storageBucket: "rupayvibe.firebasestorage.app",
+      messagingSenderId: "692963834855",
+      appId: "1:692963834855:web:4868ff4b5dd682b0c99b42",
+      measurementId: "G-H8C08XSQN2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const provider = new GoogleAuthProvider();
+
+    let currentUser = null;
+    let gameTimer = null;
+    const MAX_DAILY_PLAYS = 10;
+    const todayKey = "rv_plays_" + new Date().toISOString().split("T")[0];
+
+    const authBtn = document.getElementById("authBtn");
+    const coinBalanceEl = document.getElementById("coinBalance");
+    const inrValueEl = document.getElementById("inrValue");
+    const dailyLimitBadge = document.getElementById("dailyLimitBadge");
+    const gameArena = document.getElementById("gameArena");
+    const arenaTitle = document.getElementById("arenaTitle");
+    const arenaTimer = document.getElementById("arenaTimer");
+    const arenaBody = document.getElementById("arenaBody");
+
+    function getPlaysUsed() {
+      return parseInt(localStorage.getItem(todayKey) || "0", 10);
+    }
+
+    function updatePlaysBadge() {
+      const left = Math.max(0, MAX_DAILY_PLAYS - getPlaysUsed());
+      dailyLimitBadge.innerText = `Plays Left Today: ${left}/${MAX_DAILY_PLAYS}`;
+    }
+    updatePlaysBadge();
+
+    authBtn.onclick = async () => {
+      if (currentUser) await signOut(auth);
+      else await signInWithPopup(auth, provider);
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        authBtn.innerText = "Sign Out";
+        const userRef = doc(db, "users", user.uid);
+        onSnapshot(userRef, async (snap) => {
+          if (snap.exists()) {
+            const coins = snap.data().coins || 0;
+            coinBalanceEl.innerText = `${coins} Coins`;
+            inrValueEl.innerText = `≈ ₹${(coins / 100).toFixed(2)} (Withdraw via RupayVibe App)`;
+          } else {
+            await setDoc(userRef, { email: user.email, name: user.displayName, coins: 100 }, { merge: true });
+          }
+        });
+      } else {
+        authBtn.innerText = "Sign in with Google";
+        coinBalanceEl.innerText = "0 Coins";
+        inrValueEl.innerText = "≈ ₹0.00 (Withdraw via RupayVibe App)";
+      }
+    });
+
+    function canPlay() {
+      if (!currentUser) {
+        alert("Please sign in with Google first!");
+        return false;
+      }
+      if (getPlaysUsed() >= MAX_DAILY_PLAYS) {
+        alert("Daily 10 games limit reached! Come back tomorrow or visit RupayVibe Survey Portal.");
+        return false;
+      }
+      return true;
+    }
+
+    async function rewardWin(coinsWon, gameName) {
+      clearInterval(gameTimer);
+      localStorage.setItem(todayKey, String(getPlaysUsed() + 1));
+      updatePlaysBadge();
+      const userRef = doc(db, "users", currentUser.uid);
+      await updateDoc(userRef, { coins: increment(coinsWon) });
+      arenaBody.innerHTML = `
+        <div class="text-center space-y-3">
+          <div class="text-4xl">🎉</div>
+          <h4 class="text-xl font-bold text-emerald-400">You Won +${coinsWon} Coins!</h4>
+          <p class="text-xs text-slate-400">${gameName} reward added to your RupayVibe Wallet.</p>
+          <button onclick="closeArena()" class="bg-emerald-500 text-slate-950 font-bold px-5 py-2 rounded-xl text-xs">Back to Games</button>
+        </div>
+      `;
+    }
+
+    function gameOver(msg) {
+      clearInterval(gameTimer);
+      arenaBody.innerHTML = `
+        <div class="text-center space-y-3">
+          <div class="text-4xl">⏰</div>
+          <h4 class="text-lg font-bold text-rose-400">${msg}</h4>
+          <button onclick="closeArena()" class="bg-slate-700 text-white font-bold px-5 py-2 rounded-xl text-xs">Try Again</button>
+        </div>
+      `;
+    }
+
+    window.closeArena = () => {
+      clearInterval(gameTimer);
+      gameArena.classList.add("hidden");
+    };
+
+    function startTimer(seconds) {
+      clearInterval(gameTimer);
+      let left = seconds;
+      arenaTimer.innerText = `Time: ${left}s`;
+      gameTimer = setInterval(() => {
+        left--;
+        arenaTimer.innerText = `Time: ${left}s`;
+        if (left <= 0) gameOver("Time's up! Try again.");
+      }, 1000);
+    }
+
+    // 1. Memory Match Game
+    window.startMemoryGame = () => {
+      if (!canPlay()) return;
+      gameArena.classList.remove("hidden");
+      arenaTitle.innerText = "🧠 Memory Match (+15 Coins)";
+      startTimer(25);
+
+      const icons = ["🚀", "💎", "🔥", "🎯", "🚀", "💎", "🔥", "🎯"].sort(() => Math.random() - 0.5);
+      let flipped = [];
+      let matched = 0;
+
+      arenaBody.innerHTML = `<div id="memGrid" class="grid grid-cols-4 gap-3 w-full max-w-xs"></div>`;
+      const grid = document.getElementById("memGrid");
+
+      icons.forEach((icon) => {
+        const btn = document.createElement("button");
+        btn.className = "h-16 bg-slate-800 hover:bg-slate-700 rounded-xl text-2xl font-bold flex items-center justify-center transition";
+        btn.innerText = "?";
+        btn.onclick = () => {
+          if (btn.dataset.done || flipped.length === 2 || flipped.includes(btn)) return;
+          btn.innerText = icon;
+          btn.classList.replace("bg-slate-800", "bg-indigo-600");
+          flipped.push(btn);
+
+          if (flipped.length === 2) {
+            const [a, b] = flipped;
+            if (a.innerText === b.innerText) {
+              a.dataset.done = b.dataset.done = "1";
+              matched++;
+              flipped = [];
+              if (matched === 4) rewardWin(15, "Memory Match");
+            } else {
+              setTimeout(() => {
+                a.innerText = b.innerText = "?";
+                a.classList.replace("bg-indigo-600", "bg-slate-800");
+                b.classList.replace("bg-indigo-600", "bg-slate-800");
+                flipped = [];
+              }, 450);
+            }
+          }
+        };
+        grid.appendChild(btn);
+      });
+    };
+
+    // 2. Reflex Tap Game
+    window.startReflexGame = () => {
+      if (!canPlay()) return;
+      gameArena.classList.remove("hidden");
+      arenaTitle.innerText = "⚡ Reflex Tap (+15 Coins)";
+      startTimer(12);
+
+      let score = 0;
+      arenaBody.innerHTML = `
+        <p class="text-xs text-slate-400 mb-2">Score: <span id="refScore" class="text-amber-400 font-bold">0</span> / 15</p>
+        <div id="refBox" class="relative w-full h-52 bg-slate-950 rounded-xl border border-slate-800 overflow-hidden">
+          <button id="targetDot" class="absolute w-11 h-11 rounded-full bg-amber-400 text-slate-950 font-extrabold text-sm shadow-lg">TAP</button>
+        </div>
+      `;
+      const dot = document.getElementById("targetDot");
+      const moveDot = () => {
+        dot.style.left = Math.floor(Math.random() * 80) + "%";
+        dot.style.top = Math.floor(Math.random() * 72) + "%";
+      };
+      moveDot();
+      dot.onclick = () => {
+        score++;
+        document.getElementById("refScore").innerText = score;
+        if (score >= 15) rewardWin(15, "Reflex Tap");
+        else moveDot();
+      };
+    };
+
+    // 3. Math Sprint Game
+    window.startMathGame = () => {
+      if (!canPlay()) return;
+      gameArena.classList.remove("hidden");
+      arenaTitle.innerText = "🔢 Math Sprint (+20 Coins)";
+      startTimer(20);
+
+      let solved = 0;
+      const nextSum = () => {
+        const a = Math.floor(Math.random() * 25) + 10;
+        const b = Math.floor(Math.random() * 25) + 5;
+        const ans = a + b;
+        const opts = [ans, ans + 3, ans - 2, ans + 5].sort(() => Math.random() - 0.5);
+
+        arenaBody.innerHTML = `
+          <p class="text-xs text-slate-400 mb-2">Solved: ${solved} / 5</p>
+          <h4 class="text-2xl font-extrabold text-white mb-4">${a} + ${b} = ?</h4>
+          <div class="grid grid-cols-2 gap-3 w-full max-w-xs">
+            ${opts.map(o => `<button class="optBtn bg-slate-800 hover:bg-blue-600 py-3 rounded-xl font-bold text-base">${o}</button>`).join("")}
+          </div>
+        `;
+        document.querySelectorAll(".optBtn").forEach(btn => {
+          btn.onclick = () => {
+            if (parseInt(btn.innerText) === ans) {
+              solved++;
+              if (solved >= 5) rewardWin(20, "Math Sprint");
+              else nextSum();
+            } else {
+              gameOver("Wrong answer! Try again.");
+            }
+          };
+        });
+      };
+      nextSum();
+    };
+  </script>
+</body>
+</html>
