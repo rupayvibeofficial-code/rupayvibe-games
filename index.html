@@ -185,7 +185,7 @@
             </div>
           </div>
           <div class="flex gap-2">
-            <button onclick="joinPool1()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
+            <button id="joinPool1Btn" onclick="joinPool1()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-800 disabled:text-slate-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
               🎟️ Join Pool (100 Coins)
             </button>
             <button onclick="switchTab('earn')" class="bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold px-3.5 py-2.5 rounded-xl text-xs border border-slate-700">
@@ -403,7 +403,7 @@
           <input id="upiInput" type="text" placeholder="example@okicici / 9876543210@ybl" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400" />
         </div>
 
-        <button onclick="submitWithdraw()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3 rounded-xl text-sm shadow-lg transition">
+        <button id="submitWithdrawBtn" onclick="submitWithdraw()" class="w-full bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-800 disabled:text-slate-400 text-slate-950 font-extrabold py-3 rounded-xl text-sm shadow-lg transition">
           Request Same-Day UPI Payout
         </button>
       </div>
@@ -484,7 +484,7 @@
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
-    // New Adsterra Smartlink for games.rupayvibe.online
+    // Adsterra Smartlink for games.rupayvibe.online
     const AD_SMARTLINK = "https://araplhn.org/4/06c10e2593c78daee4f613bf45f3c8ed";
     const STREAK_REWARDS = [10, 15, 20, 30, 40, 50, 100];
     const MAX_DAILY_PLAYS = 10;
@@ -515,6 +515,45 @@
     const urlParams = new URLSearchParams(window.location.search);
     const incomingRef = urlParams.get("ref");
     if (incomingRef) localStorage.setItem("rv_pending_ref", incomingRef.trim().toUpperCase());
+
+    // Reusable 10-Second Anti-Skip Sponsor Ad Verification Helper
+    function verifySponsorAdView(btn, defaultLabel, actionName, onSuccess) {
+      window.open(AD_SMARTLINK, "_blank", "noopener,noreferrer");
+
+      btn.disabled = true;
+      let sec = 10;
+      let aborted = false;
+      btn.innerText = `⏳ Stay on Ad Tab... ${sec}s`;
+
+      const onReturnEarly = () => {
+        if (document.visibilityState === "visible" && sec > 0) {
+          aborted = true;
+          clearInterval(timer);
+          document.removeEventListener("visibilitychange", onReturnEarly);
+          btn.disabled = false;
+          btn.innerText = defaultLabel;
+          alert(`⚠️ Ad closed too early! Please stay on the Sponsor Ad page for full 10 seconds to complete ${actionName}.`);
+        }
+      };
+
+      setTimeout(() => {
+        if (!aborted && sec > 0) {
+          document.addEventListener("visibilitychange", onReturnEarly);
+        }
+      }, 1000);
+
+      const timer = setInterval(async () => {
+        if (aborted) return;
+        sec--;
+        if (sec > 0) {
+          btn.innerText = `⏳ Stay on Ad Tab... ${sec}s`;
+        } else {
+          clearInterval(timer);
+          document.removeEventListener("visibilitychange", onReturnEarly);
+          await onSuccess();
+        }
+      }, 1000);
+    }
 
     window.switchTab = (tabName) => {
       ["home", "earn", "dashboard", "redeem", "profile"].forEach(t => {
@@ -678,28 +717,18 @@
         return;
       }
 
-      // 2. Watch Sponsor Ad (Adsterra Smartlink) for Extra Spin (up to 3/day)
+      // 2. Watch Sponsor Ad (10s Anti-Skip Check) for Extra Spin
       const adUsed = getAdSpinsUsed();
       if (adUsed >= MAX_AD_SPINS) {
         return alert("Daily 4 Spins (1 Free + 3 Ad Spins) completed! Play Mini-Games in Earn Coins tab.");
       }
 
-      window.open(AD_SMARTLINK, "_blank", "noopener,noreferrer");
-
-      btn.disabled = true;
-      let sec = 10;
-      btn.innerText = `⏳ Viewing Ad... ${sec}s`;
-
-      const adTimer = setInterval(() => {
-        sec--;
-        btn.innerText = `⏳ Viewing Ad... ${sec}s`;
-        if (sec <= 0) {
-          clearInterval(adTimer);
-          localStorage.setItem(adSpinCountKey, String(adUsed + 1));
-          btn.innerText = "🎡 Spinning...";
-          runActualWheelSpin();
-        }
-      }, 1000);
+      const adLeft = MAX_AD_SPINS - adUsed;
+      verifySponsorAdView(btn, `📺 Watch Ad & Spin (${adLeft} Left)`, "Bonus Spin", async () => {
+        localStorage.setItem(adSpinCountKey, String(adUsed + 1));
+        btn.innerText = "🎡 Spinning...";
+        runActualWheelSpin();
+      });
     };
 
     document.getElementById("authBtn").onclick = async () => {
@@ -789,7 +818,7 @@
       }
     });
 
-    // Join Pool #1 (Opens Adsterra Smartlink on Token Purchase)
+    // Join Pool #1 (10s Anti-Skip Sponsor Ad Verification)
     window.joinPool1 = async () => {
       if (!currentUser) return alert("Please sign in with Google first!");
       const coins = userData.coins || 0;
@@ -800,30 +829,36 @@
         return;
       }
 
-      window.open(AD_SMARTLINK, "_blank", "noopener,noreferrer");
+      const btn = document.getElementById("joinPool1Btn");
+      verifySponsorAdView(btn, "🎟️ Join Pool (100 Coins)", "Pool #1 Entry", async () => {
+        try {
+          const pSnap = await getDoc(pool1Ref);
+          const currentEntries = pSnap.exists() ? (pSnap.data().entries || []) : [];
+          const newEntries = [...currentEntries, { uid: currentUser.uid, name: userData.name || "Player" }];
 
-      const pSnap = await getDoc(pool1Ref);
-      const currentEntries = pSnap.exists() ? (pSnap.data().entries || []) : [];
-      const newEntries = [...currentEntries, { uid: currentUser.uid, name: userData.name || "Player" }];
+          await updateDoc(doc(db, "users", currentUser.uid), {
+            coins: increment(-100),
+            poolEntries: increment(1)
+          });
 
-      await updateDoc(doc(db, "users", currentUser.uid), {
-        coins: increment(-100),
-        poolEntries: increment(1)
+          if (newEntries.length >= 10) {
+            const winner = newEntries[Math.floor(Math.random() * newEntries.length)];
+            await updateDoc(doc(db, "users", winner.uid), { coins: increment(1000) });
+            await setDoc(pool1Ref, {
+              entries: [],
+              lastWinner: winner.name,
+              round: increment(1)
+            }, { merge: true });
+            alert(`🎟️ Pool #1 Full (10/10)! Winner: ${winner.name} won ₹10 (1,000 Coins)!`);
+          } else {
+            await setDoc(pool1Ref, { entries: newEntries }, { merge: true });
+            alert(`🎟️ Ticket Confirmed! (${newEntries.length}/10 Joined). Winner drawn automatically at 10/10!`);
+          }
+        } finally {
+          btn.disabled = false;
+          btn.innerText = "🎟️ Join Pool (100 Coins)";
+        }
       });
-
-      if (newEntries.length >= 10) {
-        const winner = newEntries[Math.floor(Math.random() * newEntries.length)];
-        await updateDoc(doc(db, "users", winner.uid), { coins: increment(1000) });
-        await setDoc(pool1Ref, {
-          entries: [],
-          lastWinner: winner.name,
-          round: increment(1)
-        }, { merge: true });
-        alert(`🎟️ Pool #1 Full (10/10)! Winner: ${winner.name} won ₹10 (1,000 Coins)!`);
-      } else {
-        await setDoc(pool1Ref, { entries: newEntries }, { merge: true });
-        alert(`🎟️ Ticket Confirmed! (${newEntries.length}/10 Joined). Winner drawn automatically at 10/10!`);
-      }
     };
 
     // Referral Share
@@ -840,7 +875,7 @@
       window.open(`https://wa.me/?text=${msg}`, "_blank");
     };
 
-    // Redeem UPI (Opens Adsterra Smartlink on Payout Request)
+    // Redeem UPI
     window.selectPayout = (rs, coins) => {
       selectedRs = rs;
       selectedCoins = coins;
@@ -850,27 +885,34 @@
       document.getElementById("amt" + rs).className = "payoutOpt border-2 border-emerald-500 bg-emerald-500/15 rounded-xl p-3 text-center";
     };
 
+    // Submit Withdraw (10s Anti-Skip Sponsor Ad Verification)
     window.submitWithdraw = async () => {
       if (!currentUser) return alert("Please sign in first!");
       const upi = document.getElementById("upiInput").value.trim();
       if (!upi || !upi.includes("@")) return alert("Please enter a valid UPI ID (e.g., name@okicici)");
       if ((userData.coins || 0) < selectedCoins) return alert(`Insufficient coins! You need ${selectedCoins} Coins for ₹${selectedRs}.`);
 
-      window.open(AD_SMARTLINK, "_blank", "noopener,noreferrer");
-
-      await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(-selectedCoins) });
-      await addDoc(collection(db, "withdrawals"), {
-        uid: currentUser.uid,
-        email: currentUser.email,
-        name: userData.name || "User",
-        upiId: upi,
-        amount: selectedRs,
-        coinsDeducted: selectedCoins,
-        status: "Pending",
-        source: "games.rupayvibe.online",
-        timestamp: serverTimestamp()
+      const btn = document.getElementById("submitWithdrawBtn");
+      verifySponsorAdView(btn, "Request Same-Day UPI Payout", "UPI Withdrawal Request", async () => {
+        try {
+          await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(-selectedCoins) });
+          await addDoc(collection(db, "withdrawals"), {
+            uid: currentUser.uid,
+            email: currentUser.email,
+            name: userData.name || "User",
+            upiId: upi,
+            amount: selectedRs,
+            coinsDeducted: selectedCoins,
+            status: "Pending",
+            source: "games.rupayvibe.online",
+            timestamp: serverTimestamp()
+          });
+          alert(`✅ ₹${selectedRs} Same-Day UPI Withdrawal Requested! Payment will be sent to ${upi} today.`);
+        } finally {
+          btn.disabled = false;
+          btn.innerText = "Request Same-Day UPI Payout";
+        }
       });
-      alert(`✅ ₹${selectedRs} Same-Day UPI Withdrawal Requested! Payment will be sent to ${upi} today.`);
     };
 
     // Mini-Games Logic
