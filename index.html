@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RupayVibe Mega Arena — Pools, Spin & Same-Day UPI Rewards</title>
+  <title>RupayVibe Mega Arena — 7-Day Streak, Pools, Spin & Same-Day UPI Rewards</title>
   <!-- Monetag Clean Ads: In-Page Push & Vignette Banner (No Popunder) -->
   <script>(function(s){s.dataset.zone='12323371',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   <script>(function(s){s.dataset.zone='12323381',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
@@ -51,7 +51,7 @@
   <!-- Main Container -->
   <main class="max-w-2xl mx-auto w-full p-4 space-y-5">
 
-    <!-- ==================== TAB 1: HOME (POOLS & SPIN) ==================== -->
+    <!-- ==================== TAB 1: HOME (7-DAY STREAK, POOLS & SPIN) ==================== -->
     <div id="tab-home" class="space-y-5">
 
       <!-- Premium Wallet Hero Card -->
@@ -77,6 +77,26 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <!-- 🔥 7-Day Continuous Daily Check-In Streak Card -->
+      <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-4 space-y-3 shadow-lg">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-extrabold text-white">🔥 7-Day Daily Check-In</h3>
+            <p class="text-[11px] text-slate-400">Check in daily without missing to win +100 Coins on Day 7!</p>
+          </div>
+          <span id="streakDayBadge" class="text-xs font-extrabold bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/30">
+            Day 1/7
+          </span>
+        </div>
+
+        <!-- 7 Days Grid -->
+        <div id="streakGrid" class="grid grid-cols-7 gap-1.5 text-center"></div>
+
+        <button id="claimStreakBtn" onclick="claimDailyStreak()" class="w-full bg-amber-400 hover:bg-amber-300 disabled:bg-slate-800 disabled:text-slate-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
+          Claim Day 1 (+10 Coins)
+        </button>
       </div>
 
       <!-- Adsterra 320x50 Banner -->
@@ -334,9 +354,9 @@
       </div>
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
-        <h3 class="text-sm font-bold text-white">Recent Activity</h3>
-        <div id="activityList" class="text-xs text-slate-400 space-y-2">
-          <p>Sign in to view your live pool & game activity.</p>
+        <h3 class="text-sm font-bold text-white">Check-In & Arena Status</h3>
+        <div id="activityList" class="text-xs text-slate-400 space-y-1.5">
+          <p>7-Day Streak synced automatically with RupayVibe App & Web.</p>
         </div>
       </div>
     </div>
@@ -437,7 +457,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where, getDocs, increment, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where, getDocs, increment, onSnapshot, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
@@ -461,8 +481,20 @@
     let selectedCoins = 1000;
     let currentWheelDeg = 0;
 
+    const STREAK_REWARDS = [10, 15, 20, 30, 40, 50, 100];
     const MAX_DAILY_PLAYS = 10;
-    const todayStr = new Date().toISOString().split("T")[0];
+
+    function getLocalDateStr(offsetDays = 0) {
+      const d = new Date();
+      d.setDate(d.getDate() + offsetDays);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return `${y}-${m}-${day}`;
+    }
+
+    const todayStr = getLocalDateStr(0);
+    const yesterdayStr = getLocalDateStr(-1);
     const todayKey = "rv_plays_" + todayStr;
     const spinKey = "rv_spin_" + todayStr;
 
@@ -478,6 +510,98 @@
       document.getElementById("tab-" + tabName).classList.remove("hidden");
       document.getElementById("nav-" + tabName).classList.replace("text-slate-400", "text-amber-400");
       window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // Render 7-Day Continuous Daily Check-In UI
+    function renderStreakUI(lastCheckIn = "", checkInStreak = 0) {
+      const claimedToday = lastCheckIn === todayStr;
+      let activeDayIndex = 0;
+
+      if (claimedToday) {
+        activeDayIndex = Math.max(0, (checkInStreak - 1) % 7);
+      } else if (lastCheckIn === yesterdayStr) {
+        activeDayIndex = checkInStreak % 7;
+      } else {
+        activeDayIndex = 0; // Missed a day -> resets to Day 1
+      }
+
+      document.getElementById("streakDayBadge").innerText = `Day ${activeDayIndex + 1}/7`;
+      const grid = document.getElementById("streakGrid");
+      grid.innerHTML = "";
+
+      STREAK_REWARDS.forEach((reward, i) => {
+        const isDone = claimedToday ? i <= activeDayIndex : i < activeDayIndex;
+        const isCurrent = !claimedToday && i === activeDayIndex;
+
+        let cardClass = "bg-slate-950 border border-slate-800 text-slate-400";
+        if (isDone) {
+          cardClass = "bg-emerald-600/90 border border-emerald-400 text-white";
+        } else if (isCurrent) {
+          cardClass = "bg-amber-400/20 border-2 border-amber-400 text-amber-300";
+        }
+
+        const cell = document.createElement("div");
+        cell.className = `${cardClass} rounded-xl py-2 px-1 flex flex-col items-center justify-center transition`;
+        cell.innerHTML = `
+          <span class="text-[10px] font-bold">D${i + 1}</span>
+          <span class="text-xs my-0.5">${isDone ? "✅" : (i === 6 ? "👑" : "🪙")}</span>
+          <span class="text-[10px] font-extrabold">+${reward}</span>
+        `;
+        grid.appendChild(cell);
+      });
+
+      const btn = document.getElementById("claimStreakBtn");
+      if (claimedToday) {
+        btn.disabled = true;
+        btn.innerText = "✅ Today's Check-In Claimed (Come Back Tomorrow)";
+      } else {
+        btn.disabled = false;
+        btn.innerText = `Claim Day ${activeDayIndex + 1} (+${STREAK_REWARDS[activeDayIndex]} Coins)`;
+      }
+    }
+    renderStreakUI();
+
+    window.claimDailyStreak = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const btn = document.getElementById("claimStreakBtn");
+      btn.disabled = true;
+
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        let claimedDay = 1;
+        let claimedReward = 10;
+
+        await runTransaction(db, async (tx) => {
+          const snap = await tx.get(userRef);
+          const data = snap.data() || {};
+          const lastDate = (data.lastCheckIn || "").trim();
+          const currentStreak = data.checkInStreak || 0;
+
+          if (lastDate === todayStr) throw "Already claimed today!";
+
+          const nextDayIndex = (lastDate === yesterdayStr) ? (currentStreak % 7) : 0;
+          claimedReward = STREAK_REWARDS[nextDayIndex];
+          claimedDay = nextDayIndex + 1;
+
+          tx.update(userRef, {
+            coins: increment(claimedReward),
+            lastCheckIn: todayStr,
+            checkInStreak: claimedDay
+          });
+        });
+
+        await addDoc(collection(db, "users", currentUser.uid, "history"), {
+          title: `Day ${claimedDay} Check-In Bonus`,
+          coins: claimedReward,
+          type: "credit",
+          createdAt: serverTimestamp()
+        });
+
+        alert(`🔥 Day ${claimedDay} Claimed! +${claimedReward} Coins Added to Your Wallet!`);
+      } catch (e) {
+        if (typeof e === "string") alert(e);
+        else alert("Check-in error: " + e.message);
+      }
     };
 
     function getPlaysUsed() { return parseInt(localStorage.getItem(todayKey) || "0", 10); }
@@ -540,11 +664,12 @@
             }
           }
 
-          // New users start with 0 Coins (Earn via Games/Spin or Invite +200 Coins)
           await setDoc(userRef, {
             email: user.email,
             name: user.displayName || "Player",
             coins: 0,
+            lastCheckIn: "",
+            checkInStreak: 0,
             referralCode: generatedCode,
             referredBy: validReferrerUid || "",
             referralsCount: 0,
@@ -557,8 +682,12 @@
           if (snap.exists()) {
             userData = snap.data();
             const coins = userData.coins || 0;
+            const lastCheckIn = (userData.lastCheckIn || "").trim();
+            const checkInStreak = userData.checkInStreak || 0;
             const code = userData.referralCode || ("RV" + user.uid.slice(0, 5).toUpperCase());
             const shareUrl = `https://games.rupayvibe.online?ref=${code}`;
+
+            renderStreakUI(lastCheckIn, checkInStreak);
 
             document.getElementById("coinBalance").innerText = `${coins} Coins`;
             document.getElementById("inrValue").innerText = `≈ ₹${(coins / 100).toFixed(2)} INR`;
@@ -575,6 +704,7 @@
         document.getElementById("authBtn").innerText = "Sign in with Google";
         document.getElementById("coinBalance").innerText = "0 Coins";
         document.getElementById("inrValue").innerText = "≈ ₹0.00 INR";
+        renderStreakUI();
       }
     });
 
@@ -598,7 +728,7 @@
       }, 3100);
     };
 
-    // Join Pool #1 (100 Coins -> 10 Users -> ₹10 Winner)
+    // Join Pool #1
     window.joinPool1 = async () => {
       if (!currentUser) return alert("Please sign in with Google first!");
       const coins = userData.coins || 0;
@@ -678,7 +808,7 @@
       alert(`✅ ₹${selectedRs} Same-Day UPI Withdrawal Requested! Payment will be sent to ${upi} today.`);
     };
 
-    // Mini-Games Logic (Centered Popup Modal)
+    // Mini-Games Logic
     function canPlay() {
       if (!currentUser) { alert("Please sign in with Google first!"); return false; }
       if (getPlaysUsed() >= MAX_DAILY_PLAYS) { alert("Daily 10 games limit reached! Come back tomorrow or open Surveys."); return false; }
