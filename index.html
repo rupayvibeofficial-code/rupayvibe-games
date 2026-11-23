@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RupayVibe Mega Arena — 7-Day Streak, Pools, Spin & Same-Day UPI Rewards</title>
+  <title>RupayVibe Mega Arena — 7-Day Streak, Spin & Win, Mega Pools & UPI Rewards</title>
   <!-- Monetag Clean Ads: In-Page Push & Vignette Banner (No Popunder) -->
   <script>(function(s){s.dataset.zone='12323371',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   <script>(function(s){s.dataset.zone='12323381',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
@@ -51,7 +51,7 @@
   <!-- Main Container -->
   <main class="max-w-2xl mx-auto w-full p-4 space-y-5">
 
-    <!-- ==================== TAB 1: HOME (7-DAY STREAK, POOLS & SPIN) ==================== -->
+    <!-- ==================== TAB 1: HOME (7-DAY STREAK, SPIN & POOLS) ==================== -->
     <div id="tab-home" class="space-y-5">
 
       <!-- Premium Wallet Hero Card -->
@@ -116,15 +116,15 @@
         </div>
       </div>
 
-      <!-- Lucky Spin Wheel Card -->
+      <!-- Lucky Spin Wheel Card (1 Free + 3 Ad Spins) -->
       <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-5 gold-glow">
         <div class="flex items-center justify-between mb-3">
           <div>
-            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-bold">FREE DAILY SPIN</span>
-            <h3 class="text-base font-extrabold text-white mt-1">🎡 Lucky Coin Spin Wheel</h3>
-            <p class="text-xs text-slate-400">Spin daily to win instant coins for Mega Pools!</p>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-bold">DAILY LUCKY SPIN</span>
+            <h3 class="text-base font-extrabold text-white mt-1">🎡 Spin & Win Coins</h3>
+            <p class="text-xs text-slate-400">1 Free Spin + 3 Bonus Ad Spins every day!</p>
           </div>
-          <span id="spinStatusBadge" class="text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-bold">1 Free Spin</span>
+          <span id="spinStatusBadge" class="text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-bold">1 Free + 3 Ad Spins</span>
         </div>
 
         <div class="flex flex-col sm:flex-row items-center justify-around gap-4 py-2">
@@ -140,8 +140,8 @@
           </div>
 
           <div class="text-center sm:text-left space-y-2.5 max-w-xs">
-            <p class="text-xs text-slate-300">Rewards: <span class="text-amber-400 font-bold">+5, +10, +15, +20, +30, +50 Coins</span></p>
-            <button id="spinNowBtn" onclick="spinWheel()" class="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-extrabold py-2.5 px-6 rounded-xl text-xs sm:text-sm shadow-lg transition">
+            <p class="text-xs text-slate-300">Prizes: <span class="text-amber-400 font-bold">+5, +10, +15, +20, +30, +50 Coins</span></p>
+            <button id="spinNowBtn" onclick="spinWheel()" class="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 disabled:from-slate-800 disabled:to-slate-800 disabled:text-slate-400 text-slate-950 font-extrabold py-2.5 px-6 rounded-xl text-xs sm:text-sm shadow-lg transition">
               🎡 Spin Now (Free)
             </button>
           </div>
@@ -265,7 +265,7 @@
         <div>
           <span class="text-[10px] uppercase tracking-wider bg-black/30 text-indigo-100 px-2.5 py-0.5 rounded-full font-bold">PLAY & COLLECT</span>
           <h2 class="text-xl font-extrabold text-white mt-2">🎮 Earn Coins Zone</h2>
-          <p class="text-xs text-indigo-100/90 mt-0.5">Play quick skill games to collect coins for Mega Pools!</p>
+          <p class="text-xs text-indigo-100/90 mt-0.5">Play up to 10 games daily (up to 200 Coins/day)!</p>
         </div>
         <div class="text-right">
           <span id="dailyLimitBadge" class="text-[11px] bg-black/35 text-amber-300 px-3 py-1 rounded-full font-bold border border-amber-400/30">Plays Left: 10/10</span>
@@ -356,7 +356,7 @@
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
         <h3 class="text-sm font-bold text-white">Check-In & Arena Status</h3>
         <div id="activityList" class="text-xs text-slate-400 space-y-1.5">
-          <p>7-Day Streak synced automatically with RupayVibe App & Web.</p>
+          <p>7-Day Streak & Wallet synced automatically with RupayVibe App & Web.</p>
         </div>
       </div>
     </div>
@@ -474,15 +474,17 @@
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
+    const AD_SMARTLINK = "https://asiafilm.org/4/11743e7be4c0a04ea4fbe3b9eb71414e";
+    const STREAK_REWARDS = [10, 15, 20, 30, 40, 50, 100];
+    const MAX_DAILY_PLAYS = 10;
+    const MAX_AD_SPINS = 3;
+
     let currentUser = null;
     let userData = {};
     let gameTimer = null;
     let selectedRs = 10;
     let selectedCoins = 1000;
     let currentWheelDeg = 0;
-
-    const STREAK_REWARDS = [10, 15, 20, 30, 40, 50, 100];
-    const MAX_DAILY_PLAYS = 10;
 
     function getLocalDateStr(offsetDays = 0) {
       const d = new Date();
@@ -497,6 +499,7 @@
     const yesterdayStr = getLocalDateStr(-1);
     const todayKey = "rv_plays_" + todayStr;
     const spinKey = "rv_spin_" + todayStr;
+    const adSpinCountKey = "rv_ad_spins_" + todayStr;
 
     const urlParams = new URLSearchParams(window.location.search);
     const incomingRef = urlParams.get("ref");
@@ -522,7 +525,7 @@
       } else if (lastCheckIn === yesterdayStr) {
         activeDayIndex = checkInStreak % 7;
       } else {
-        activeDayIndex = 0; // Missed a day -> resets to Day 1
+        activeDayIndex = 0;
       }
 
       document.getElementById("streakDayBadge").innerText = `Day ${activeDayIndex + 1}/7`;
@@ -613,13 +616,80 @@
     }
     updatePlaysBadge();
 
+    function getAdSpinsUsed() {
+      return parseInt(localStorage.getItem(adSpinCountKey) || "0", 10);
+    }
+
     function updateSpinBadge() {
-      if (localStorage.getItem(spinKey)) {
-        document.getElementById("spinStatusBadge").innerText = "Spun Today ✓";
+      const freeUsed = !!localStorage.getItem(spinKey);
+      const adUsed = getAdSpinsUsed();
+      const adLeft = Math.max(0, MAX_AD_SPINS - adUsed);
+
+      if (!freeUsed) {
+        document.getElementById("spinStatusBadge").innerText = "1 Free + 3 Ad Spins";
+        document.getElementById("spinNowBtn").innerText = "🎡 Spin Now (Free)";
+        document.getElementById("spinNowBtn").disabled = false;
+      } else if (adLeft > 0) {
+        document.getElementById("spinStatusBadge").innerText = `Ad Spins Left: ${adLeft}/${MAX_AD_SPINS}`;
+        document.getElementById("spinNowBtn").innerText = `📺 Watch Ad & Spin (${adLeft} Left)`;
+        document.getElementById("spinNowBtn").disabled = false;
+      } else {
+        document.getElementById("spinStatusBadge").innerText = "All Spins Used ✓";
         document.getElementById("spinNowBtn").innerText = "Come Back Tomorrow";
+        document.getElementById("spinNowBtn").disabled = true;
       }
     }
     updateSpinBadge();
+
+    function runActualWheelSpin() {
+      const prizes = [5, 10, 15, 20, 30, 50];
+      const idx = Math.floor(Math.random() * prizes.length);
+      const won = prizes[idx];
+      currentWheelDeg += 1440 + (idx * 60);
+      document.getElementById("wheelDisc").style.transform = `rotate(${currentWheelDeg}deg)`;
+
+      setTimeout(async () => {
+        await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(won) });
+        updateSpinBadge();
+        alert(`🎉 Congrats! You won +${won} Coins from Lucky Spin!`);
+      }, 3100);
+    }
+
+    window.spinWheel = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const btn = document.getElementById("spinNowBtn");
+
+      // 1. First Free Spin
+      if (!localStorage.getItem(spinKey)) {
+        btn.disabled = true;
+        localStorage.setItem(spinKey, "1");
+        runActualWheelSpin();
+        return;
+      }
+
+      // 2. Watch Sponsor Ad (Adsterra Smartlink) for Extra Spin (up to 3/day)
+      const adUsed = getAdSpinsUsed();
+      if (adUsed >= MAX_AD_SPINS) {
+        return alert("Daily 4 Spins (1 Free + 3 Ad Spins) completed! Play Mini-Games in Earn Coins tab.");
+      }
+
+      window.open(AD_SMARTLINK, "_blank", "noopener,noreferrer");
+
+      btn.disabled = true;
+      let sec = 10;
+      btn.innerText = `⏳ Viewing Ad... ${sec}s`;
+
+      const adTimer = setInterval(() => {
+        sec--;
+        btn.innerText = `⏳ Viewing Ad... ${sec}s`;
+        if (sec <= 0) {
+          clearInterval(adTimer);
+          localStorage.setItem(adSpinCountKey, String(adUsed + 1));
+          btn.innerText = "🎡 Spinning...";
+          runActualWheelSpin();
+        }
+      }, 1000);
+    };
 
     document.getElementById("authBtn").onclick = async () => {
       if (currentUser) await signOut(auth);
@@ -707,26 +777,6 @@
         renderStreakUI();
       }
     });
-
-    // Spin Wheel Logic
-    window.spinWheel = async () => {
-      if (!currentUser) return alert("Please sign in with Google first!");
-      if (localStorage.getItem(spinKey)) return alert("You already used today's Free Spin! Come back tomorrow or play Mini-Games.");
-
-      const prizes = [5, 10, 15, 20, 30, 50];
-      const idx = Math.floor(Math.random() * prizes.length);
-      const won = prizes[idx];
-      currentWheelDeg += 1440 + (idx * 60);
-      document.getElementById("wheelDisc").style.transform = `rotate(${currentWheelDeg}deg)`;
-
-      localStorage.setItem(spinKey, "1");
-      updateSpinBadge();
-
-      setTimeout(async () => {
-        await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(won) });
-        alert(`🎉 Congrats! You won +${won} Coins from Lucky Spin!`);
-      }, 3100);
-    };
 
     // Join Pool #1
     window.joinPool1 = async () => {
