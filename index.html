@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RupayVibe Games — Play Mini-Games, Join Mega Pools & Win Same-Day UPI Cash</title>
+  <title>RupayVibe Arena — Spin, Play Games, Join Mega Pools & Win Same-Day UPI Cash</title>
   <!-- Monetag Clean Ads: In-Page Push & Vignette Banner -->
   <script>(function(s){s.dataset.zone='12323371',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   <script>(function(s){s.dataset.zone='12323381',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
@@ -20,22 +20,22 @@
     }
   </style>
 </head>
-<body class="bg-[#070B14] text-white min-h-screen flex flex-col justify-between font-sans selection:bg-amber-400 selection:text-slate-950">
+<body class="bg-[#070B14] text-white min-h-screen flex flex-col justify-between font-sans pb-20 selection:bg-amber-400 selection:text-slate-950">
 
   <!-- Top Same-Day Payout Trust Bar -->
   <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 text-white text-[11px] font-bold py-1.5 px-3 text-center tracking-wide shadow-md">
-    ⚡ SAME-DAY UPI WITHDRAWAL • PLAY FREE GAMES & MEGA POOLS • WIN ₹10 TO ₹500 DAILY!
+    ⚡ SAME-DAY UPI WITHDRAWAL • SPIN, PLAY & JOIN MEGA POOLS • WIN ₹10 TO ₹12,000!
   </div>
 
   <!-- Header -->
-  <header class="p-4 border-b border-slate-800/80 bg-[#0B1120]/90 backdrop-blur sticky top-0 z-30">
+  <header class="p-4 border-b border-slate-800/80 bg-[#0B1120]/95 backdrop-blur sticky top-0 z-30">
     <div class="max-w-2xl mx-auto w-full flex items-center justify-between">
       <div>
         <div class="flex items-center gap-2">
           <h1 class="text-xl font-extrabold bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">RupayVibe</h1>
           <span class="text-[10px] bg-amber-500/20 border border-amber-400/40 text-amber-300 px-2 py-0.5 rounded-full font-bold">MEGA ARENA</span>
         </div>
-        <p class="text-[11px] text-slate-400">100 Coins = ₹1.00 • Instant Wallet Sync</p>
+        <p class="text-[11px] text-slate-400">100 Coins = ₹1.00 • Same-Day UPI Rewards</p>
       </div>
       <button id="authBtn" class="gold-shimmer text-slate-950 font-extrabold text-xs sm:text-sm px-4 py-2 rounded-xl shadow-lg shadow-amber-500/20 hover:scale-105 transition">
         Sign in with Google
@@ -43,40 +43,13 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Content Container -->
   <main class="max-w-2xl mx-auto w-full p-4 space-y-5 flex-1">
 
     <!-- Live UPI Payout Ticker -->
     <div class="bg-amber-500/10 border border-amber-400/30 rounded-xl px-3 py-2 flex items-center gap-2.5 overflow-hidden">
       <span class="shrink-0 bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded uppercase animate-pulse">LIVE UPI</span>
       <p id="liveTickerText" class="text-xs font-semibold text-amber-200 truncate">💸 Karth*** received ₹25 via Same-Day UPI • Verified Payout</p>
-    </div>
-
-    <!-- Premium Wallet & Same-Day Withdraw Hero Card -->
-    <div class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-[#111936] to-indigo-950 border border-amber-400/30 rounded-2xl p-5 shadow-2xl">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-[11px] uppercase tracking-widest text-amber-300/90 font-bold">Your RupayVibe Cash Wallet</p>
-          <div class="flex items-baseline gap-2.5 mt-1">
-            <h2 id="coinBalance" class="text-3xl sm:text-4xl font-black text-white">0 Coins</h2>
-            <span id="inrValue" class="text-sm font-extrabold text-emerald-400 bg-emerald-500/15 border border-emerald-400/30 px-2.5 py-0.5 rounded-lg">≈ ₹0.00</span>
-          </div>
-        </div>
-        <div class="text-right">
-          <span id="dailyLimitBadge" class="inline-block text-[10px] bg-white/10 text-slate-200 px-2.5 py-1 rounded-full font-semibold">Games Left: 10/10</span>
-          <p class="text-[10px] text-emerald-300 mt-1.5 font-semibold">⚡ Same-Day UPI</p>
-        </div>
-      </div>
-
-      <!-- Action Buttons inside Wallet -->
-      <div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/10">
-        <button id="dailyFreeBtn" class="bg-white/10 hover:bg-white/15 border border-white/15 text-amber-300 font-bold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
-          🎁 Daily Free +10 Coins
-        </button>
-        <button onclick="openWithdrawModal()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold py-2.5 px-3 rounded-xl text-xs shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-1.5">
-          💸 Withdraw UPI (Min ₹10)
-        </button>
-      </div>
     </div>
 
     <!-- Clean Fixed Adsterra 320x50 Banner Slot -->
@@ -96,228 +69,370 @@
       </div>
     </div>
 
-    <!-- 🏆 COMMUNITY MEGA POOLS SECTION (1st Active + 3 Locked VIP Pools) -->
-    <section class="space-y-3">
-      <div class="flex items-center justify-between">
+    <!-- ==================== TAB 1: HOME ==================== -->
+    <div id="tab-home" class="space-y-5">
+
+      <!-- Wallet Hero Card -->
+      <div class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-[#111936] to-indigo-950 border border-amber-400/30 rounded-2xl p-5 shadow-2xl">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-[11px] uppercase tracking-widest text-amber-300/90 font-bold">Your RupayVibe Cash Wallet</p>
+            <div class="flex items-baseline gap-2.5 mt-1">
+              <h2 id="coinBalance" class="text-3xl sm:text-4xl font-black text-white">0 Coins</h2>
+              <span id="inrValue" class="text-sm font-extrabold text-emerald-400 bg-emerald-500/15 border border-emerald-400/30 px-2.5 py-0.5 rounded-lg">≈ ₹0.00</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <span id="dailyLimitBadge" class="inline-block text-[10px] bg-white/10 text-slate-200 px-2.5 py-1 rounded-full font-semibold">Games: 10/10</span>
+            <p class="text-[10px] text-emerald-300 mt-1.5 font-semibold">⚡ Same-Day UPI</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/10">
+          <button onclick="switchTab('redeem')" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold py-2.5 px-3 rounded-xl text-xs shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-1.5">
+            💸 Redeem UPI (Min ₹10)
+          </button>
+          <button onclick="shareWhatsApp()" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-300 font-extrabold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+            🤝 Invite (+200 Coins)
+          </button>
+        </div>
+      </div>
+
+      <!-- 🎡 LUCKY SPIN WHEEL SECTION -->
+      <section class="bg-gradient-to-b from-slate-900 to-[#0E162B] border border-amber-400/40 rounded-2xl p-5 shadow-xl">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h2 class="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
+              🎡 Lucky Spin Wheel <span class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full">WIN UP TO 50 COINS</span>
+            </h2>
+            <p class="text-xs text-slate-400">Spin daily to collect coins & enter Mega Pools!</p>
+          </div>
+          <span id="spinCountBadge" class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full font-bold">Spins: 2/2</span>
+        </div>
+
+        <div class="flex flex-col items-center justify-center py-2 space-y-4">
+          <div class="relative flex items-center justify-center">
+            <!-- Top Pointer -->
+            <div class="absolute -top-3 z-20 text-2xl drop-shadow">🔻</div>
+            <canvas id="spinCanvas" width="230" height="230" class="rounded-full shadow-2xl border-4 border-amber-400"></canvas>
+          </div>
+          <button id="spinNowBtn" onclick="spinWheel()" class="w-full max-w-xs gold-shimmer text-slate-950 font-black py-3 rounded-xl text-sm shadow-lg shadow-amber-500/20 hover:scale-[1.02] transition">
+            🎡 SPIN & WIN COINS
+          </button>
+        </div>
+      </section>
+
+      <!-- 🏆 COMMUNITY MEGA POOLS SECTION -->
+      <section class="space-y-3">
         <div>
           <h2 class="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
             🏆 Community Mega Pools <span class="text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30 px-2 py-0.5 rounded-full">INSTANT DRAW</span>
           </h2>
-          <p class="text-xs text-slate-400">Join with free game coins • Pool full = Instant Winner!</p>
+          <p class="text-xs text-slate-400">Join with 100 Coins • Pool full = Instant Winner!</p>
         </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+
+          <!-- POOL 1: ACTIVE (100 Coins • 10 Users • 1 Pool) -->
+          <div class="bg-gradient-to-b from-amber-500/15 via-slate-900 to-slate-900 border-2 border-amber-400/70 rounded-2xl p-4 shadow-lg shadow-amber-500/10 flex flex-col justify-between space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase bg-emerald-500 text-slate-950 px-2.5 py-0.5 rounded-full">● LIVE POOL #1</span>
+              <span class="text-xs font-extrabold text-amber-300">Entry: 100 Coins</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-black text-white">Win ₹10 Cash <span class="text-xs text-slate-300 font-semibold">(1,000 Coins)</span></h3>
+              <p class="text-[11px] text-slate-300 mt-0.5">10 Users • 1 Lucky Winner • Instant Credit</p>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[11px] font-bold">
+                <span class="text-amber-300">Spots Filled</span>
+                <span id="pool1CountText" class="text-white">0 / 10 Users</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden p-0.5">
+                <div id="pool1Bar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-400 rounded-full transition-all duration-500" style="width: 10%;"></div>
+              </div>
+            </div>
+            <button id="joinPool1Btn" onclick="joinStarterPool()" class="w-full gold-shimmer text-slate-950 font-black py-2.5 rounded-xl text-xs shadow-md hover:brightness-110 transition">
+              🎟️ Join Pool (100 Coins)
+            </button>
+          </div>
+
+          <!-- POOL 2: LOCKED (100 Coins • 50 Users • 1 Pool) -->
+          <div class="bg-slate-900/85 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3 opacity-90">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full">🔒 LOCKED</span>
+              <span class="text-xs font-bold text-slate-400">Entry: 100 Coins</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-200">Win ₹50 Cash <span class="text-xs text-amber-400">(5,000 Coins)</span></h3>
+              <p class="text-[11px] text-slate-400 mt-0.5">50 Users • 1 Mega Winner • Same-Day UPI</p>
+            </div>
+            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2 text-center">
+              <p class="text-[11px] text-amber-300/90 font-semibold">Unlocks when 50 active players join!</p>
+            </div>
+            <button disabled class="w-full bg-slate-800 text-slate-500 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed">
+              🔒 Unlocks at 50 Users
+            </button>
+          </div>
+
+          <!-- POOL 3: LOCKED (100 Coins • 100 Users) -->
+          <div class="bg-slate-900/85 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3 opacity-90">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full">🔒 LOCKED</span>
+              <span class="text-xs font-bold text-slate-400">Entry: 100 Coins</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-200">Win ₹100 Cash <span class="text-xs text-amber-400">(10,000 Coins)</span></h3>
+              <p class="text-[11px] text-slate-400 mt-0.5">100 Users • 1 Jackpot Winner • Same-Day UPI</p>
+            </div>
+            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2 text-center">
+              <p class="text-[11px] text-amber-300/90 font-semibold">Unlocks when 100 active players join!</p>
+            </div>
+            <button disabled class="w-full bg-slate-800 text-slate-500 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed">
+              🔒 Unlocks at 100 Users
+            </button>
+          </div>
+
+          <!-- POOL 4: LOCKED GRAND MEGA POOL (1,200 Tokens • ₹12,000) -->
+          <div class="bg-gradient-to-b from-purple-950/45 to-slate-900/95 border border-purple-500/40 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase bg-purple-500/20 text-purple-300 border border-purple-400/30 px-2.5 py-0.5 rounded-full">👑 MEGA LOCKED</span>
+              <span class="text-xs font-bold text-purple-300">1,200 Tokens Pool</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-black text-white">Win ₹12,000 Cash <span class="text-xs text-emerald-400 font-bold">(GRAND PRIZE)</span></h3>
+              <p class="text-[11px] text-slate-300 mt-0.5">1,200 Tokens Mega Pool • Direct Bank / UPI</p>
+            </div>
+            <div class="bg-slate-950/80 border border-purple-500/25 rounded-xl p-2 text-center">
+              <p class="text-[11px] text-purple-300 font-semibold">Grand Mega Pool • Unlocks at 1,200 Community Members!</p>
+            </div>
+            <button disabled class="w-full bg-slate-800 text-slate-500 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed">
+              👑 Mega Pool Locked (1,200 Tokens)
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 🎮 MINI-GAMES ARENA -->
+      <section class="space-y-3">
+        <div>
+          <h2 class="text-base sm:text-lg font-extrabold text-white">🎮 Play Free Games & Collect Coins</h2>
+          <p class="text-xs text-slate-400">Collect 100 Coins to join Pool #1 or redeem via UPI</p>
+        </div>
+
+        <div id="gameMenu" class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+          <div class="bg-slate-900 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 transition">
+            <div>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl">🧠</span>
+                <span class="text-[10px] bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded font-bold">+15 COINS</span>
+              </div>
+              <h3 class="font-bold text-base mt-2">Memory Match</h3>
+              <p class="text-xs text-slate-400 mt-1">Match 4 emoji pairs in 25 seconds.</p>
+            </div>
+            <button onclick="startMemoryGame()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs transition">
+              Play Now
+            </button>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 transition">
+            <div>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl">⚡</span>
+                <span class="text-[10px] bg-amber-500/15 text-amber-300 px-2 py-0.5 rounded font-bold">+15 COINS</span>
+              </div>
+              <h3 class="font-bold text-base mt-2">Reflex Tap</h3>
+              <p class="text-xs text-slate-400 mt-1">Tap the glowing target 15 times in 12s.</p>
+            </div>
+            <button onclick="startReflexGame()" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs transition">
+              Play Now
+            </button>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 transition">
+            <div>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl">🔢</span>
+                <span class="text-[10px] bg-blue-500/15 text-blue-300 px-2 py-0.5 rounded font-bold">+20 COINS</span>
+              </div>
+              <h3 class="font-bold text-base mt-2">Math Sprint</h3>
+              <p class="text-xs text-slate-400 mt-1">Solve 5 quick math sums in 20s.</p>
+            </div>
+            <button onclick="startMathGame()" class="w-full bg-blue-500 hover:bg-blue-400 text-white font-extrabold py-2.5 rounded-xl text-xs transition">
+              Play Now
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Game Arena -->
+      <div id="gameArena" class="hidden bg-slate-900 border-2 border-amber-400/50 rounded-2xl p-5 space-y-4 shadow-2xl">
+        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+          <h3 id="arenaTitle" class="font-bold text-lg text-amber-400">Game</h3>
+          <div class="flex items-center gap-3">
+            <span id="arenaTimer" class="text-xs bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full font-bold">Time: 20s</span>
+            <button onclick="closeArena()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">Exit</button>
+          </div>
+        </div>
+        <div id="arenaBody" class="min-h-[240px] flex flex-col items-center justify-center"></div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-
-        <!-- POOL 1: ACTIVE & UNLOCKED (100 Coins • 10 Users • 1 Pool) -->
-        <div class="bg-gradient-to-b from-amber-500/15 via-slate-900 to-slate-900 border-2 border-amber-400/70 rounded-2xl p-4 shadow-lg shadow-amber-500/10 flex flex-col justify-between space-y-3 relative">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-black uppercase bg-emerald-500 text-slate-950 px-2.5 py-0.5 rounded-full">● LIVE POOL #1</span>
-            <span class="text-xs font-extrabold text-amber-300">Entry: 100 Coins</span>
-          </div>
+      <!-- 🤝 INVITE & EARN +200 COINS CARD -->
+      <section class="bg-gradient-to-r from-slate-900 to-[#131C38] border border-amber-400/30 rounded-2xl p-4 space-y-3">
+        <div class="flex items-center justify-between">
           <div>
-            <h3 class="text-lg font-black text-white">Win 1,000 Coins <span class="text-emerald-400">(₹10)</span></h3>
-            <p class="text-[11px] text-slate-300 mt-0.5">10 Users • 1 Lucky Winner • Instant Wallet Credit</p>
+            <h3 class="text-sm sm:text-base font-extrabold text-white">🤝 Invite Friends & Get +200 Coins</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Earn <span class="text-emerald-400 font-bold">+200 Coins (₹2.00)</span> per friend — join 2 Mega Pools instantly!</p>
           </div>
-          <!-- Live Progress Bar -->
-          <div class="space-y-1">
-            <div class="flex justify-between text-[11px] font-bold">
-              <span class="text-amber-300">Spots Filled</span>
-              <span id="pool1CountText" class="text-white">0 / 10 Users</span>
-            </div>
-            <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden p-0.5">
-              <div id="pool1Bar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-400 rounded-full transition-all duration-500" style="width: 10%;"></div>
-            </div>
-          </div>
-          <button id="joinPool1Btn" onclick="joinStarterPool()" class="w-full gold-shimmer text-slate-950 font-black py-2.5 rounded-xl text-xs shadow-md hover:brightness-110 transition">
-            🎟️ Join Pool (100 Coins)
-          </button>
+          <span id="refCodeBadge" class="text-xs font-mono font-bold bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-lg">RV-----</span>
         </div>
-
-        <!-- POOL 2: LOCKED (100 Coins • 50 Users • 1 Pool) -->
-        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3 relative opacity-90">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full">🔒 LOCKED</span>
-            <span class="text-xs font-bold text-slate-400">Entry: 100 Coins</span>
-          </div>
-          <div>
-            <h3 class="text-lg font-extrabold text-slate-200">Win 5,000 Coins <span class="text-amber-400">(₹50)</span></h3>
-            <p class="text-[11px] text-slate-400 mt-0.5">50 Users • 1 Mega Winner • High Reward Pool</p>
-          </div>
-          <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2 text-center">
-            <p class="text-[11px] text-amber-300/90 font-semibold">Unlocks automatically when 50 active players join!</p>
-          </div>
-          <button disabled class="w-full bg-slate-800 text-slate-500 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed">
-            🔒 Unlocks at 50 Users
-          </button>
+        <div class="flex gap-2">
+          <input id="refLinkInput" type="text" readonly value="Sign in to get your invite link" class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none" />
+          <button onclick="copyRefLink()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs">Copy</button>
+          <button onclick="shareWhatsApp()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl text-xs">WhatsApp</button>
         </div>
+      </section>
 
-        <!-- POOL 3: LOCKED (100 Coins • 100 Users) -->
-        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3 relative opacity-90">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full">🔒 LOCKED</span>
-            <span class="text-xs font-bold text-slate-400">Entry: 100 Coins</span>
-          </div>
-          <div>
-            <h3 class="text-lg font-extrabold text-slate-200">Win 10,000 Coins <span class="text-amber-400">(₹100)</span></h3>
-            <p class="text-[11px] text-slate-400 mt-0.5">100 Users • 1 Jackpot Winner • Same-Day UPI</p>
-          </div>
-          <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2 text-center">
-            <p class="text-[11px] text-amber-300/90 font-semibold">Unlocks when 100 community members join!</p>
-          </div>
-          <button disabled class="w-full bg-slate-800 text-slate-500 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed">
-            🔒 Unlocks at 100 Users
-          </button>
-        </div>
-
-        <!-- POOL 4: LOCKED VIP (1,000 Coins -> 1,200 Coins) -->
-        <div class="bg-gradient-to-b from-purple-950/40 to-slate-900/90 border border-purple-500/30 rounded-2xl p-4 flex flex-col justify-between space-y-3 relative opacity-95">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase bg-purple-500/20 text-purple-300 border border-purple-400/30 px-2.5 py-0.5 rounded-full">👑 VIP LOCKED</span>
-            <span class="text-xs font-bold text-purple-300">Entry: 1,000 Coins</span>
-          </div>
-          <div>
-            <h3 class="text-lg font-extrabold text-white">Win 1,200 Coins <span class="text-emerald-400">(₹12)</span></h3>
-            <p class="text-[11px] text-slate-400 mt-0.5">VIP High-Return Pool • Fast Multiplier</p>
-          </div>
-          <div class="bg-slate-950/80 border border-purple-500/20 rounded-xl p-2 text-center">
-            <p class="text-[11px] text-purple-300 font-semibold">VIP Pool • Unlocks after your 1st Pool Win!</p>
-          </div>
-          <button disabled class="w-full bg-slate-800 text-slate-500 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed">
-            👑 VIP Pool Locked
-          </button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 🎮 MINI-GAMES ARENA -->
-    <section class="space-y-3">
-      <div>
-        <h2 class="text-base sm:text-lg font-extrabold text-white">🎮 Play Free Games & Collect Coins</h2>
-        <p class="text-xs text-slate-400">Win instant coins to enter Mega Pools or withdraw via UPI</p>
-      </div>
-
-      <div id="gameMenu" class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-        <div class="bg-slate-900 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 transition">
-          <div>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl">🧠</span>
-              <span class="text-[10px] bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded font-bold">+15 COINS</span>
-            </div>
-            <h3 class="font-bold text-base mt-2">Memory Match</h3>
-            <p class="text-xs text-slate-400 mt-1">Match 4 emoji pairs in 25 seconds.</p>
-          </div>
-          <button onclick="startMemoryGame()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs transition">
-            Play Now
-          </button>
-        </div>
-
-        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 transition">
-          <div>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl">⚡</span>
-              <span class="text-[10px] bg-amber-500/15 text-amber-300 px-2 py-0.5 rounded font-bold">+15 COINS</span>
-            </div>
-            <h3 class="font-bold text-base mt-2">Reflex Tap</h3>
-            <p class="text-xs text-slate-400 mt-1">Tap the glowing target 15 times in 12s.</p>
-          </div>
-          <button onclick="startReflexGame()" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs transition">
-            Play Now
-          </button>
-        </div>
-
-        <div class="bg-slate-900 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 transition">
-          <div>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl">🔢</span>
-              <span class="text-[10px] bg-blue-500/15 text-blue-300 px-2 py-0.5 rounded font-bold">+20 COINS</span>
-            </div>
-            <h3 class="font-bold text-base mt-2">Math Sprint</h3>
-            <p class="text-xs text-slate-400 mt-1">Solve 5 quick math sums in 20s.</p>
-          </div>
-          <button onclick="startMathGame()" class="w-full bg-blue-500 hover:bg-blue-400 text-white font-extrabold py-2.5 rounded-xl text-xs transition">
-            Play Now
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Active Game Arena -->
-    <div id="gameArena" class="hidden bg-slate-900 border-2 border-amber-400/50 rounded-2xl p-5 space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <h3 id="arenaTitle" class="font-bold text-lg text-amber-400">Game</h3>
-        <div class="flex items-center gap-3">
-          <span id="arenaTimer" class="text-xs bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full font-bold">Time: 20s</span>
-          <button onclick="closeArena()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">Exit</button>
-        </div>
-      </div>
-      <div id="arenaBody" class="min-h-[240px] flex flex-col items-center justify-center"></div>
     </div>
 
-    <!-- 🤝 REFER & EARN CARD (Unlock Pools Faster + Bonus Coins) -->
-    <section class="bg-gradient-to-r from-slate-900 to-[#131C38] border border-slate-800 rounded-2xl p-4 space-y-3">
-      <div class="flex items-center justify-between">
+    <!-- ==================== TAB 2: DASHBOARD ==================== -->
+    <div id="tab-dashboard" class="hidden space-y-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
         <div>
-          <h3 class="text-sm sm:text-base font-extrabold text-white">🤝 Invite Friends & Unlock ₹50 / ₹100 Pools</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Earn <span class="text-emerald-400 font-bold">+50 Coins</span> when your friend completes their 1st payout!</p>
+          <h2 class="text-lg font-extrabold text-white">📊 Earnings Dashboard</h2>
+          <p class="text-xs text-slate-400">Your live RupayVibe activity & rewards summary</p>
         </div>
-        <span id="refCodeBadge" class="text-xs font-mono font-bold bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-lg">RV-----</span>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5">
+            <p class="text-[11px] text-slate-400">Current Balance</p>
+            <p id="dashCoins" class="text-xl font-black text-amber-400 mt-1">0 Coins</p>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5">
+            <p class="text-[11px] text-slate-400">Cash Value (INR)</p>
+            <p id="dashInr" class="text-xl font-black text-emerald-400 mt-1">₹0.00</p>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5">
+            <p class="text-[11px] text-slate-400">Friends Invited (+200)</p>
+            <p id="dashRefs" class="text-xl font-black text-blue-400 mt-1">0</p>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5">
+            <p class="text-[11px] text-slate-400">Total Payouts</p>
+            <p id="dashPayouts" class="text-xl font-black text-purple-400 mt-1">0</p>
+          </div>
+        </div>
+
+        <div class="bg-indigo-950/40 border border-indigo-500/30 rounded-xl p-3.5 flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold text-white">Want Extra 500–2,000 Coins?</p>
+            <p class="text-[11px] text-slate-300">Complete quick brand surveys on our Survey Portal</p>
+          </div>
+          <a href="https://rupayvibe.online" class="bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-xs px-3.5 py-2 rounded-xl shrink-0">Open Surveys ↗</a>
+        </div>
       </div>
-      <div class="flex gap-2">
-        <input id="refLinkInput" type="text" readonly value="Sign in to get your invite link" class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none" />
-        <button onclick="copyRefLink()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs">Copy</button>
-        <button onclick="shareWhatsApp()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl text-xs">WhatsApp</button>
+    </div>
+
+    <!-- ==================== TAB 3: REDEEM ==================== -->
+    <div id="tab-redeem" class="hidden space-y-4">
+      <div class="bg-slate-900 border border-emerald-500/30 rounded-2xl p-5 space-y-4">
+        <div>
+          <h2 class="text-lg font-extrabold text-white">💸 Same-Day UPI Redeem</h2>
+          <p class="text-xs text-emerald-400 font-semibold">Direct GPay / PhonePe / Paytm Bank Transfer</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2.5 text-center">
+          <div class="bg-emerald-500/15 border border-emerald-400/40 rounded-xl p-3">
+            <p class="text-[10px] text-emerald-300 font-bold">1st Payout</p>
+            <p class="text-lg font-black text-white mt-0.5">₹10</p>
+            <p class="text-[10px] text-slate-400">1,000 Coins</p>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
+            <p class="text-[10px] text-slate-400 font-bold">2nd Payout</p>
+            <p class="text-lg font-black text-white mt-0.5">₹25</p>
+            <p class="text-[10px] text-slate-400">2,500 Coins</p>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
+            <p class="text-[10px] text-slate-400 font-bold">3rd+ Payout</p>
+            <p class="text-lg font-black text-white mt-0.5">₹50</p>
+            <p class="text-[10px] text-slate-400">5,000 Coins</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
+          <p id="withdrawTierLabel" class="text-xs font-bold text-amber-300">Your Next Tier: ₹10 (1,000 Coins)</p>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-xs text-slate-300 font-semibold">Enter Your UPI ID</label>
+          <input id="upiInput" type="text" placeholder="yourname@okaxis / 9876543210@ybl" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-emerald-400" />
+        </div>
+
+        <button id="submitWithdrawBtn" onclick="submitUpiWithdraw()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black py-3 rounded-xl text-sm shadow-lg">
+          ⚡ Submit Same-Day UPI Withdrawal
+        </button>
       </div>
-    </section>
+    </div>
+
+    <!-- ==================== TAB 4: PROFILE ==================== -->
+    <div id="tab-profile" class="hidden space-y-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-xl font-black text-amber-300">👤</div>
+          <div>
+            <h2 id="profName" class="text-base font-extrabold text-white">Guest Player</h2>
+            <p id="profEmail" class="text-xs text-slate-400">Sign in with Google to view profile</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5 space-y-2 text-xs">
+          <div class="flex justify-between">
+            <span class="text-slate-400">Your Invite Code (+200 Coins):</span>
+            <span id="profRefCode" class="font-mono font-bold text-amber-300">RV-----</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-400">Account Sync:</span>
+            <span class="text-emerald-400 font-semibold">● Connected to RupayVibe App</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-1">
+          <a href="https://rupayvibe.online" class="block w-full text-center bg-slate-800 hover:bg-slate-700 py-2.5 rounded-xl text-xs font-bold text-emerald-300">📝 Open Survey Portal</a>
+          <a href="https://rupayvibe.online/privacy.html" class="block w-full text-center bg-slate-800 hover:bg-slate-700 py-2.5 rounded-xl text-xs font-bold text-slate-300">🔒 Privacy Policy</a>
+          <a href="mailto:rupayvibe.official@gmail.com" class="block w-full text-center bg-slate-800 hover:bg-slate-700 py-2.5 rounded-xl text-xs font-bold text-slate-300">✉️ Contact Support</a>
+        </div>
+      </div>
+    </div>
 
   </main>
 
-  <!-- Same-Day UPI Withdrawal Modal -->
-  <div id="withdrawModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <div>
-          <h3 class="text-lg font-extrabold text-white">💸 Same-Day UPI Withdrawal</h3>
-          <p class="text-[11px] text-emerald-400 font-semibold">Direct GPay / PhonePe / Paytm Transfer</p>
-        </div>
-        <button onclick="closeWithdrawModal()" class="text-slate-400 hover:text-white text-sm font-bold">✕</button>
-      </div>
-
-      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-3 space-y-1">
-        <p id="withdrawTierLabel" class="text-xs font-bold text-emerald-300">1st Withdrawal Tier: ₹10 (1,000 Coins)</p>
-        <p class="text-[11px] text-slate-300">Tiers: 1st ₹10 • 2nd ₹25 • 3rd+ ₹50 • Processed Same Day!</p>
-      </div>
-
-      <div class="space-y-2">
-        <label class="text-xs text-slate-300 font-semibold">Enter Your UPI ID</label>
-        <input id="upiInput" type="text" placeholder="example@okaxis / 9876543210@ybl" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400" />
-      </div>
-
-      <div class="flex gap-3 pt-2">
-        <button onclick="closeWithdrawModal()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 rounded-xl text-xs">Cancel</button>
-        <button id="submitWithdrawBtn" onclick="submitUpiWithdraw()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs">Withdraw Now</button>
-      </div>
+  <!-- Fixed Bottom Navigation Menu -->
+  <nav class="fixed bottom-0 inset-x-0 bg-[#0B1120]/95 backdrop-blur border-t border-slate-800 z-40">
+    <div class="max-w-2xl mx-auto grid grid-cols-4 py-2">
+      <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-amber-400 font-extrabold text-[11px] gap-0.5">
+        <span class="text-lg">🏠</span>
+        <span>Home</span>
+      </button>
+      <button onclick="switchTab('dashboard')" id="nav-dashboard" class="flex flex-col items-center text-slate-400 hover:text-white font-semibold text-[11px] gap-0.5">
+        <span class="text-lg">📊</span>
+        <span>Dashboard</span>
+      </button>
+      <button onclick="switchTab('redeem')" id="nav-redeem" class="flex flex-col items-center text-slate-400 hover:text-white font-semibold text-[11px] gap-0.5">
+        <span class="text-lg">💸</span>
+        <span>Redeem</span>
+      </button>
+      <button onclick="switchTab('profile')" id="nav-profile" class="flex flex-col items-center text-slate-400 hover:text-white font-semibold text-[11px] gap-0.5">
+        <span class="text-lg">👤</span>
+        <span>Profile</span>
+      </button>
     </div>
-  </div>
+  </nav>
 
-  <!-- Footer -->
-  <footer class="p-4 border-t border-slate-800/80 text-center text-xs text-slate-400 space-y-2 max-w-2xl mx-auto w-full">
-    <div class="space-x-4">
-      <a href="https://rupayvibe.online" class="text-emerald-400 hover:underline font-semibold">📝 High-Paying Surveys</a>
-      <span>•</span>
-      <a href="https://rupayvibe.online/privacy.html" class="text-amber-400 hover:underline">Privacy Policy</a>
-      <span>•</span>
-      <a href="mailto:rupayvibe.official@gmail.com" class="hover:text-white underline">Support</a>
-    </div>
-    <p class="text-[11px] text-slate-500">© 2026 RupayVibe Arena (JP Studio) • Same-Day UPI Rewards</p>
-  </footer>
-
-  <!-- Firebase + Pool + Games + Same-Day Withdraw Logic -->
+  <!-- Firebase + Spin Wheel + Mega Pool + Referral + Redeem Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, increment, onSnapshot, query, orderBy, limit, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where, getDocs, increment, onSnapshot, orderBy, limit, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
@@ -338,8 +453,10 @@
     let userData = {};
     let gameTimer = null;
     const MAX_DAILY_PLAYS = 10;
+    const MAX_DAILY_SPINS = 2;
     const todayStr = new Date().toISOString().split("T")[0];
     const todayKey = "rv_plays_" + todayStr;
+    const spinKey = "rv_spins_" + todayStr;
 
     const authBtn = document.getElementById("authBtn");
     const coinBalanceEl = document.getElementById("coinBalance");
@@ -349,6 +466,127 @@
     const arenaTitle = document.getElementById("arenaTitle");
     const arenaTimer = document.getElementById("arenaTimer");
     const arenaBody = document.getElementById("arenaBody");
+
+    // Tab Navigation Switcher
+    window.switchTab = (tabName) => {
+      ["home", "dashboard", "redeem", "profile"].forEach(t => {
+        document.getElementById("tab-" + t).classList.toggle("hidden", t !== tabName);
+        const nav = document.getElementById("nav-" + t);
+        if (t === tabName) {
+          nav.classList.remove("text-slate-400", "font-semibold");
+          nav.classList.add("text-amber-400", "font-extrabold");
+        } else {
+          nav.classList.remove("text-amber-400", "font-extrabold");
+          nav.classList.add("text-slate-400", "font-semibold");
+        }
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // Draw Spin Wheel
+    const prizes = [5, 10, 15, 25, 10, 50, 15, 20];
+    const sliceColors = ["#059669", "#d97706", "#2563eb", "#7c3aed", "#0d9488", "#e11d48", "#4f46e5", "#ca8a04"];
+    const canvas = document.getElementById("spinCanvas");
+    const ctx = canvas.getContext("2d");
+    let currentWheelAngle = 0;
+    let isSpinning = false;
+
+    function drawWheel(angleOffset = 0) {
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const r = cx - 4;
+      const arc = (2 * Math.PI) / prizes.length;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < prizes.length; i++) {
+        const start = angleOffset + i * arc - Math.PI / 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, start, start + arc);
+        ctx.fillStyle = sliceColors[i % sliceColors.length];
+        ctx.fill();
+        ctx.strokeStyle = "#0f172a";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(start + arc / 2);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 14px sans-serif";
+        ctx.fillText("+" + prizes[i], r * 0.55, 5);
+        ctx.restore();
+      }
+      ctx.beginPath();
+      ctx.arc(cx, cy, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "#0f172a";
+      ctx.fill();
+      ctx.strokeStyle = "#fbbf24";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+    drawWheel(0);
+
+    function getSpinsUsed() {
+      return parseInt(localStorage.getItem(spinKey) || "0", 10);
+    }
+    function updateSpinBadge() {
+      const left = Math.max(0, MAX_DAILY_SPINS - getSpinsUsed());
+      document.getElementById("spinCountBadge").innerText = `Spins: ${left}/${MAX_DAILY_SPINS}`;
+    }
+    updateSpinBadge();
+
+    window.spinWheel = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      if (isSpinning) return;
+      if (getSpinsUsed() >= MAX_DAILY_SPINS) {
+        return alert("Daily 2 Spins completed! Play Mini-Games or invite friends (+200 Coins) to earn more.");
+      }
+
+      isSpinning = true;
+      const btn = document.getElementById("spinNowBtn");
+      btn.disabled = true;
+
+      // Weighted prize selection
+      const roll = Math.random() * 100;
+      let idx = 0;
+      if (roll < 30) idx = 0;       // +5
+      else if (roll < 55) idx = 1;  // +10
+      else if (roll < 75) idx = 2;  // +15
+      else if (roll < 90) idx = 7;  // +20
+      else if (roll < 97) idx = 3;  // +25
+      else idx = 5;                 // +50
+
+      const wonCoins = prizes[idx];
+      const arc = (2 * Math.PI) / prizes.length;
+      const targetAngle = (6 * 2 * Math.PI) + ((2 * Math.PI) - (idx + 0.5) * arc);
+      const startAngle = currentWheelAngle;
+      const duration = 3200;
+      const startTime = performance.now();
+
+      function animate(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        currentWheelAngle = startAngle + (targetAngle - startAngle) * ease;
+        drawWheel(currentWheelAngle);
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          finishSpin(wonCoins);
+        }
+      }
+      requestAnimationFrame(animate);
+    };
+
+    async function finishSpin(wonCoins) {
+      localStorage.setItem(spinKey, String(getSpinsUsed() + 1));
+      updateSpinBadge();
+      await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(wonCoins) });
+      isSpinning = false;
+      document.getElementById("spinNowBtn").disabled = false;
+      alert(`🎉 Lucky Spin Win! +${wonCoins} Coins added to your wallet!`);
+    }
 
     // Capture ?ref=RVxxxxx from URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -360,8 +598,7 @@
       "💸 Karth*** received ₹25 via Same-Day UPI • Verified",
       "⚡ Divy*** received ₹10 via Same-Day UPI • Instant",
       "🏆 Arun*** won ₹10 Mega Pool #1 • Credited",
-      "🔥 Suren*** received ₹50 via Same-Day UPI • Verified",
-      "🚀 Megh*** received ₹10 via Same-Day UPI • Instant"
+      "🔥 Suren*** received ₹50 via Same-Day UPI • Verified"
     ];
     let livePayouts = [...fallbackPayouts];
     let tickerIdx = 0;
@@ -410,7 +647,7 @@
           const pSnap = await tx.get(pool1Ref);
 
           const coins = (uSnap.data()?.coins || 0);
-          if (coins < 100) throw "Need 100 Coins to join! Play 5 free games to collect 100 Coins.";
+          if (coins < 100) throw "Need 100 Coins to join! Spin the Wheel, play Games, or Invite a Friend (+200 Coins).";
 
           const pData = pSnap.data() || { round: 1, maxUsers: 10, prizeCoins: 1000, participants: [] };
           const list = [...(pData.participants || [])];
@@ -424,7 +661,6 @@
           tx.update(uRef, { coins: increment(-100) });
 
           if (list.length >= 10) {
-            // Pick 1 random lucky winner out of 10
             const winner = list[Math.floor(Math.random() * list.length)];
             const winRef = doc(db, "users", winner.uid);
             tx.update(winRef, { coins: increment(1000) });
@@ -453,23 +689,13 @@
       }
     };
 
-    // Daily Free +10 Coins
-    document.getElementById("dailyFreeBtn").onclick = async () => {
-      if (!currentUser) return alert("Please sign in with Google first!");
-      const claimKey = "rv_daily_free_" + todayStr;
-      if (localStorage.getItem(claimKey)) return alert("Already claimed today's +10 Free Coins! Play games or join Mega Pool.");
-      await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(10) });
-      localStorage.setItem(claimKey, "1");
-      alert("🎁 +10 Free Coins added to your wallet!");
-    };
-
     function getPlaysUsed() {
       return parseInt(localStorage.getItem(todayKey) || "0", 10);
     }
 
     function updatePlaysBadge() {
       const left = Math.max(0, MAX_DAILY_PLAYS - getPlaysUsed());
-      dailyLimitBadge.innerText = `Games Left: ${left}/${MAX_DAILY_PLAYS}`;
+      dailyLimitBadge.innerText = `Games: ${left}/${MAX_DAILY_PLAYS}`;
     }
     updatePlaysBadge();
 
@@ -482,29 +708,64 @@
       currentUser = user;
       if (user) {
         authBtn.innerText = "Sign Out";
+        document.getElementById("profName").innerText = user.displayName || "Player";
+        document.getElementById("profEmail").innerText = user.email || "";
+
         const userRef = doc(db, "users", user.uid);
+        const initialSnap = await getDoc(userRef);
+
+        if (!initialSnap.exists()) {
+          // New Sign-up gets 0 Coins; Referrer gets +200 Coins
+          const newCode = "RV" + user.uid.substring(0, 5).toUpperCase();
+          const savedRef = (localStorage.getItem("rv_pending_ref") || "").trim().toUpperCase();
+          let validReferrerUid = "";
+
+          if (savedRef && savedRef !== newCode) {
+            const q = query(collection(db, "users"), where("referralCode", "==", savedRef), limit(1));
+            const refSnap = await getDocs(q);
+            if (!refSnap.empty) {
+              validReferrerUid = refSnap.docs[0].id;
+              await updateDoc(doc(db, "users", validReferrerUid), {
+                coins: increment(200),
+                referralsCount: increment(1)
+              });
+            }
+          }
+
+          await setDoc(userRef, {
+            email: user.email,
+            name: user.displayName,
+            coins: 0,
+            referralCode: newCode,
+            referredBy: validReferrerUid,
+            referralsCount: 0,
+            withdrawalsCount: 0,
+            createdAt: serverTimestamp()
+          }, { merge: true });
+        }
+
         onSnapshot(userRef, async (snap) => {
           if (snap.exists()) {
             userData = snap.data();
             const coins = userData.coins || 0;
+            const inr = (coins / 100).toFixed(2);
             coinBalanceEl.innerText = `${coins} Coins`;
-            inrValueEl.innerText = `≈ ₹${(coins / 100).toFixed(2)}`;
+            inrValueEl.innerText = `≈ ₹${inr}`;
+
+            document.getElementById("dashCoins").innerText = `${coins} Coins`;
+            document.getElementById("dashInr").innerText = `₹${inr}`;
+            document.getElementById("dashRefs").innerText = userData.referralsCount || 0;
+            document.getElementById("dashPayouts").innerText = userData.withdrawalsCount || 0;
 
             const myCode = userData.referralCode || ("RV" + user.uid.substring(0, 5).toUpperCase());
             if (!userData.referralCode) await updateDoc(userRef, { referralCode: myCode });
             document.getElementById("refCodeBadge").innerText = myCode;
+            document.getElementById("profRefCode").innerText = myCode;
             document.getElementById("refLinkInput").value = `https://games.rupayvibe.online?ref=${myCode}`;
             if (userData.savedUpi) document.getElementById("upiInput").value = userData.savedUpi;
-          } else {
-            const newCode = "RV" + user.uid.substring(0, 5).toUpperCase();
-            await setDoc(userRef, {
-              email: user.email,
-              name: user.displayName,
-              coins: 100,
-              referralCode: newCode,
-              withdrawalsCount: 0,
-              createdAt: serverTimestamp()
-            }, { merge: true });
+
+            const req = getRequiredCoins(userData.withdrawalsCount || 0);
+            document.getElementById("withdrawTierLabel").innerText = `Your Next Tier: ₹${req / 100} (${req} Coins) • Same-Day UPI`;
           }
         });
       } else {
@@ -514,17 +775,19 @@
       }
     });
 
-    // Referral Share Helpers
+    // Referral Share Helpers (+200 Coins)
     window.copyRefLink = () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
       const inp = document.getElementById("refLinkInput");
       inp.select();
       navigator.clipboard.writeText(inp.value);
-      alert("Invite link copied! Share with friends to unlock ₹50 & ₹100 pools.");
+      alert("Invite link copied! Earn +200 Coins for every friend who joins!");
     };
 
     window.shareWhatsApp = () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
       const link = document.getElementById("refLinkInput").value;
-      const msg = encodeURIComponent(`🎮 Play Free Mini-Games & Join ₹10–₹100 Mega Pools on RupayVibe! Same-Day UPI Cashout 💸\nJoin here: ${link}`);
+      const msg = encodeURIComponent(`🎡 Spin the Wheel, Play Free Mini-Games & Join ₹10–₹12,000 Mega Pools on RupayVibe! Same-Day UPI Cashout 💸\nJoin here: ${link}`);
       window.open(`https://wa.me/?text=${msg}`, "_blank");
     };
 
@@ -535,26 +798,15 @@
       return 5000;
     }
 
-    window.openWithdrawModal = () => {
-      if (!currentUser) return alert("Please sign in with Google first!");
-      const wCount = userData.withdrawalsCount || 0;
-      const req = getRequiredCoins(wCount);
-      document.getElementById("withdrawTierLabel").innerText = `Current Tier: ₹${req / 100} (${req} Coins) • Same-Day UPI`;
-      document.getElementById("withdrawModal").classList.remove("hidden");
-    };
-
-    window.closeWithdrawModal = () => {
-      document.getElementById("withdrawModal").classList.add("hidden");
-    };
-
     window.submitUpiWithdraw = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
       const upi = document.getElementById("upiInput").value.trim();
       if (!upi.includes("@") || upi.length < 5) return alert("Enter a valid UPI ID (e.g. name@okaxis / number@ybl)");
 
       const wCount = userData.withdrawalsCount || 0;
       const reqCoins = getRequiredCoins(wCount);
       if ((userData.coins || 0) < reqCoins) {
-        return alert(`You need ${reqCoins} Coins (₹${reqCoins / 100}) for this withdrawal tier. Play games or win Mega Pool!`);
+        return alert(`You need ${reqCoins} Coins (₹${reqCoins / 100}) for this withdrawal tier. Spin, play games, or invite friends (+200 Coins)!`);
       }
 
       const btn = document.getElementById("submitWithdrawBtn");
@@ -579,13 +831,12 @@
           source: "games.rupayvibe.online",
           createdAt: serverTimestamp()
         });
-        closeWithdrawModal();
         alert(`✅ Same-Day UPI Withdrawal of ₹${reqCoins / 100} submitted to ${upi}!`);
       } catch (e) {
         alert("Error: " + e.message);
       } finally {
         btn.disabled = false;
-        btn.innerText = "Withdraw Now";
+        btn.innerText = "⚡ Submit Same-Day UPI Withdrawal";
       }
     };
 
@@ -596,7 +847,7 @@
         return false;
       }
       if (getPlaysUsed() >= MAX_DAILY_PLAYS) {
-        alert("Daily 10 games limit reached! Visit rupayvibe.online for unlimited surveys.");
+        alert("Daily 10 games limit reached! Invite friends (+200 Coins) or visit rupayvibe.online for surveys.");
         return false;
       }
       return true;
