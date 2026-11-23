@@ -111,4 +111,913 @@
         <!-- 7 Days Grid -->
         <div id="streakGrid" class="grid grid-cols-7 gap-1.5 text-center"></div>
 
-        <button id="claimStreakBtn" onclick="
+        <button id="claimStreakBtn" onclick="claimDailyStreak()" class="w-full bg-amber-400 hover:bg-amber-300 disabled:bg-slate-800 disabled:text-slate-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
+          Claim Day 1 (+10 Coins)
+        </button>
+      </div>
+
+      <!-- Lucky Spin Wheel Card (1 Free + 3 Ad Spins) -->
+      <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-5 gold-glow">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-bold">DAILY LUCKY SPIN</span>
+            <h3 class="text-base font-extrabold text-white mt-1">🎡 Spin & Win Coins</h3>
+            <p class="text-xs text-slate-400">1 Free Spin + 3 Bonus Ad Spins every day!</p>
+          </div>
+          <span id="spinStatusBadge" class="text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-bold">1 Free + 3 Ad Spins</span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-around gap-4 py-2">
+          <!-- Wheel Visual -->
+          <div class="relative w-36 h-36 flex items-center justify-center">
+            <div class="absolute -top-2 z-10 text-amber-400 text-lg font-black">▼</div>
+            <div id="wheelDisc" class="w-32 h-32 rounded-full border-4 border-amber-400 shadow-lg transition-transform duration-[3000ms] ease-out flex items-center justify-center"
+              style="background: conic-gradient(#10b981 0deg 60deg, #f59e0b 60deg 120deg, #3b82f6 120deg 180deg, #8b5cf6 180deg 240deg, #ec4899 240deg 300deg, #14b8a6 300deg 360deg);">
+              <div class="w-12 h-12 rounded-full bg-slate-950 border-2 border-amber-400 flex items-center justify-center text-xs font-extrabold text-amber-300">
+                SPIN
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center sm:text-left space-y-2.5 max-w-xs">
+            <p class="text-xs text-slate-300">Prizes: <span class="text-amber-400 font-bold">+5, +10, +15, +20, +30, +50 Coins</span></p>
+            <button id="spinNowBtn" onclick="spinWheel()" class="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 disabled:from-slate-800 disabled:to-slate-800 disabled:text-slate-400 text-slate-950 font-extrabold py-2.5 px-6 rounded-xl text-xs sm:text-sm shadow-lg transition">
+              🎡 Spin Now (Free)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community Mega Pools Section -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-extrabold text-white">🏆 Community Mega Pools</h3>
+            <p class="text-xs text-slate-400">Use earned coins to enter • Instant Winner Draw</p>
+          </div>
+          <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full font-bold">100% Free-to-Play</span>
+        </div>
+
+        <!-- POOL 1: ACTIVE & UNLOCKED (100 Coins | 10 Users -> ₹10 Winner) -->
+        <div class="bg-gradient-to-br from-slate-900 to-emerald-950/60 border-2 border-emerald-500 rounded-2xl p-4 space-y-3 shadow-lg">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] bg-emerald-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full">🟢 LIVE • POOL #1</span>
+            <span class="text-xs font-bold text-emerald-400">Entry: 100 Coins</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="text-lg font-extrabold text-white">Win ₹10 Cash (1,000 Coins)</h4>
+              <p class="text-xs text-slate-300">10 Tokens Pool • 1 Lucky Winner gets full ₹10!</p>
+            </div>
+            <div class="text-right">
+              <p class="text-xl font-black text-amber-400">₹10</p>
+              <p class="text-[10px] text-slate-400">UPI Instant</p>
+            </div>
+          </div>
+          <!-- Progress Bar -->
+          <div class="space-y-1">
+            <div class="flex justify-between text-[11px] font-semibold">
+              <span class="text-emerald-300">Pool Progress</span>
+              <span id="pool1CountText" class="text-white">0 / 10 Tokens Joined</span>
+            </div>
+            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+              <div id="pool1Bar" class="bg-gradient-to-r from-emerald-400 to-amber-400 h-full rounded-full transition-all duration-500" style="width: 10%"></div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="joinPool1()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
+              🎟️ Join Pool (100 Coins)
+            </button>
+            <button onclick="switchTab('earn')" class="bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold px-3.5 py-2.5 rounded-xl text-xs border border-slate-700">
+              Need Coins?
+            </button>
+          </div>
+        </div>
+
+        <!-- POOL 2: LOCKED (100 Coins | 50 Users -> ₹50 Pool) -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 opacity-85 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] bg-slate-800 text-amber-300 border border-amber-400/30 font-bold px-2.5 py-0.5 rounded-full">🔒 LOCKED • POOL #2</span>
+            <span class="text-xs text-slate-400 font-semibold">Entry: 100 Coins • 50 Users</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="text-base font-bold text-slate-200">₹50 Mega Pool (5,000 Coins)</h4>
+              <p class="text-[11px] text-slate-400">Unlocks automatically when 50 active players join!</p>
+            </div>
+            <span class="text-lg font-extrabold text-slate-400">₹50</span>
+          </div>
+        </div>
+
+        <!-- POOL 3: LOCKED (100 Coins | 100 Users -> ₹100 Pool) -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 opacity-85 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] bg-slate-800 text-amber-300 border border-amber-400/30 font-bold px-2.5 py-0.5 rounded-full">🔒 LOCKED • POOL #3</span>
+            <span class="text-xs text-slate-400 font-semibold">Entry: 100 Coins • 100 Users</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="text-base font-bold text-slate-200">₹100 Jackpot Pool (10,000 Coins)</h4>
+              <p class="text-[11px] text-slate-400">Unlocks automatically when 100 active players join!</p>
+            </div>
+            <span class="text-lg font-extrabold text-slate-400">₹100</span>
+          </div>
+        </div>
+
+        <!-- POOL 4: LOCKED VIP GRAND POOL (1,200 Tokens -> ₹12,000) -->
+        <div class="bg-gradient-to-r from-slate-900 via-amber-950/30 to-slate-900 border border-amber-500/30 rounded-2xl p-4 opacity-90 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2.5 py-0.5 rounded-full">👑 LOCKED • VIP GRAND POOL</span>
+            <span class="text-xs text-amber-300 font-semibold">1,200 Tokens Pool</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="text-base font-extrabold text-amber-200">₹12,000 Grand Prize (12,00,000 Coins)</h4>
+              <p class="text-[11px] text-slate-400">Mega Community Milestone Event • Coming Soon!</p>
+            </div>
+            <span class="text-lg font-black text-amber-400">₹12,000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adsterra Native Banner Slot (Clean Card Style) -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 space-y-2 overflow-hidden">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Featured Partner Offers</span>
+          <span class="text-[10px] text-slate-600">Ad</span>
+        </div>
+        <script async fetchpriority="high" data-cfasync="false" src="https://bauval.org/21/5a763450dd0a4a9695a9d4cc6e4e33f5"></script>
+        <div id="container-5a763450dd0a4a9695a9d4cc6e4e33f5"></div>
+      </div>
+
+      <!-- Invite & Earn +200 Coins Card -->
+      <div class="bg-gradient-to-r from-indigo-950 to-slate-900 border border-indigo-500/40 rounded-2xl p-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 rounded-full font-bold">UNLIMITED REFERRALS</span>
+          <span class="text-xs font-extrabold text-emerald-400">+200 Coins / Friend</span>
+        </div>
+        <h3 class="text-base font-extrabold text-white">👥 Invite Friends & Get +200 Coins!</h3>
+        <p class="text-xs text-slate-300">Share your referral link. When your friend signs in, you get <span class="text-amber-400 font-bold">+200 Coins (2 Free Pool Tickets!)</span> instantly.</p>
+        <div class="flex gap-2">
+          <input id="refLinkInput" type="text" readonly value="Sign in to get your invite link" class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300" />
+          <button onclick="copyRefLink()" class="bg-indigo-500 hover:bg-indigo-400 text-white font-bold px-4 py-2 rounded-xl text-xs">Copy</button>
+          <button onclick="shareWhatsApp()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs">WhatsApp</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 2: EARN COINS (GAMES & SURVEYS) ==================== -->
+    <div id="tab-earn" class="hidden space-y-5">
+
+      <!-- Earn Header Banner -->
+      <div class="bg-gradient-to-r from-indigo-600 via-purple-700 to-slate-900 border border-indigo-400/30 rounded-2xl p-5 flex items-center justify-between">
+        <div>
+          <span class="text-[10px] uppercase tracking-wider bg-black/30 text-indigo-100 px-2.5 py-0.5 rounded-full font-bold">PLAY & COLLECT</span>
+          <h2 class="text-xl font-extrabold text-white mt-2">🎮 Earn Coins Zone</h2>
+          <p class="text-xs text-indigo-100/90 mt-0.5">Play up to 10 games daily (up to 200 Coins/day)!</p>
+        </div>
+        <div class="text-right">
+          <span id="dailyLimitBadge" class="text-[11px] bg-black/35 text-amber-300 px-3 py-1 rounded-full font-bold border border-amber-400/30">Plays Left: 10/10</span>
+        </div>
+      </div>
+
+      <!-- Mini-Games Grid -->
+      <div id="gameMenu" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">🧠</span>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-bold">+15 COINS</span>
+            </div>
+            <h3 class="font-bold text-sm mt-2">Memory Match</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Match 4 emoji pairs in 25 seconds.</p>
+          </div>
+          <button onclick="startMemoryGame()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs transition">
+            Play Now
+          </button>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">⚡</span>
+              <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">+15 COINS</span>
+            </div>
+            <h3 class="font-bold text-sm mt-2">Reflex Tap</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Tap the glowing target 15 times in 12s.</p>
+          </div>
+          <button onclick="startReflexGame()" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs transition">
+            Play Now
+          </button>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">🔢</span>
+              <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded font-bold">+20 COINS</span>
+            </div>
+            <h3 class="font-bold text-sm mt-2">Math Sprint</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Solve 5 quick math sums in 20s.</p>
+          </div>
+          <button onclick="startMathGame()" class="w-full bg-blue-500 hover:bg-blue-400 text-white font-extrabold py-2.5 rounded-xl text-xs transition">
+            Play Now
+          </button>
+        </div>
+      </div>
+
+      <!-- High-Paying Surveys Portal Card -->
+      <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full font-bold">HIGH REWARDS • 50 – 500 COINS</span>
+          <h3 class="text-base font-extrabold text-white mt-1.5">📝 Paid Brand Surveys Portal</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Answer quick market research surveys on RupayVibe Survey Hub & sync coins instantly.</p>
+        </div>
+        <a href="https://rupayvibe.online" target="_blank" rel="noopener noreferrer" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl text-xs text-center shrink-0 transition">
+          Open Surveys ↗
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 3: DASHBOARD ==================== -->
+    <div id="tab-dashboard" class="hidden space-y-4">
+      <h2 class="text-lg font-extrabold text-white">📊 Your Arena Dashboard</h2>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Current Coins</p>
+          <p id="dashCoins" class="text-2xl font-extrabold text-emerald-400 mt-1">0</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Friends Invited</p>
+          <p id="dashReferrals" class="text-2xl font-extrabold text-amber-400 mt-1">0</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Pool Entries</p>
+          <p id="dashPools" class="text-2xl font-extrabold text-indigo-400 mt-1">0</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Games Played Today</p>
+          <p id="dashGames" class="text-2xl font-extrabold text-blue-400 mt-1">0 / 10</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
+        <h3 class="text-sm font-bold text-white">Check-In & Arena Status</h3>
+        <div id="activityList" class="text-xs text-slate-400 space-y-1.5">
+          <p>7-Day Streak & Wallet synced automatically with RupayVibe App & Web.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: REDEEM (SAME-DAY UPI) ==================== -->
+    <div id="tab-redeem" class="hidden space-y-4">
+      <div class="bg-gradient-to-r from-emerald-900 to-slate-900 border border-emerald-500/40 rounded-2xl p-4">
+        <span class="text-[10px] bg-emerald-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full">⚡ SAME-DAY UPI TRANSFER</span>
+        <h2 class="text-lg font-extrabold text-white mt-2">💸 Withdraw Your Earnings</h2>
+        <p class="text-xs text-slate-300 mt-1">100 Coins = ₹1.00 INR • Direct GPay / PhonePe / Paytm UPI</p>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4">
+        <div>
+          <label class="text-xs text-slate-400 block mb-1.5">Select Payout Amount</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" onclick="selectPayout(10, 1000)" id="amt10" class="payoutOpt border-2 border-emerald-500 bg-emerald-500/15 rounded-xl p-3 text-center">
+              <p class="text-base font-extrabold text-white">₹10</p>
+              <p class="text-[10px] text-emerald-300">1,000 Coins</p>
+            </button>
+            <button type="button" onclick="selectPayout(25, 2500)" id="amt25" class="payoutOpt border border-slate-700 bg-slate-950 rounded-xl p-3 text-center">
+              <p class="text-base font-extrabold text-white">₹25</p>
+              <p class="text-[10px] text-slate-400">2,500 Coins</p>
+            </button>
+            <button type="button" onclick="selectPayout(50, 5000)" id="amt50" class="payoutOpt border border-slate-700 bg-slate-950 rounded-xl p-3 text-center">
+              <p class="text-base font-extrabold text-white">₹50</p>
+              <p class="text-[10px] text-slate-400">5,000 Coins</p>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Enter Your UPI ID</label>
+          <input id="upiInput" type="text" placeholder="example@okicici / 9876543210@ybl" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400" />
+        </div>
+
+        <button onclick="submitWithdraw()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3 rounded-xl text-sm shadow-lg transition">
+          Request Same-Day UPI Payout
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: PROFILE ==================== -->
+    <div id="tab-profile" class="hidden space-y-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
+        <h2 class="text-lg font-extrabold text-white">👤 Account Profile</h2>
+        <div class="text-xs space-y-2 text-slate-300">
+          <p><span class="text-slate-500">Name:</span> <span id="profName" class="font-bold">Guest User</span></p>
+          <p><span class="text-slate-500">Email:</span> <span id="profEmail" class="font-bold">Not signed in</span></p>
+          <p><span class="text-slate-500">Your Referral Code:</span> <span id="profRefCode" class="font-extrabold text-amber-400">—</span></p>
+        </div>
+        <div class="pt-2 flex flex-wrap gap-3 text-xs">
+          <a href="https://rupayvibe.online" target="_blank" class="text-emerald-400 underline">Survey Portal</a>
+          <a href="https://rupayvibe.online/privacy.html" target="_blank" class="text-slate-400 underline">Privacy Policy</a>
+          <a href="https://rupayvibe.online/terms.html" target="_blank" class="text-slate-400 underline">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Centered Full-Screen Popup Game Arena Modal -->
+  <div id="gameArena" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-2 border-amber-400/60 rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 id="arenaTitle" class="font-bold text-base sm:text-lg text-amber-400">Game</h3>
+        <div class="flex items-center gap-2.5">
+          <span id="arenaTimer" class="text-xs bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full font-bold">Time: 20s</span>
+          <button onclick="closeArena()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded-lg font-bold">✕ Exit</button>
+        </div>
+      </div>
+      <div id="arenaBody" class="min-h-[260px] flex flex-col items-center justify-center"></div>
+    </div>
+  </div>
+
+  <!-- Bottom Mobile Navigation Bar (5 Tabs) -->
+  <nav class="fixed bottom-0 inset-x-0 bg-slate-900/95 backdrop-blur border-t border-slate-800 z-40">
+    <div class="max-w-2xl mx-auto grid grid-cols-5 py-2 text-center text-[10px] sm:text-[11px] font-bold">
+      <button onclick="switchTab('home')" id="nav-home" class="navBtn text-amber-400 flex flex-col items-center gap-0.5">
+        <span class="text-base">🏠</span><span>Home</span>
+      </button>
+      <button onclick="switchTab('earn')" id="nav-earn" class="navBtn text-slate-400 flex flex-col items-center gap-0.5">
+        <span class="text-base">🎮</span><span>Earn Coins</span>
+      </button>
+      <button onclick="switchTab('dashboard')" id="nav-dashboard" class="navBtn text-slate-400 flex flex-col items-center gap-0.5">
+        <span class="text-base">📊</span><span>Dashboard</span>
+      </button>
+      <button onclick="switchTab('redeem')" id="nav-redeem" class="navBtn text-slate-400 flex flex-col items-center gap-0.5">
+        <span class="text-base">💸</span><span>Redeem</span>
+      </button>
+      <button onclick="switchTab('profile')" id="nav-profile" class="navBtn text-slate-400 flex flex-col items-center gap-0.5">
+        <span class="text-base">👤</span><span>Profile</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Firebase + App Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where, getDocs, increment, onSnapshot, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
+      authDomain: "rupayvibe.firebaseapp.com",
+      projectId: "rupayvibe",
+      storageBucket: "rupayvibe.firebasestorage.app",
+      messagingSenderId: "692963834855",
+      appId: "1:692963834855:web:4868ff4b5dd682b0c99b42",
+      measurementId: "G-H8C08XSQN2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const provider = new GoogleAuthProvider();
+
+    // New Adsterra Smartlink for games.rupayvibe.online
+    const AD_SMARTLINK = "https://araplhn.org/4/06c10e2593c78daee4f613bf45f3c8ed";
+    const STREAK_REWARDS = [10, 15, 20, 30, 40, 50, 100];
+    const MAX_DAILY_PLAYS = 10;
+    const MAX_AD_SPINS = 3;
+
+    let currentUser = null;
+    let userData = {};
+    let gameTimer = null;
+    let selectedRs = 10;
+    let selectedCoins = 1000;
+    let currentWheelDeg = 0;
+
+    function getLocalDateStr(offsetDays = 0) {
+      const d = new Date();
+      d.setDate(d.getDate() + offsetDays);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return `${y}-${m}-${day}`;
+    }
+
+    const todayStr = getLocalDateStr(0);
+    const yesterdayStr = getLocalDateStr(-1);
+    const todayKey = "rv_plays_" + todayStr;
+    const spinKey = "rv_spin_" + todayStr;
+    const adSpinCountKey = "rv_ad_spins_" + todayStr;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const incomingRef = urlParams.get("ref");
+    if (incomingRef) localStorage.setItem("rv_pending_ref", incomingRef.trim().toUpperCase());
+
+    window.switchTab = (tabName) => {
+      ["home", "earn", "dashboard", "redeem", "profile"].forEach(t => {
+        document.getElementById("tab-" + t).classList.add("hidden");
+        document.getElementById("nav-" + t).classList.replace("text-amber-400", "text-slate-400");
+      });
+      document.getElementById("tab-" + tabName).classList.remove("hidden");
+      document.getElementById("nav-" + tabName).classList.replace("text-slate-400", "text-amber-400");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // Render 7-Day Continuous Daily Check-In UI
+    function renderStreakUI(lastCheckIn = "", checkInStreak = 0) {
+      const claimedToday = lastCheckIn === todayStr;
+      let activeDayIndex = 0;
+
+      if (claimedToday) {
+        activeDayIndex = Math.max(0, (checkInStreak - 1) % 7);
+      } else if (lastCheckIn === yesterdayStr) {
+        activeDayIndex = checkInStreak % 7;
+      } else {
+        activeDayIndex = 0;
+      }
+
+      document.getElementById("streakDayBadge").innerText = `Day ${activeDayIndex + 1}/7`;
+      const grid = document.getElementById("streakGrid");
+      grid.innerHTML = "";
+
+      STREAK_REWARDS.forEach((reward, i) => {
+        const isDone = claimedToday ? i <= activeDayIndex : i < activeDayIndex;
+        const isCurrent = !claimedToday && i === activeDayIndex;
+
+        let cardClass = "bg-slate-950 border border-slate-800 text-slate-400";
+        if (isDone) {
+          cardClass = "bg-emerald-600/90 border border-emerald-400 text-white";
+        } else if (isCurrent) {
+          cardClass = "bg-amber-400/20 border-2 border-amber-400 text-amber-300";
+        }
+
+        const cell = document.createElement("div");
+        cell.className = `${cardClass} rounded-xl py-2 px-1 flex flex-col items-center justify-center transition`;
+        cell.innerHTML = `
+          <span class="text-[10px] font-bold">D${i + 1}</span>
+          <span class="text-xs my-0.5">${isDone ? "✅" : (i === 6 ? "👑" : "🪙")}</span>
+          <span class="text-[10px] font-extrabold">+${reward}</span>
+        `;
+        grid.appendChild(cell);
+      });
+
+      const btn = document.getElementById("claimStreakBtn");
+      if (claimedToday) {
+        btn.disabled = true;
+        btn.innerText = "✅ Today's Check-In Claimed (Come Back Tomorrow)";
+      } else {
+        btn.disabled = false;
+        btn.innerText = `Claim Day ${activeDayIndex + 1} (+${STREAK_REWARDS[activeDayIndex]} Coins)`;
+      }
+    }
+    renderStreakUI();
+
+    window.claimDailyStreak = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const btn = document.getElementById("claimStreakBtn");
+      btn.disabled = true;
+
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        let claimedDay = 1;
+        let claimedReward = 10;
+
+        await runTransaction(db, async (tx) => {
+          const snap = await tx.get(userRef);
+          const data = snap.data() || {};
+          const lastDate = (data.lastCheckIn || "").trim();
+          const currentStreak = data.checkInStreak || 0;
+
+          if (lastDate === todayStr) throw "Already claimed today!";
+
+          const nextDayIndex = (lastDate === yesterdayStr) ? (currentStreak % 7) : 0;
+          claimedReward = STREAK_REWARDS[nextDayIndex];
+          claimedDay = nextDayIndex + 1;
+
+          tx.update(userRef, {
+            coins: increment(claimedReward),
+            lastCheckIn: todayStr,
+            checkInStreak: claimedDay
+          });
+        });
+
+        await addDoc(collection(db, "users", currentUser.uid, "history"), {
+          title: `Day ${claimedDay} Check-In Bonus`,
+          coins: claimedReward,
+          type: "credit",
+          createdAt: serverTimestamp()
+        });
+
+        alert(`🔥 Day ${claimedDay} Claimed! +${claimedReward} Coins Added to Your Wallet!`);
+      } catch (e) {
+        if (typeof e === "string") alert(e);
+        else alert("Check-in error: " + e.message);
+      }
+    };
+
+    function getPlaysUsed() { return parseInt(localStorage.getItem(todayKey) || "0", 10); }
+    function updatePlaysBadge() {
+      const used = getPlaysUsed();
+      const left = Math.max(0, MAX_DAILY_PLAYS - used);
+      document.getElementById("dailyLimitBadge").innerText = `Plays Left: ${left}/${MAX_DAILY_PLAYS}`;
+      document.getElementById("dashGames").innerText = `${used} / ${MAX_DAILY_PLAYS}`;
+    }
+    updatePlaysBadge();
+
+    function getAdSpinsUsed() {
+      return parseInt(localStorage.getItem(adSpinCountKey) || "0", 10);
+    }
+
+    function updateSpinBadge() {
+      const freeUsed = !!localStorage.getItem(spinKey);
+      const adUsed = getAdSpinsUsed();
+      const adLeft = Math.max(0, MAX_AD_SPINS - adUsed);
+
+      if (!freeUsed) {
+        document.getElementById("spinStatusBadge").innerText = "1 Free + 3 Ad Spins";
+        document.getElementById("spinNowBtn").innerText = "🎡 Spin Now (Free)";
+        document.getElementById("spinNowBtn").disabled = false;
+      } else if (adLeft > 0) {
+        document.getElementById("spinStatusBadge").innerText = `Ad Spins Left: ${adLeft}/${MAX_AD_SPINS}`;
+        document.getElementById("spinNowBtn").innerText = `📺 Watch Ad & Spin (${adLeft} Left)`;
+        document.getElementById("spinNowBtn").disabled = false;
+      } else {
+        document.getElementById("spinStatusBadge").innerText = "All Spins Used ✓";
+        document.getElementById("spinNowBtn").innerText = "Come Back Tomorrow";
+        document.getElementById("spinNowBtn").disabled = true;
+      }
+    }
+    updateSpinBadge();
+
+    function runActualWheelSpin() {
+      const prizes = [5, 10, 15, 20, 30, 50];
+      const idx = Math.floor(Math.random() * prizes.length);
+      const won = prizes[idx];
+      currentWheelDeg += 1440 + (idx * 60);
+      document.getElementById("wheelDisc").style.transform = `rotate(${currentWheelDeg}deg)`;
+
+      setTimeout(async () => {
+        await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(won) });
+        updateSpinBadge();
+        alert(`🎉 Congrats! You won +${won} Coins from Lucky Spin!`);
+      }, 3100);
+    }
+
+    window.spinWheel = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const btn = document.getElementById("spinNowBtn");
+
+      // 1. First Free Spin
+      if (!localStorage.getItem(spinKey)) {
+        btn.disabled = true;
+        localStorage.setItem(spinKey, "1");
+        runActualWheelSpin();
+        return;
+      }
+
+      // 2. Watch Sponsor Ad (Adsterra Smartlink) for Extra Spin (up to 3/day)
+      const adUsed = getAdSpinsUsed();
+      if (adUsed >= MAX_AD_SPINS) {
+        return alert("Daily 4 Spins (1 Free + 3 Ad Spins) completed! Play Mini-Games in Earn Coins tab.");
+      }
+
+      window.open(AD_SMARTLINK, "_blank", "noopener,noreferrer");
+
+      btn.disabled = true;
+      let sec = 10;
+      btn.innerText = `⏳ Viewing Ad... ${sec}s`;
+
+      const adTimer = setInterval(() => {
+        sec--;
+        btn.innerText = `⏳ Viewing Ad... ${sec}s`;
+        if (sec <= 0) {
+          clearInterval(adTimer);
+          localStorage.setItem(adSpinCountKey, String(adUsed + 1));
+          btn.innerText = "🎡 Spinning...";
+          runActualWheelSpin();
+        }
+      }, 1000);
+    };
+
+    document.getElementById("authBtn").onclick = async () => {
+      if (currentUser) await signOut(auth);
+      else await signInWithPopup(auth, provider);
+    };
+
+    // Live Pool #1 Listener
+    const pool1Ref = doc(db, "pools", "pool_10");
+    onSnapshot(pool1Ref, async (snap) => {
+      if (snap.exists()) {
+        const entries = snap.data().entries || [];
+        const count = entries.length;
+        document.getElementById("pool1CountText").innerText = `${count} / 10 Tokens Joined`;
+        document.getElementById("pool1Bar").style.width = `${Math.max(8, (count / 10) * 100)}%`;
+      } else {
+        await setDoc(pool1Ref, { entries: [], round: 1 });
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user;
+      if (user) {
+        document.getElementById("authBtn").innerText = "Sign Out";
+        const userRef = doc(db, "users", user.uid);
+        const initialSnap = await getDoc(userRef);
+
+        if (!initialSnap.exists()) {
+          const generatedCode = "RV" + Math.floor(10000 + Math.random() * 90000);
+          const pendingRef = localStorage.getItem("rv_pending_ref");
+          let validReferrerUid = null;
+
+          if (pendingRef && pendingRef !== generatedCode) {
+            const q = query(collection(db, "users"), where("referralCode", "==", pendingRef));
+            const refSnap = await getDocs(q);
+            if (!refSnap.empty) {
+              const referrerDoc = refSnap.docs[0];
+              validReferrerUid = referrerDoc.id;
+              await updateDoc(doc(db, "users", validReferrerUid), {
+                coins: increment(200),
+                referralsCount: increment(1)
+              });
+            }
+          }
+
+          await setDoc(userRef, {
+            email: user.email,
+            name: user.displayName || "Player",
+            coins: 0,
+            lastCheckIn: "",
+            checkInStreak: 0,
+            referralCode: generatedCode,
+            referredBy: validReferrerUid || "",
+            referralsCount: 0,
+            poolEntries: 0,
+            createdAt: serverTimestamp()
+          });
+        }
+
+        onSnapshot(userRef, (snap) => {
+          if (snap.exists()) {
+            userData = snap.data();
+            const coins = userData.coins || 0;
+            const lastCheckIn = (userData.lastCheckIn || "").trim();
+            const checkInStreak = userData.checkInStreak || 0;
+            const code = userData.referralCode || ("RV" + user.uid.slice(0, 5).toUpperCase());
+            const shareUrl = `https://games.rupayvibe.online?ref=${code}`;
+
+            renderStreakUI(lastCheckIn, checkInStreak);
+
+            document.getElementById("coinBalance").innerText = `${coins} Coins`;
+            document.getElementById("inrValue").innerText = `≈ ₹${(coins / 100).toFixed(2)} INR`;
+            document.getElementById("dashCoins").innerText = coins;
+            document.getElementById("dashReferrals").innerText = userData.referralsCount || 0;
+            document.getElementById("dashPools").innerText = userData.poolEntries || 0;
+            document.getElementById("refLinkInput").value = shareUrl;
+            document.getElementById("profName").innerText = userData.name || user.displayName;
+            document.getElementById("profEmail").innerText = user.email;
+            document.getElementById("profRefCode").innerText = code;
+          }
+        });
+      } else {
+        document.getElementById("authBtn").innerText = "Sign in with Google";
+        document.getElementById("coinBalance").innerText = "0 Coins";
+        document.getElementById("inrValue").innerText = "≈ ₹0.00 INR";
+        renderStreakUI();
+      }
+    });
+
+    // Join Pool #1 (Opens Adsterra Smartlink on Token Purchase)
+    window.joinPool1 = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const coins = userData.coins || 0;
+      if (coins < 100) {
+        if (confirm("You need 100 Coins to join Pool #1! Go to Earn Coins tab to play games?")) {
+          switchTab("earn");
+        }
+        return;
+      }
+
+      window.open(AD_SMARTLINK, "_blank", "noopener,noreferrer");
+
+      const pSnap = await getDoc(pool1Ref);
+      const currentEntries = pSnap.exists() ? (pSnap.data().entries || []) : [];
+      const newEntries = [...currentEntries, { uid: currentUser.uid, name: userData.name || "Player" }];
+
+      await updateDoc(doc(db, "users", currentUser.uid), {
+        coins: increment(-100),
+        poolEntries: increment(1)
+      });
+
+      if (newEntries.length >= 10) {
+        const winner = newEntries[Math.floor(Math.random() * newEntries.length)];
+        await updateDoc(doc(db, "users", winner.uid), { coins: increment(1000) });
+        await setDoc(pool1Ref, {
+          entries: [],
+          lastWinner: winner.name,
+          round: increment(1)
+        }, { merge: true });
+        alert(`🎟️ Pool #1 Full (10/10)! Winner: ${winner.name} won ₹10 (1,000 Coins)!`);
+      } else {
+        await setDoc(pool1Ref, { entries: newEntries }, { merge: true });
+        alert(`🎟️ Ticket Confirmed! (${newEntries.length}/10 Joined). Winner drawn automatically at 10/10!`);
+      }
+    };
+
+    // Referral Share
+    window.copyRefLink = () => {
+      const inp = document.getElementById("refLinkInput");
+      inp.select();
+      navigator.clipboard.writeText(inp.value);
+      alert("Invite link copied! Share & earn +200 Coins per friend.");
+    };
+
+    window.shareWhatsApp = () => {
+      const link = document.getElementById("refLinkInput").value;
+      const msg = encodeURIComponent(`🏆 Join RupayVibe Mega Arena! Play free games, spin & join ₹10–₹500 UPI pools! Join via my link: ${link}`);
+      window.open(`https://wa.me/?text=${msg}`, "_blank");
+    };
+
+    // Redeem UPI (Opens Adsterra Smartlink on Payout Request)
+    window.selectPayout = (rs, coins) => {
+      selectedRs = rs;
+      selectedCoins = coins;
+      document.querySelectorAll(".payoutOpt").forEach(el => {
+        el.className = "payoutOpt border border-slate-700 bg-slate-950 rounded-xl p-3 text-center";
+      });
+      document.getElementById("amt" + rs).className = "payoutOpt border-2 border-emerald-500 bg-emerald-500/15 rounded-xl p-3 text-center";
+    };
+
+    window.submitWithdraw = async () => {
+      if (!currentUser) return alert("Please sign in first!");
+      const upi = document.getElementById("upiInput").value.trim();
+      if (!upi || !upi.includes("@")) return alert("Please enter a valid UPI ID (e.g., name@okicici)");
+      if ((userData.coins || 0) < selectedCoins) return alert(`Insufficient coins! You need ${selectedCoins} Coins for ₹${selectedRs}.`);
+
+      window.open(AD_SMARTLINK, "_blank", "noopener,noreferrer");
+
+      await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(-selectedCoins) });
+      await addDoc(collection(db, "withdrawals"), {
+        uid: currentUser.uid,
+        email: currentUser.email,
+        name: userData.name || "User",
+        upiId: upi,
+        amount: selectedRs,
+        coinsDeducted: selectedCoins,
+        status: "Pending",
+        source: "games.rupayvibe.online",
+        timestamp: serverTimestamp()
+      });
+      alert(`✅ ₹${selectedRs} Same-Day UPI Withdrawal Requested! Payment will be sent to ${upi} today.`);
+    };
+
+    // Mini-Games Logic
+    function canPlay() {
+      if (!currentUser) { alert("Please sign in with Google first!"); return false; }
+      if (getPlaysUsed() >= MAX_DAILY_PLAYS) { alert("Daily 10 games limit reached! Come back tomorrow or open Surveys."); return false; }
+      return true;
+    }
+
+    async function rewardWin(coinsWon, gameName) {
+      clearInterval(gameTimer);
+      localStorage.setItem(todayKey, String(getPlaysUsed() + 1));
+      updatePlaysBadge();
+      await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(coinsWon) });
+      document.getElementById("arenaBody").innerHTML = `
+        <div class="text-center space-y-3">
+          <div class="text-4xl">🎉</div>
+          <h4 class="text-xl font-extrabold text-emerald-400">You Won +${coinsWon} Coins!</h4>
+          <p class="text-xs text-slate-300">${gameName} reward added to your wallet.</p>
+          <button onclick="closeArena()" class="bg-emerald-500 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl text-xs">Done</button>
+        </div>
+      `;
+    }
+
+    function gameOver(msg) {
+      clearInterval(gameTimer);
+      document.getElementById("arenaBody").innerHTML = `
+        <div class="text-center space-y-3">
+          <div class="text-4xl">⏰</div>
+          <h4 class="text-lg font-bold text-rose-400">${msg}</h4>
+          <button onclick="closeArena()" class="bg-slate-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs">Close</button>
+        </div>
+      `;
+    }
+
+    window.closeArena = () => {
+      clearInterval(gameTimer);
+      document.getElementById("gameArena").classList.add("hidden");
+    };
+
+    function startTimer(seconds) {
+      clearInterval(gameTimer);
+      let left = seconds;
+      document.getElementById("arenaTimer").innerText = `Time: ${left}s`;
+      gameTimer = setInterval(() => {
+        left--;
+        document.getElementById("arenaTimer").innerText = `Time: ${left}s`;
+        if (left <= 0) gameOver("Time's up! Try again.");
+      }, 1000);
+    }
+
+    window.startMemoryGame = () => {
+      if (!canPlay()) return;
+      document.getElementById("gameArena").classList.remove("hidden");
+      document.getElementById("arenaTitle").innerText = "🧠 Memory Match (+15 Coins)";
+      startTimer(25);
+
+      const icons = ["🚀", "💎", "🔥", "🎯", "🚀", "💎", "🔥", "🎯"].sort(() => Math.random() - 0.5);
+      let flipped = [], matched = 0;
+      document.getElementById("arenaBody").innerHTML = `<div id="memGrid" class="grid grid-cols-4 gap-3 w-full max-w-xs"></div>`;
+      const grid = document.getElementById("memGrid");
+
+      icons.forEach((icon) => {
+        const btn = document.createElement("button");
+        btn.className = "h-16 bg-slate-800 hover:bg-slate-700 rounded-xl text-2xl font-bold flex items-center justify-center transition";
+        btn.innerText = "?";
+        btn.onclick = () => {
+          if (btn.dataset.done || flipped.length === 2 || flipped.includes(btn)) return;
+          btn.innerText = icon;
+          btn.classList.replace("bg-slate-800", "bg-indigo-600");
+          flipped.push(btn);
+          if (flipped.length === 2) {
+            const [a, b] = flipped;
+            if (a.innerText === b.innerText) {
+              a.dataset.done = b.dataset.done = "1";
+              matched++; flipped = [];
+              if (matched === 4) rewardWin(15, "Memory Match");
+            } else {
+              setTimeout(() => {
+                a.innerText = b.innerText = "?";
+                a.classList.replace("bg-indigo-600", "bg-slate-800");
+                b.classList.replace("bg-indigo-600", "bg-slate-800");
+                flipped = [];
+              }, 450);
+            }
+          }
+        };
+        grid.appendChild(btn);
+      });
+    };
+
+    window.startReflexGame = () => {
+      if (!canPlay()) return;
+      document.getElementById("gameArena").classList.remove("hidden");
+      document.getElementById("arenaTitle").innerText = "⚡ Reflex Tap (+15 Coins)";
+      startTimer(12);
+      let score = 0;
+      document.getElementById("arenaBody").innerHTML = `
+        <p class="text-xs text-slate-300 mb-2">Score: <span id="refScore" class="text-amber-400 font-bold">0</span> / 15</p>
+        <div class="relative w-full h-52 bg-slate-950 rounded-xl border border-slate-800 overflow-hidden">
+          <button id="targetDot" class="absolute w-12 h-12 rounded-full bg-amber-400 text-slate-950 font-extrabold text-xs shadow-lg">TAP</button>
+        </div>
+      `;
+      const dot = document.getElementById("targetDot");
+      const moveDot = () => {
+        dot.style.left = Math.floor(Math.random() * 78) + "%";
+        dot.style.top = Math.floor(Math.random() * 70) + "%";
+      };
+      moveDot();
+      dot.onclick = () => {
+        score++;
+        document.getElementById("refScore").innerText = score;
+        if (score >= 15) rewardWin(15, "Reflex Tap");
+        else moveDot();
+      };
+    };
+
+    window.startMathGame = () => {
+      if (!canPlay()) return;
+      document.getElementById("gameArena").classList.remove("hidden");
+      document.getElementById("arenaTitle").innerText = "🔢 Math Sprint (+20 Coins)";
+      startTimer(20);
+      let solved = 0;
+      const nextSum = () => {
+        const a = Math.floor(Math.random() * 25) + 10;
+        const b = Math.floor(Math.random() * 25) + 5;
+        const ans = a + b;
+        const opts = [ans, ans + 3, ans - 2, ans + 5].sort(() => Math.random() - 0.5);
+        document.getElementById("arenaBody").innerHTML = `
+          <p class="text-xs text-slate-400 mb-2">Solved: ${solved} / 5</p>
+          <h4 class="text-2xl font-extrabold text-white mb-4">${a} + ${b} = ?</h4>
+          <div class="grid grid-cols-2 gap-3 w-full max-w-xs">
+            ${opts.map(o => `<button class="optBtn bg-slate-800 hover:bg-blue-600 py-3 rounded-xl font-bold text-base">${o}</button>`).join("")}
+          </div>
+        `;
+        document.querySelectorAll(".optBtn").forEach(btn => {
+          btn.onclick = () => {
+            if (parseInt(btn.innerText) === ans) {
+              solved++;
+              if (solved >= 5) rewardWin(20, "Math Sprint");
+              else nextSum();
+            } else gameOver("Wrong answer! Try again.");
+          };
+        });
+      };
+      nextSum();
+    };
+  </script>
+</body>
+</html>
