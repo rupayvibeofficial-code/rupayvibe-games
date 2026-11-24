@@ -51,7 +51,7 @@
   <!-- Main Container -->
   <main class="max-w-2xl mx-auto w-full p-4 space-y-5">
 
-    <!-- Adsterra 320x50 Banner (Visible Across ALL Tabs: Home, Earn, Dashboard, Redeem, Profile) -->
+    <!-- Adsterra 320x50 Banner -->
     <div class="w-full flex flex-col items-center justify-center bg-slate-900/70 border border-slate-800 rounded-xl py-2 overflow-hidden">
       <span class="text-[9px] uppercase tracking-widest text-slate-500 mb-1">Sponsored</span>
       <div class="w-[320px] h-[50px] flex items-center justify-center overflow-hidden">
@@ -108,7 +108,6 @@
           </span>
         </div>
 
-        <!-- 7 Days Grid -->
         <div id="streakGrid" class="grid grid-cols-7 gap-1.5 text-center"></div>
 
         <button id="claimStreakBtn" onclick="claimDailyStreak()" class="w-full bg-amber-400 hover:bg-amber-300 disabled:bg-slate-800 disabled:text-slate-400 text-slate-950 font-extrabold py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
@@ -116,7 +115,7 @@
         </button>
       </div>
 
-      <!-- Lucky Spin Wheel Card (1 Free + 3 Ad Spins) -->
+      <!-- Lucky Spin Wheel Card -->
       <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-5 gold-glow">
         <div class="flex items-center justify-between mb-3">
           <div>
@@ -128,7 +127,6 @@
         </div>
 
         <div class="flex flex-col sm:flex-row items-center justify-around gap-4 py-2">
-          <!-- Wheel Visual -->
           <div class="relative w-36 h-36 flex items-center justify-center">
             <div class="absolute -top-2 z-10 text-amber-400 text-lg font-black">▼</div>
             <div id="wheelDisc" class="w-32 h-32 rounded-full border-4 border-amber-400 shadow-lg transition-transform duration-[3000ms] ease-out flex items-center justify-center"
@@ -158,7 +156,7 @@
           <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full font-bold">100% Free-to-Play</span>
         </div>
 
-        <!-- POOL 1: ACTIVE & UNLOCKED (100 Coins | 10 Users -> ₹10 Winner) -->
+        <!-- POOL 1 -->
         <div class="bg-gradient-to-br from-slate-900 to-emerald-950/60 border-2 border-emerald-500 rounded-2xl p-4 space-y-3 shadow-lg">
           <div class="flex items-center justify-between">
             <span class="text-[10px] bg-emerald-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full">🟢 LIVE • POOL #1</span>
@@ -174,7 +172,6 @@
               <p class="text-[10px] text-slate-400">UPI Instant</p>
             </div>
           </div>
-          <!-- Progress Bar -->
           <div class="space-y-1">
             <div class="flex justify-between text-[11px] font-semibold">
               <span class="text-emerald-300">Pool Progress</span>
@@ -194,7 +191,7 @@
           </div>
         </div>
 
-        <!-- POOL 2: LOCKED (100 Coins | 50 Users -> ₹50 Pool) -->
+        <!-- POOL 2 -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 opacity-85 space-y-2">
           <div class="flex items-center justify-between">
             <span class="text-[10px] bg-slate-800 text-amber-300 border border-amber-400/30 font-bold px-2.5 py-0.5 rounded-full">🔒 LOCKED • POOL #2</span>
@@ -209,7 +206,7 @@
           </div>
         </div>
 
-        <!-- POOL 3: LOCKED (100 Coins | 100 Users -> ₹100 Pool) -->
+        <!-- POOL 3 -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 opacity-85 space-y-2">
           <div class="flex items-center justify-between">
             <span class="text-[10px] bg-slate-800 text-amber-300 border border-amber-400/30 font-bold px-2.5 py-0.5 rounded-full">🔒 LOCKED • POOL #3</span>
@@ -224,7 +221,7 @@
           </div>
         </div>
 
-        <!-- POOL 4: LOCKED VIP GRAND POOL (1,200 Tokens -> ₹12,000) -->
+        <!-- POOL 4 -->
         <div class="bg-gradient-to-r from-slate-900 via-amber-950/30 to-slate-900 border border-amber-500/30 rounded-2xl p-4 opacity-90 space-y-2">
           <div class="flex items-center justify-between">
             <span class="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2.5 py-0.5 rounded-full">👑 LOCKED • VIP GRAND POOL</span>
@@ -240,7 +237,7 @@
         </div>
       </div>
 
-      <!-- Adsterra Native Banner Slot (Clean Card Style) -->
+      <!-- Adsterra Native Banner Slot -->
       <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 space-y-2 overflow-hidden">
         <div class="flex items-center justify-between">
           <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Featured Partner Offers</span>
@@ -270,7 +267,6 @@
     <!-- ==================== TAB 2: EARN COINS (GAMES & SURVEYS) ==================== -->
     <div id="tab-earn" class="hidden space-y-5">
 
-      <!-- Earn Header Banner -->
       <div class="bg-gradient-to-r from-indigo-600 via-purple-700 to-slate-900 border border-indigo-400/30 rounded-2xl p-5 flex items-center justify-between">
         <div>
           <span class="text-[10px] uppercase tracking-wider bg-black/30 text-indigo-100 px-2.5 py-0.5 rounded-full font-bold">PLAY & COLLECT</span>
@@ -371,14 +367,26 @@
       </div>
     </div>
 
-    <!-- ==================== TAB 4: REDEEM (SAME-DAY UPI) ==================== -->
+    <!-- ==================== TAB 4: REDEEM (SAME-DAY UPI + LIVE COINS + HISTORY) ==================== -->
     <div id="tab-redeem" class="hidden space-y-4">
-      <div class="bg-gradient-to-r from-emerald-900 to-slate-900 border border-emerald-500/40 rounded-2xl p-4">
-        <span class="text-[10px] bg-emerald-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full">⚡ SAME-DAY UPI TRANSFER</span>
-        <h2 class="text-lg font-extrabold text-white mt-2">💸 Withdraw Your Earnings</h2>
-        <p class="text-xs text-slate-300 mt-1">100 Coins = ₹1.00 INR • Direct GPay / PhonePe / Paytm UPI</p>
+      <!-- Top Redeem Banner with Available Coins Display -->
+      <div class="bg-gradient-to-br from-emerald-800 via-teal-900 to-slate-900 border border-emerald-400/40 rounded-2xl p-4 shadow-lg">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <span class="text-[10px] bg-emerald-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full">⚡ SAME-DAY UPI TRANSFER</span>
+            <h2 class="text-lg font-extrabold text-white mt-2">💸 Withdraw Your Earnings</h2>
+            <p class="text-[11px] text-emerald-100/85 mt-0.5">100 Coins = ₹1.00 • GPay / PhonePe / Paytm</p>
+          </div>
+          <!-- Available Coins Box inside Withdraw Section -->
+          <div class="bg-slate-950/75 border border-emerald-400/40 rounded-xl px-3.5 py-2.5 text-right shrink-0">
+            <p class="text-[10px] uppercase tracking-wider text-emerald-300 font-bold">Available Balance</p>
+            <p id="redeemCoinBalance" class="text-lg sm:text-xl font-black text-white mt-0.5">0 Coins</p>
+            <p id="redeemInrValue" class="text-[11px] font-bold text-amber-400">≈ ₹0.00</p>
+          </div>
+        </div>
       </div>
 
+      <!-- Payout Form -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4">
         <div>
           <label class="text-xs text-slate-400 block mb-1.5">Select Payout Amount</label>
@@ -407,6 +415,34 @@
           Request Same-Day UPI Payout
         </button>
       </div>
+
+      <!-- 📜 Wallet & Payout History Section -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-extrabold text-white">📜 Wallet & Payout History</h3>
+          <span class="text-[10px] text-slate-400">Live Sync</span>
+        </div>
+
+        <!-- 2 Sub-Tabs: Coin History (In/Out) vs Payout Status (Pending/Paid) -->
+        <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+          <button type="button" id="histTabCoinsBtn" onclick="switchHistoryTab('coins')" class="bg-emerald-500 text-slate-950 font-extrabold text-xs py-2 rounded-lg transition">
+            🪙 Coin History (In/Out)
+          </button>
+          <button type="button" id="histTabPayoutsBtn" onclick="switchHistoryTab('payouts')" class="text-slate-400 hover:text-white font-bold text-xs py-2 rounded-lg transition">
+            💸 Payout Status
+          </button>
+        </div>
+
+        <!-- Coin History List -->
+        <div id="coinHistoryList" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+          <p class="text-xs text-slate-500 text-center py-4">Sign in to view your coin earnings & spending history.</p>
+        </div>
+
+        <!-- Payout History List -->
+        <div id="payoutHistoryList" class="hidden space-y-2 max-h-72 overflow-y-auto pr-1">
+          <p class="text-xs text-slate-500 text-center py-4">Sign in to track your UPI payout status.</p>
+        </div>
+      </div>
     </div>
 
     <!-- ==================== TAB 5: PROFILE ==================== -->
@@ -427,6 +463,43 @@
     </div>
 
   </main>
+
+  <!-- ✅ Front Popup: Payout Confirmed Modal -->
+  <div id="payoutConfirmModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-2 border-emerald-400 rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
+      <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center mx-auto text-3xl font-black">
+        ✓
+      </div>
+      <div>
+        <span class="text-[10px] uppercase tracking-widest bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-extrabold">
+          PAYOUT CONFIRMED
+        </span>
+        <h3 class="text-xl font-extrabold text-white mt-2">Payout Request Confirmed!</h3>
+        <p class="text-xs text-slate-300 mt-1">உங்க UPI பே-அவுட் வெற்றிகரமாக பதிவு செய்யப்பட்டது. இன்று இரவுக்குள் பணம் அனுப்பப்படும்!</p>
+      </div>
+      <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-left space-y-1.5 text-xs">
+        <div class="flex justify-between">
+          <span class="text-slate-400">Payout Amount:</span>
+          <span id="confirmPayoutAmt" class="font-extrabold text-emerald-400">₹10</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">UPI ID:</span>
+          <span id="confirmPayoutUpi" class="font-bold text-white">user@upi</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Coins Deducted:</span>
+          <span id="confirmPayoutCoins" class="font-bold text-rose-400">-1,000 Coins</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Status:</span>
+          <span class="font-bold text-amber-300">⏳ Pending (Same-Day Transfer)</span>
+        </div>
+      </div>
+      <button onclick="closePayoutConfirmModal()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3 rounded-xl text-sm shadow-lg transition">
+        Done & View History
+      </button>
+    </div>
+  </div>
 
   <!-- Centered Full-Screen Popup Game Arena Modal -->
   <div id="gameArena" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -467,7 +540,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where, getDocs, increment, onSnapshot, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where, getDocs, orderBy, limit, increment, onSnapshot, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
@@ -565,6 +638,38 @@
       document.getElementById("nav-" + tabName).classList.replace("text-slate-400", "text-amber-400");
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
+
+    // Switch History Sub-Tab inside Redeem
+    window.switchHistoryTab = (type) => {
+      const coinBtn = document.getElementById("histTabCoinsBtn");
+      const payBtn = document.getElementById("histTabPayoutsBtn");
+      const coinList = document.getElementById("coinHistoryList");
+      const payList = document.getElementById("payoutHistoryList");
+
+      if (type === "coins") {
+        coinBtn.className = "bg-emerald-500 text-slate-950 font-extrabold text-xs py-2 rounded-lg transition";
+        payBtn.className = "text-slate-400 hover:text-white font-bold text-xs py-2 rounded-lg transition";
+        coinList.classList.remove("hidden");
+        payList.classList.add("hidden");
+      } else {
+        payBtn.className = "bg-emerald-500 text-slate-950 font-extrabold text-xs py-2 rounded-lg transition";
+        coinBtn.className = "text-slate-400 hover:text-white font-bold text-xs py-2 rounded-lg transition";
+        payList.classList.remove("hidden");
+        coinList.classList.add("hidden");
+      }
+    };
+
+    window.closePayoutConfirmModal = () => {
+      document.getElementById("payoutConfirmModal").classList.add("hidden");
+      switchHistoryTab("payouts");
+    };
+
+    function formatTime(ts) {
+      if (!ts) return "Just now";
+      const d = ts.toDate ? ts.toDate() : new Date(ts);
+      return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short" }) + " • " +
+             d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+    }
 
     // Render 7-Day Continuous Daily Check-In UI
     function renderStreakUI(lastCheckIn = "", checkInStreak = 0) {
@@ -716,7 +821,6 @@
       if (!currentUser) return alert("Please sign in with Google first!");
       const btn = document.getElementById("spinNowBtn");
 
-      // 1. First Free Spin
       if (!localStorage.getItem(spinKey)) {
         btn.disabled = true;
         localStorage.setItem(spinKey, "1");
@@ -724,7 +828,6 @@
         return;
       }
 
-      // 2. Watch Sponsor Ad (10s Anti-Skip Check) for Extra Spin
       const adUsed = getAdSpinsUsed();
       if (adUsed >= MAX_AD_SPINS) {
         return alert("Daily 4 Spins (1 Free + 3 Ad Spins) completed! Play Mini-Games in Earn Coins tab.");
@@ -804,10 +907,12 @@
           });
         }
 
+        // Listen to User Profile & Wallet Balance
         onSnapshot(userRef, (snap) => {
           if (snap.exists()) {
             userData = snap.data();
             const coins = userData.coins || 0;
+            const inr = (coins / 100).toFixed(2);
             const lastCheckIn = (userData.lastCheckIn || "").trim();
             const checkInStreak = userData.checkInStreak || 0;
             const code = userData.referralCode || ("RV" + user.uid.slice(0, 5).toUpperCase());
@@ -816,7 +921,9 @@
             renderStreakUI(lastCheckIn, checkInStreak);
 
             document.getElementById("coinBalance").innerText = `${coins} Coins`;
-            document.getElementById("inrValue").innerText = `≈ ₹${(coins / 100).toFixed(2)} INR`;
+            document.getElementById("inrValue").innerText = `≈ ₹${inr} INR`;
+            document.getElementById("redeemCoinBalance").innerText = `${coins} Coins`;
+            document.getElementById("redeemInrValue").innerText = `≈ ₹${inr}`;
             document.getElementById("dashCoins").innerText = coins;
             document.getElementById("dashReferrals").innerText = userData.referralsCount || 0;
             document.getElementById("dashPools").innerText = userData.poolEntries || 0;
@@ -826,15 +933,85 @@
             document.getElementById("profRefCode").innerText = code;
           }
         });
+
+        // Listen to Coin History (Credit & Debit)
+        const histQuery = query(
+          collection(db, "users", user.uid, "history"),
+          orderBy("createdAt", "desc"),
+          limit(25)
+        );
+        onSnapshot(histQuery, (snap) => {
+          const listEl = document.getElementById("coinHistoryList");
+          if (snap.empty) {
+            listEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">No coin transactions yet. Play games or check in to earn!</p>`;
+            return;
+          }
+          listEl.innerHTML = snap.docs.map(d => {
+            const item = d.data();
+            const isCredit = item.type !== "debit";
+            const sign = isCredit ? "+" : "-";
+            const badgeColor = isCredit ? "text-emerald-400" : "text-rose-400";
+            const icon = isCredit ? "🟢" : "🔴";
+            return `
+              <div class="bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-white truncate">${icon} ${item.title || "Coin Activity"}</p>
+                  <p class="text-[10px] text-slate-500 mt-0.5">${formatTime(item.createdAt)}</p>
+                </div>
+                <span class="text-xs font-extrabold ${badgeColor} shrink-0">${sign}${item.coins || 0} Coins</span>
+              </div>
+            `;
+          }).join("");
+        });
+
+        // Listen to Payout Withdrawals Status (Pending vs Paid)
+        const payoutQuery = query(
+          collection(db, "withdrawals"),
+          where("uid", "==", user.uid),
+          limit(20)
+        );
+        onSnapshot(payoutQuery, (snap) => {
+          const payListEl = document.getElementById("payoutHistoryList");
+          if (snap.empty) {
+            payListEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">No UPI withdrawal requests yet.</p>`;
+            return;
+          }
+          const docs = snap.docs.map(d => d.data()).sort((a, b) => {
+            const ta = (a.timestamp || a.createdAt)?.toMillis?.() || 0;
+            const tb = (b.timestamp || b.createdAt)?.toMillis?.() || 0;
+            return tb - ta;
+          });
+          payListEl.innerHTML = docs.map(w => {
+            const isPaid = (w.status || "").toLowerCase() === "paid";
+            const statusBadge = isPaid
+              ? `<span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full font-extrabold">✅ Paid</span>`
+              : `<span class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2.5 py-0.5 rounded-full font-extrabold">⏳ Pending</span>`;
+            const rs = w.amount || w.rupees || 10;
+            const coinsUsed = w.coinsDeducted || w.coins || (rs * 100);
+            return `
+              <div class="bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-3 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <p class="text-xs font-extrabold text-white">₹${rs} UPI Payout <span class="text-[10px] font-normal text-slate-400">(-${coinsUsed} Coins)</span></p>
+                  <p class="text-[11px] text-slate-300 truncate mt-0.5">UPI: ${w.upiId || "—"}</p>
+                  <p class="text-[10px] text-slate-500 mt-0.5">${formatTime(w.timestamp || w.createdAt)}</p>
+                </div>
+                <div class="shrink-0">${statusBadge}</div>
+              </div>
+            `;
+          }).join("");
+        });
+
       } else {
         document.getElementById("authBtn").innerText = "Sign in (+50 Free)";
         document.getElementById("coinBalance").innerText = "0 Coins";
         document.getElementById("inrValue").innerText = "≈ ₹0.00 INR";
+        document.getElementById("redeemCoinBalance").innerText = "0 Coins";
+        document.getElementById("redeemInrValue").innerText = "≈ ₹0.00";
         renderStreakUI();
       }
     });
 
-    // Join Pool #1 (10s Anti-Skip Sponsor Ad Verification)
+    // Join Pool #1 (Logs Debit History)
     window.joinPool1 = async () => {
       if (!currentUser) return alert("Please sign in with Google first!");
       const coins = userData.coins || 0;
@@ -857,9 +1034,22 @@
             poolEntries: increment(1)
           });
 
+          await addDoc(collection(db, "users", currentUser.uid, "history"), {
+            title: "Joined Community Pool #1",
+            coins: 100,
+            type: "debit",
+            createdAt: serverTimestamp()
+          });
+
           if (newEntries.length >= 10) {
             const winner = newEntries[Math.floor(Math.random() * newEntries.length)];
             await updateDoc(doc(db, "users", winner.uid), { coins: increment(1000) });
+            await addDoc(collection(db, "users", winner.uid, "history"), {
+              title: "Won Community Pool #1 (₹10)",
+              coins: 1000,
+              type: "credit",
+              createdAt: serverTimestamp()
+            });
             await setDoc(pool1Ref, {
               entries: [],
               lastWinner: winner.name,
@@ -901,7 +1091,7 @@
       document.getElementById("amt" + rs).className = "payoutOpt border-2 border-emerald-500 bg-emerald-500/15 rounded-xl p-3 text-center";
     };
 
-    // Submit Withdraw (10s Anti-Skip Sponsor Ad Verification)
+    // Submit Withdraw -> Logs Debit History + Shows Front Confirmation Modal
     window.submitWithdraw = async () => {
       if (!currentUser) return alert("Please sign in first!");
       const upi = document.getElementById("upiInput").value.trim();
@@ -912,6 +1102,14 @@
       verifySponsorAdView(btn, "Request Same-Day UPI Payout", "UPI Withdrawal Request", async () => {
         try {
           await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(-selectedCoins) });
+
+          await addDoc(collection(db, "users", currentUser.uid, "history"), {
+            title: `UPI Withdrawal (${upi})`,
+            coins: selectedCoins,
+            type: "debit",
+            createdAt: serverTimestamp()
+          });
+
           await addDoc(collection(db, "withdrawals"), {
             uid: currentUser.uid,
             email: currentUser.email,
@@ -923,7 +1121,12 @@
             source: "games.rupayvibe.online",
             timestamp: serverTimestamp()
           });
-          alert(`✅ ₹${selectedRs} Same-Day UPI Withdrawal Requested! Payment will be sent to ${upi} today.`);
+
+          // Show Front Payout Confirmed Modal
+          document.getElementById("confirmPayoutAmt").innerText = `₹${selectedRs}`;
+          document.getElementById("confirmPayoutUpi").innerText = upi;
+          document.getElementById("confirmPayoutCoins").innerText = `-${selectedCoins} Coins`;
+          document.getElementById("payoutConfirmModal").classList.remove("hidden");
         } finally {
           btn.disabled = false;
           btn.innerText = "Request Same-Day UPI Payout";
