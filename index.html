@@ -40,10 +40,10 @@
           <h1 class="text-lg sm:text-xl font-extrabold text-amber-400 tracking-tight">RupayVibe</h1>
           <span class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full font-bold">MEGA ARENA</span>
         </div>
-        <p class="text-[11px] text-slate-400">100 Coins = ₹1.00 • Same-Day UPI Rewards</p>
+        <p class="text-[11px] text-slate-400">100 Coins = ₹1.00 • Sign in & Get +50 Free Coins</p>
       </div>
       <button id="authBtn" class="bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-extrabold text-xs sm:text-sm px-4 py-2 rounded-xl shadow transition">
-        Sign in with Google
+        Sign in (+50 Free)
       </button>
     </div>
   </header>
@@ -489,6 +489,7 @@
     const STREAK_REWARDS = [10, 15, 20, 30, 40, 50, 100];
     const MAX_DAILY_PLAYS = 10;
     const MAX_AD_SPINS = 3;
+    const WELCOME_COINS = 50;
 
     let currentUser = null;
     let userData = {};
@@ -700,6 +701,12 @@
 
       setTimeout(async () => {
         await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(won) });
+        await addDoc(collection(db, "users", currentUser.uid, "history"), {
+          title: "Lucky Spin Win",
+          coins: won,
+          type: "credit",
+          createdAt: serverTimestamp()
+        });
         updateSpinBadge();
         alert(`🎉 Congrats! You won +${won} Coins from Lucky Spin!`);
       }, 3100);
@@ -757,7 +764,7 @@
         const initialSnap = await getDoc(userRef);
 
         if (!initialSnap.exists()) {
-          const generatedCode = "RV" + Math.floor(10000 + Math.random() * 90000);
+          const generatedCode = "RV" + user.uid.substring(0, 5).toUpperCase();
           const pendingRef = localStorage.getItem("rv_pending_ref");
           let validReferrerUid = null;
 
@@ -777,13 +784,22 @@
           await setDoc(userRef, {
             email: user.email,
             name: user.displayName || "Player",
-            coins: 0,
+            photoUrl: user.photoURL || "",
+            coins: WELCOME_COINS,
             lastCheckIn: "",
             checkInStreak: 0,
             referralCode: generatedCode,
             referredBy: validReferrerUid || "",
             referralsCount: 0,
+            withdrawalsCount: 0,
             poolEntries: 0,
+            createdAt: serverTimestamp()
+          });
+
+          await addDoc(collection(db, "users", user.uid, "history"), {
+            title: "Welcome Signup Bonus",
+            coins: WELCOME_COINS,
+            type: "credit",
             createdAt: serverTimestamp()
           });
         }
@@ -811,7 +827,7 @@
           }
         });
       } else {
-        document.getElementById("authBtn").innerText = "Sign in with Google";
+        document.getElementById("authBtn").innerText = "Sign in (+50 Free)";
         document.getElementById("coinBalance").innerText = "0 Coins";
         document.getElementById("inrValue").innerText = "≈ ₹0.00 INR";
         renderStreakUI();
@@ -833,233 +849,3 @@
       verifySponsorAdView(btn, "🎟️ Join Pool (100 Coins)", "Pool #1 Entry", async () => {
         try {
           const pSnap = await getDoc(pool1Ref);
-          const currentEntries = pSnap.exists() ? (pSnap.data().entries || []) : [];
-          const newEntries = [...currentEntries, { uid: currentUser.uid, name: userData.name || "Player" }];
-
-          await updateDoc(doc(db, "users", currentUser.uid), {
-            coins: increment(-100),
-            poolEntries: increment(1)
-          });
-
-          if (newEntries.length >= 10) {
-            const winner = newEntries[Math.floor(Math.random() * newEntries.length)];
-            await updateDoc(doc(db, "users", winner.uid), { coins: increment(1000) });
-            await setDoc(pool1Ref, {
-              entries: [],
-              lastWinner: winner.name,
-              round: increment(1)
-            }, { merge: true });
-            alert(`🎟️ Pool #1 Full (10/10)! Winner: ${winner.name} won ₹10 (1,000 Coins)!`);
-          } else {
-            await setDoc(pool1Ref, { entries: newEntries }, { merge: true });
-            alert(`🎟️ Ticket Confirmed! (${newEntries.length}/10 Joined). Winner drawn automatically at 10/10!`);
-          }
-        } finally {
-          btn.disabled = false;
-          btn.innerText = "🎟️ Join Pool (100 Coins)";
-        }
-      });
-    };
-
-    // Referral Share
-    window.copyRefLink = () => {
-      const inp = document.getElementById("refLinkInput");
-      inp.select();
-      navigator.clipboard.writeText(inp.value);
-      alert("Invite link copied! Share & earn +200 Coins per friend.");
-    };
-
-    window.shareWhatsApp = () => {
-      const link = document.getElementById("refLinkInput").value;
-      const msg = encodeURIComponent(`🏆 Join RupayVibe Mega Arena! Play free games, spin & join ₹10–₹500 UPI pools! Join via my link: ${link}`);
-      window.open(`https://wa.me/?text=${msg}`, "_blank");
-    };
-
-    // Redeem UPI
-    window.selectPayout = (rs, coins) => {
-      selectedRs = rs;
-      selectedCoins = coins;
-      document.querySelectorAll(".payoutOpt").forEach(el => {
-        el.className = "payoutOpt border border-slate-700 bg-slate-950 rounded-xl p-3 text-center";
-      });
-      document.getElementById("amt" + rs).className = "payoutOpt border-2 border-emerald-500 bg-emerald-500/15 rounded-xl p-3 text-center";
-    };
-
-    // Submit Withdraw (10s Anti-Skip Sponsor Ad Verification)
-    window.submitWithdraw = async () => {
-      if (!currentUser) return alert("Please sign in first!");
-      const upi = document.getElementById("upiInput").value.trim();
-      if (!upi || !upi.includes("@")) return alert("Please enter a valid UPI ID (e.g., name@okicici)");
-      if ((userData.coins || 0) < selectedCoins) return alert(`Insufficient coins! You need ${selectedCoins} Coins for ₹${selectedRs}.`);
-
-      const btn = document.getElementById("submitWithdrawBtn");
-      verifySponsorAdView(btn, "Request Same-Day UPI Payout", "UPI Withdrawal Request", async () => {
-        try {
-          await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(-selectedCoins) });
-          await addDoc(collection(db, "withdrawals"), {
-            uid: currentUser.uid,
-            email: currentUser.email,
-            name: userData.name || "User",
-            upiId: upi,
-            amount: selectedRs,
-            coinsDeducted: selectedCoins,
-            status: "Pending",
-            source: "games.rupayvibe.online",
-            timestamp: serverTimestamp()
-          });
-          alert(`✅ ₹${selectedRs} Same-Day UPI Withdrawal Requested! Payment will be sent to ${upi} today.`);
-        } finally {
-          btn.disabled = false;
-          btn.innerText = "Request Same-Day UPI Payout";
-        }
-      });
-    };
-
-    // Mini-Games Logic
-    function canPlay() {
-      if (!currentUser) { alert("Please sign in with Google first!"); return false; }
-      if (getPlaysUsed() >= MAX_DAILY_PLAYS) { alert("Daily 10 games limit reached! Come back tomorrow or open Surveys."); return false; }
-      return true;
-    }
-
-    async function rewardWin(coinsWon, gameName) {
-      clearInterval(gameTimer);
-      localStorage.setItem(todayKey, String(getPlaysUsed() + 1));
-      updatePlaysBadge();
-      await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(coinsWon) });
-      document.getElementById("arenaBody").innerHTML = `
-        <div class="text-center space-y-3">
-          <div class="text-4xl">🎉</div>
-          <h4 class="text-xl font-extrabold text-emerald-400">You Won +${coinsWon} Coins!</h4>
-          <p class="text-xs text-slate-300">${gameName} reward added to your wallet.</p>
-          <button onclick="closeArena()" class="bg-emerald-500 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl text-xs">Done</button>
-        </div>
-      `;
-    }
-
-    function gameOver(msg) {
-      clearInterval(gameTimer);
-      document.getElementById("arenaBody").innerHTML = `
-        <div class="text-center space-y-3">
-          <div class="text-4xl">⏰</div>
-          <h4 class="text-lg font-bold text-rose-400">${msg}</h4>
-          <button onclick="closeArena()" class="bg-slate-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs">Close</button>
-        </div>
-      `;
-    }
-
-    window.closeArena = () => {
-      clearInterval(gameTimer);
-      document.getElementById("gameArena").classList.add("hidden");
-    };
-
-    function startTimer(seconds) {
-      clearInterval(gameTimer);
-      let left = seconds;
-      document.getElementById("arenaTimer").innerText = `Time: ${left}s`;
-      gameTimer = setInterval(() => {
-        left--;
-        document.getElementById("arenaTimer").innerText = `Time: ${left}s`;
-        if (left <= 0) gameOver("Time's up! Try again.");
-      }, 1000);
-    }
-
-    window.startMemoryGame = () => {
-      if (!canPlay()) return;
-      document.getElementById("gameArena").classList.remove("hidden");
-      document.getElementById("arenaTitle").innerText = "🧠 Memory Match (+15 Coins)";
-      startTimer(25);
-
-      const icons = ["🚀", "💎", "🔥", "🎯", "🚀", "💎", "🔥", "🎯"].sort(() => Math.random() - 0.5);
-      let flipped = [], matched = 0;
-      document.getElementById("arenaBody").innerHTML = `<div id="memGrid" class="grid grid-cols-4 gap-3 w-full max-w-xs"></div>`;
-      const grid = document.getElementById("memGrid");
-
-      icons.forEach((icon) => {
-        const btn = document.createElement("button");
-        btn.className = "h-16 bg-slate-800 hover:bg-slate-700 rounded-xl text-2xl font-bold flex items-center justify-center transition";
-        btn.innerText = "?";
-        btn.onclick = () => {
-          if (btn.dataset.done || flipped.length === 2 || flipped.includes(btn)) return;
-          btn.innerText = icon;
-          btn.classList.replace("bg-slate-800", "bg-indigo-600");
-          flipped.push(btn);
-          if (flipped.length === 2) {
-            const [a, b] = flipped;
-            if (a.innerText === b.innerText) {
-              a.dataset.done = b.dataset.done = "1";
-              matched++; flipped = [];
-              if (matched === 4) rewardWin(15, "Memory Match");
-            } else {
-              setTimeout(() => {
-                a.innerText = b.innerText = "?";
-                a.classList.replace("bg-indigo-600", "bg-slate-800");
-                b.classList.replace("bg-indigo-600", "bg-slate-800");
-                flipped = [];
-              }, 450);
-            }
-          }
-        };
-        grid.appendChild(btn);
-      });
-    };
-
-    window.startReflexGame = () => {
-      if (!canPlay()) return;
-      document.getElementById("gameArena").classList.remove("hidden");
-      document.getElementById("arenaTitle").innerText = "⚡ Reflex Tap (+15 Coins)";
-      startTimer(12);
-      let score = 0;
-      document.getElementById("arenaBody").innerHTML = `
-        <p class="text-xs text-slate-300 mb-2">Score: <span id="refScore" class="text-amber-400 font-bold">0</span> / 15</p>
-        <div class="relative w-full h-52 bg-slate-950 rounded-xl border border-slate-800 overflow-hidden">
-          <button id="targetDot" class="absolute w-12 h-12 rounded-full bg-amber-400 text-slate-950 font-extrabold text-xs shadow-lg">TAP</button>
-        </div>
-      `;
-      const dot = document.getElementById("targetDot");
-      const moveDot = () => {
-        dot.style.left = Math.floor(Math.random() * 78) + "%";
-        dot.style.top = Math.floor(Math.random() * 70) + "%";
-      };
-      moveDot();
-      dot.onclick = () => {
-        score++;
-        document.getElementById("refScore").innerText = score;
-        if (score >= 15) rewardWin(15, "Reflex Tap");
-        else moveDot();
-      };
-    };
-
-    window.startMathGame = () => {
-      if (!canPlay()) return;
-      document.getElementById("gameArena").classList.remove("hidden");
-      document.getElementById("arenaTitle").innerText = "🔢 Math Sprint (+20 Coins)";
-      startTimer(20);
-      let solved = 0;
-      const nextSum = () => {
-        const a = Math.floor(Math.random() * 25) + 10;
-        const b = Math.floor(Math.random() * 25) + 5;
-        const ans = a + b;
-        const opts = [ans, ans + 3, ans - 2, ans + 5].sort(() => Math.random() - 0.5);
-        document.getElementById("arenaBody").innerHTML = `
-          <p class="text-xs text-slate-400 mb-2">Solved: ${solved} / 5</p>
-          <h4 class="text-2xl font-extrabold text-white mb-4">${a} + ${b} = ?</h4>
-          <div class="grid grid-cols-2 gap-3 w-full max-w-xs">
-            ${opts.map(o => `<button class="optBtn bg-slate-800 hover:bg-blue-600 py-3 rounded-xl font-bold text-base">${o}</button>`).join("")}
-          </div>
-        `;
-        document.querySelectorAll(".optBtn").forEach(btn => {
-          btn.onclick = () => {
-            if (parseInt(btn.innerText) === ans) {
-              solved++;
-              if (solved >= 5) rewardWin(20, "Math Sprint");
-              else nextSum();
-            } else gameOver("Wrong answer! Try again.");
-          };
-        });
-      };
-      nextSum();
-    };
-  </script>
-</body>
-</html>
