@@ -51,7 +51,7 @@
   <!-- Main Container -->
   <main class="max-w-2xl mx-auto w-full p-4 space-y-5">
 
-    <!-- Adsterra 320x50 Banner -->
+    <!-- Adsterra 320x50 Banner (Always Visible on All Tabs) -->
     <div class="w-full flex flex-col items-center justify-center bg-slate-900/70 border border-slate-800 rounded-xl py-2 overflow-hidden">
       <span class="text-[9px] uppercase tracking-widest text-slate-500 mb-1">Sponsored</span>
       <div class="w-[320px] h-[50px] flex items-center justify-center overflow-hidden">
@@ -237,16 +237,6 @@
         </div>
       </div>
 
-      <!-- Adsterra Native Banner Slot -->
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 space-y-2 overflow-hidden">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Featured Partner Offers</span>
-          <span class="text-[10px] text-slate-600">Ad</span>
-        </div>
-        <script async fetchpriority="high" data-cfasync="false" src="https://bauval.org/21/5a763450dd0a4a9695a9d4cc6e4e33f5"></script>
-        <div id="container-5a763450dd0a4a9695a9d4cc6e4e33f5"></div>
-      </div>
-
       <!-- Invite & Earn +200 Coins Card -->
       <div class="bg-gradient-to-r from-indigo-950 to-slate-900 border border-indigo-500/40 rounded-2xl p-4 space-y-3">
         <div class="flex items-center justify-between">
@@ -369,7 +359,6 @@
 
     <!-- ==================== TAB 4: REDEEM (SAME-DAY UPI + LIVE COINS + HISTORY) ==================== -->
     <div id="tab-redeem" class="hidden space-y-4">
-      <!-- Top Redeem Banner with Available Coins Display -->
       <div class="bg-gradient-to-br from-emerald-800 via-teal-900 to-slate-900 border border-emerald-400/40 rounded-2xl p-4 shadow-lg">
         <div class="flex items-center justify-between gap-3">
           <div>
@@ -385,7 +374,6 @@
         </div>
       </div>
 
-      <!-- Payout Form -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4">
         <div>
           <label class="text-xs text-slate-400 block mb-1.5">Select Payout Amount</label>
@@ -473,6 +461,16 @@
           <p class="text-xs text-slate-500 text-center py-4">Sign in to see friends who joined via your link.</p>
         </div>
       </div>
+    </div>
+
+    <!-- Shared Adsterra Native Banner (Visible on Home, Earn/Games & Dashboard Tabs) -->
+    <div id="sharedNativeBanner" class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 space-y-2 overflow-hidden">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Featured Partner Offers</span>
+        <span class="text-[10px] text-slate-600">Ad</span>
+      </div>
+      <script async fetchpriority="high" data-cfasync="false" src="https://bauval.org/21/5a763450dd0a4a9695a9d4cc6e4e33f5"></script>
+      <div id="container-5a763450dd0a4a9695a9d4cc6e4e33f5"></div>
     </div>
 
   </main>
@@ -677,6 +675,17 @@
       });
       document.getElementById("tab-" + tabName).classList.remove("hidden");
       document.getElementById("nav-" + tabName).classList.replace("text-slate-400", "text-amber-400");
+
+      // Show Native Banner on Home, Earn (Games), and Dashboard Tabs
+      const nativeAdBox = document.getElementById("sharedNativeBanner");
+      if (nativeAdBox) {
+        if (["home", "earn", "dashboard"].includes(tabName)) {
+          nativeAdBox.classList.remove("hidden");
+        } else {
+          nativeAdBox.classList.add("hidden");
+        }
+      }
+
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
@@ -918,13 +927,11 @@
               const referrerDoc = refSnap.docs[0];
               validReferrerUid = referrerDoc.id;
 
-              // Credit +200 Coins to Referrer
               await updateDoc(doc(db, "users", validReferrerUid), {
                 coins: increment(200),
                 referralsCount: increment(1)
               });
 
-              // Log Referral History for Referrer
               await addDoc(collection(db, "users", validReferrerUid, "history"), {
                 title: `Referral Bonus (${user.displayName || "Friend"})`,
                 coins: 200,
@@ -932,7 +939,6 @@
                 createdAt: serverTimestamp()
               });
 
-              // Save Referred Friend Details in Referrer's Subcollection (Shows in Profile -> My Referred Friends)
               await setDoc(doc(db, "users", validReferrerUid, "referrals", user.uid), {
                 uid: user.uid,
                 name: user.displayName || "Player",
@@ -1025,7 +1031,7 @@
           }).join("");
         });
 
-        // Listen to Coin History (Credit & Debit)
+        // Listen to Coin History
         const histQuery = query(
           collection(db, "users", user.uid, "history"),
           orderBy("createdAt", "desc"),
@@ -1055,7 +1061,7 @@
           }).join("");
         });
 
-        // Listen to Payout Withdrawals Status (Pending vs Paid)
+        // Listen to Payout Withdrawals Status
         const payoutQuery = query(
           collection(db, "withdrawals"),
           where("uid", "==", user.uid),
