@@ -102,6 +102,18 @@
       </div>
     </div>
 
+    <!-- Official Android App (APK) Download Card -->
+    <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950/40 border border-emerald-500/40 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+      <div class="text-center sm:text-left space-y-1">
+        <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">📱 OFFICIAL ANDROID APP</span>
+        <h4 class="text-base font-extrabold text-white mt-1">Download RupayVibe Android App</h4>
+        <p class="text-[11px] text-slate-300">All Games, Pools, Surveys &amp; Spin inside one app • Tap <b>"Install Anyway"</b> if prompted.</p>
+      </div>
+      <a href="https://github.com/rupayvibeofficial-code/rupayvibe-games/releases/download/v1.0.1/RupayVibe.apk" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-black text-xs px-5 py-3 rounded-xl text-center shadow-lg shrink-0 transition">
+        ⬇️ Download APK
+      </a>
+    </div>
+
     <!-- How It Works (3 Professional Steps) -->
     <div class="space-y-4">
       <div class="text-center">
@@ -756,10 +768,12 @@
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
-    // Both Website Adsterra Smartlinks (Alternating for 2X Game Rewards & Actions)
+    // Alternating Adsterra + Monetag Smartlinks (All 4 Links Rotating for Maximum CPM!)
     const SMARTLINK_URLS = [
-      "https://araplhn.org/4/06c10e2593c78daee4f613bf45f3c8ed",
-      "https://asiafilm.org/4/11743e7be4c0a04ea4fbe3b9eb71414e"
+      "https://araplhn.org/4/06c10e2593c78daee4f613bf45f3c8ed", // 1. Adsterra Smartlink (Games)
+      "https://uplcm.com/4/12349603",                          // 2. Monetag Direct Link 1
+      "https://asiafilm.org/4/11743e7be4c0a04ea4fbe3b9eb71414e", // 3. Adsterra Smartlink (Web)
+      "https://uplcm.com/4/12323336"                           // 4. Monetag Direct Link 2
     ];
     let smartlinkIndex = 0;
     function getNextSmartlink() {
@@ -1178,7 +1192,6 @@
       const appEl = document.getElementById("appView");
 
       if (user) {
-        // Switch from Public Landing Page to Full Member App Dashboard
         landingEl.classList.add("hidden");
         appEl.classList.remove("hidden");
         document.getElementById("authBtn").innerText = "Sign Out";
@@ -1243,7 +1256,6 @@
           });
         }
 
-        // Listen to User Profile & Wallet Balance
         onSnapshot(userRef, (snap) => {
           if (snap.exists()) {
             userData = snap.data();
@@ -1270,7 +1282,6 @@
           }
         });
 
-        // Listen to My Referred Friends List
         const refListQuery = query(
           collection(db, "users", user.uid, "referrals"),
           orderBy("joinedAt", "desc"),
@@ -1302,7 +1313,6 @@
           }).join("");
         });
 
-        // Listen to Coin History
         const histQuery = query(
           collection(db, "users", user.uid, "history"),
           orderBy("createdAt", "desc"),
@@ -1332,7 +1342,6 @@
           }).join("");
         });
 
-        // Listen to Payout Withdrawals Status
         const payoutQuery = query(
           collection(db, "withdrawals"),
           where("uid", "==", user.uid),
@@ -1370,7 +1379,6 @@
         });
 
       } else {
-        // Show Professional Public Landing Page when Signed Out
         appEl.classList.add("hidden");
         landingEl.classList.remove("hidden");
         document.getElementById("authBtn").innerText = "Sign in (+50 Free)";
@@ -1378,7 +1386,6 @@
       }
     });
 
-    // Referral Share
     window.copyRefLink = () => {
       const inp = document.getElementById("refLinkInput");
       inp.select();
@@ -1392,7 +1399,6 @@
       window.open(`https://wa.me/?text=${msg}`, "_blank");
     };
 
-    // Redeem UPI
     window.selectPayout = (rs, coins) => {
       selectedRs = rs;
       selectedCoins = coins;
@@ -1443,7 +1449,6 @@
       });
     };
 
-    // Mini-Games Logic (15 Coins Base + Side-by-Side 2X Ad Button = 30 Coins)
     function canPlay() {
       if (!currentUser) { alert("Please sign in with Google first!"); return false; }
       if (getPlaysUsed() >= MAX_DAILY_PLAYS) { alert("Daily 10 games limit reached! Come back tomorrow or open Surveys."); return false; }
