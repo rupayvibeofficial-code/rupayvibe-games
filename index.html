@@ -102,7 +102,7 @@
       </div>
     </div>
 
-    <!-- Official Android App (APK) Download Card -->
+    <!-- Official Android App (APK) Download Card (Landing Page) -->
     <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950/40 border border-emerald-500/40 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
       <div class="text-center sm:text-left space-y-1">
         <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">📱 OFFICIAL ANDROID APP</span>
@@ -281,7 +281,7 @@
           </div>
         </div>
 
-        <!-- ==================== NEW 4-TIER COMMUNITY MEGA POOLS (TOP-3 WINNERS) ==================== -->
+        <!-- ==================== 4-TIER COMMUNITY MEGA POOLS (TOP-3 WINNERS) ==================== -->
         <div class="space-y-3">
           <div class="flex items-center justify-between">
             <div>
@@ -301,7 +301,6 @@
               <h4 class="text-base font-extrabold text-white">20 Tokens Arena • Multi-Ticket Allowed</h4>
               <p class="text-[11px] text-slate-300">Buy multiple tokens to increase your 1st, 2nd &amp; 3rd prize chances!</p>
             </div>
-            <!-- Podium Grid -->
             <div class="grid grid-cols-3 gap-2 text-center">
               <div class="bg-amber-400/15 border border-amber-400/60 rounded-xl py-2 px-1">
                 <p class="text-xs font-black text-amber-300">🥇 ₹8</p>
@@ -462,6 +461,18 @@
             <button onclick="copyRefLink()" class="bg-indigo-500 hover:bg-indigo-400 text-white font-bold px-4 py-2 rounded-xl text-xs">Copy</button>
             <button onclick="shareWhatsApp()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs">WhatsApp</button>
           </div>
+        </div>
+
+        <!-- 📱 Official Android App (APK) Download Card (Inside Home Tab) -->
+        <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950/40 border border-emerald-500/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+          <div class="text-center sm:text-left space-y-1">
+            <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">📱 OFFICIAL ANDROID APP</span>
+            <h4 class="text-sm font-extrabold text-white mt-1">Get RupayVibe Android App</h4>
+            <p class="text-[11px] text-slate-300">Live Surveys + 4-Tier Pools in one app • Tap <b>"Install Anyway"</b> if prompted.</p>
+          </div>
+          <a href="https://github.com/rupayvibeofficial-code/rupayvibe-games/releases/download/v1.0.1/RupayVibe.apk" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl text-center shadow shrink-0 transition">
+            ⬇️ Download APK
+          </a>
         </div>
 
       </div>
@@ -641,7 +652,7 @@
         </div>
       </div>
 
-      <!-- ==================== TAB 5: PROFILE (WITH MY REFERRED FRIENDS LIST) ==================== -->
+      <!-- ==================== TAB 5: PROFILE (WITH MY REFERRED FRIENDS & APK DOWNLOAD) ==================== -->
       <div id="tab-profile" class="hidden space-y-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
           <div class="flex items-center justify-between">
@@ -677,6 +688,18 @@
           <div id="referredFriendsList" class="space-y-2 max-h-72 overflow-y-auto pr-1">
             <p class="text-xs text-slate-500 text-center py-4">Loading referred friends...</p>
           </div>
+        </div>
+
+        <!-- 📱 Official Android App (APK) Download Card (Inside Profile Tab) -->
+        <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950/40 border border-emerald-500/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+          <div class="text-center sm:text-left space-y-1">
+            <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">📱 OFFICIAL ANDROID APP</span>
+            <h4 class="text-sm font-extrabold text-white mt-1">Get RupayVibe Android App</h4>
+            <p class="text-[11px] text-slate-300">Same wallet sync • Tap <b>"Install Anyway"</b> if prompted.</p>
+          </div>
+          <a href="https://github.com/rupayvibeofficial-code/rupayvibe-games/releases/download/v1.0.1/RupayVibe.apk" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl text-center shadow shrink-0 transition">
+            ⬇️ Download APK
+          </a>
         </div>
       </div>
 
@@ -1117,7 +1140,7 @@
       });
     };
 
-    // ==================== NEW 4-TIER MEGA POOLS (SYNCED WITH FLUTTER APP) ====================
+    // ==================== 4-TIER MEGA POOLS (SYNCED WITH FLUTTER APP) ====================
     const ALL_POOLS = [
       { id: "pool_starter_20", maxTokens: 20 },
       { id: "pool_silver_50", maxTokens: 50 },
@@ -1178,7 +1201,6 @@
           });
 
           if (newEntries.length >= maxTokens) {
-            // Shuffle & select up to 3 UNIQUE winners (1st, 2nd, 3rd) — remaining 25% coins burned as profit
             const shuffled = [...newEntries].sort(() => Math.random() - 0.5);
             const chosenUids = new Set();
             const winners = [];
