@@ -4,9 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RupayVibe — Play Skill Games, Join Mega Pools & Win Same-Day UPI Rewards</title>
-  <!-- Monetag Clean Ads: In-Page Push & Vignette Banner -->
-  <script>(function(s){s.dataset.zone='12323371',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-  <script>(function(s){s.dataset.zone='12323381',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @keyframes marquee {
@@ -102,16 +99,16 @@
       </div>
     </div>
 
-    <!-- Official Android App (APK) Download Card (Landing Page) -->
-    <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950/40 border border-emerald-500/40 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+    <!-- Android App Update Notice Card (Landing Page) -->
+    <div class="bg-gradient-to-r from-amber-950/50 via-slate-900 to-emerald-950/50 border border-amber-400/40 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
       <div class="text-center sm:text-left space-y-1">
-        <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">📱 OFFICIAL ANDROID APP</span>
-        <h4 class="text-base font-extrabold text-white mt-1">Download RupayVibe Android App</h4>
-        <p class="text-[11px] text-slate-300">All Games, 4-Tier Pools, Live Surveys &amp; Spin inside one app • Tap <b>"Install Anyway"</b> if prompted.</p>
+        <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">🛠️ APP UPDATE IN PROGRESS</span>
+        <h4 class="text-base font-extrabold text-white mt-1">RupayVibe Android App is Updating!</h4>
+        <p class="text-[11px] text-slate-300">We are upgrading our Android App with new features &amp; faster rewards. Until then, play directly on this website — your coins sync automatically!</p>
       </div>
-      <a href="https://github.com/rupayvibeofficial-code/rupayvibe-games/releases/download/v1.0.1/RupayVibe.apk" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-black text-xs px-5 py-3 rounded-xl text-center shadow-lg shrink-0 transition">
-        ⬇️ Download APK
-      </a>
+      <span class="w-full sm:w-auto bg-amber-400/15 border border-amber-400/40 text-amber-300 font-black text-xs px-5 py-3 rounded-xl text-center shrink-0">
+        ⏳ Updating Soon...
+      </span>
     </div>
 
     <!-- Live Community Mega Pools Preview -->
@@ -186,23 +183,6 @@
 
     <main class="max-w-2xl mx-auto w-full p-4 space-y-5">
 
-      <!-- Adsterra 320x50 Banner (Always Visible on All Tabs) -->
-      <div class="w-full flex flex-col items-center justify-center bg-slate-900/70 border border-slate-800 rounded-xl py-2 overflow-hidden">
-        <span class="text-[9px] uppercase tracking-widest text-slate-500 mb-1">Sponsored</span>
-        <div class="w-[320px] h-[50px] flex items-center justify-center overflow-hidden">
-          <script>
-            atOptions = {
-              'key' : '9e0626f3f23bc0fd1dcd5159aa2f26f9',
-              'format' : 'iframe',
-              'height' : 50,
-              'width' : 320,
-              'params' : {}
-            };
-          </script>
-          <script data-cfasync="false" src="https://bauval.org/22/9e0626f3f23bc0fd1dcd5159aa2f26f9"></script>
-        </div>
-      </div>
-
       <!-- ==================== TAB 1: HOME (7-DAY STREAK, SPIN & ALL 4 TOP-3 POOLS) ==================== -->
       <div id="tab-home" class="space-y-5">
 
@@ -256,9 +236,9 @@
             <div>
               <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-bold">DAILY LUCKY SPIN</span>
               <h3 class="text-base font-extrabold text-white mt-1">🎡 Spin & Win Coins</h3>
-              <p class="text-xs text-slate-400">1 Free Spin + 3 Bonus Ad Spins every day!</p>
+              <p class="text-xs text-slate-400">4 Daily Spins available every day!</p>
             </div>
-            <span id="spinStatusBadge" class="text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-bold">1 Free + 3 Ad Spins</span>
+            <span id="spinStatusBadge" class="text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-bold">4 Spins Left</span>
           </div>
 
           <div class="flex flex-col sm:flex-row items-center justify-around gap-4 py-2">
@@ -275,7 +255,7 @@
             <div class="text-center sm:text-left space-y-2.5 max-w-xs">
               <p class="text-xs text-slate-300">Prizes: <span class="text-amber-400 font-bold">+5, +10, +15, +20, +30, +50 Coins</span></p>
               <button id="spinNowBtn" onclick="spinWheel()" class="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 disabled:from-slate-800 disabled:to-slate-800 disabled:text-slate-400 text-slate-950 font-extrabold py-2.5 px-6 rounded-xl text-xs sm:text-sm shadow-lg transition">
-                🎡 Spin Now (Free)
+                🎡 Spin Now (4 Left)
               </button>
             </div>
           </div>
@@ -463,16 +443,16 @@
           </div>
         </div>
 
-        <!-- 📱 Official Android App (APK) Download Card (Inside Home Tab) -->
-        <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950/40 border border-emerald-500/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+        <!-- 🛠️ Android App Update Notice Card (Inside Home Tab) -->
+        <div class="bg-gradient-to-r from-amber-950/50 via-slate-900 to-emerald-950/50 border border-amber-400/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
           <div class="text-center sm:text-left space-y-1">
-            <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">📱 OFFICIAL ANDROID APP</span>
-            <h4 class="text-sm font-extrabold text-white mt-1">Get RupayVibe Android App</h4>
-            <p class="text-[11px] text-slate-300">Live Surveys + 4-Tier Pools in one app • Tap <b>"Install Anyway"</b> if prompted.</p>
+            <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">🛠️ APP UPDATE IN PROGRESS</span>
+            <h4 class="text-sm font-extrabold text-white mt-1">RupayVibe Android App is Updating!</h4>
+            <p class="text-[11px] text-slate-300">New v2.0 Android App coming soon • Keep playing here, all your coins are safe!</p>
           </div>
-          <a href="https://github.com/rupayvibeofficial-code/rupayvibe-games/releases/download/v1.0.1/RupayVibe.apk" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl text-center shadow shrink-0 transition">
-            ⬇️ Download APK
-          </a>
+          <span class="w-full sm:w-auto bg-amber-400/15 border border-amber-400/40 text-amber-300 font-black text-xs px-4 py-2.5 rounded-xl text-center shrink-0">
+            ⏳ Updating Soon...
+          </span>
         </div>
 
       </div>
@@ -652,7 +632,7 @@
         </div>
       </div>
 
-      <!-- ==================== TAB 5: PROFILE (WITH MY REFERRED FRIENDS & APK DOWNLOAD) ==================== -->
+      <!-- ==================== TAB 5: PROFILE (WITH MY REFERRED FRIENDS & APP UPDATE NOTICE) ==================== -->
       <div id="tab-profile" class="hidden space-y-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
           <div class="flex items-center justify-between">
@@ -690,27 +670,17 @@
           </div>
         </div>
 
-        <!-- 📱 Official Android App (APK) Download Card (Inside Profile Tab) -->
-        <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950/40 border border-emerald-500/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+        <!-- 🛠️ Android App Update Notice Card (Inside Profile Tab) -->
+        <div class="bg-gradient-to-r from-amber-950/50 via-slate-900 to-emerald-950/50 border border-amber-400/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
           <div class="text-center sm:text-left space-y-1">
-            <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">📱 OFFICIAL ANDROID APP</span>
-            <h4 class="text-sm font-extrabold text-white mt-1">Get RupayVibe Android App</h4>
-            <p class="text-[11px] text-slate-300">Same wallet sync • Tap <b>"Install Anyway"</b> if prompted.</p>
+            <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full font-extrabold">🛠️ APP UPDATE IN PROGRESS</span>
+            <h4 class="text-sm font-extrabold text-white mt-1">RupayVibe Android App is Updating!</h4>
+            <p class="text-[11px] text-slate-300">New v2.0 Android App coming soon • Same wallet syncs automatically.</p>
           </div>
-          <a href="https://github.com/rupayvibeofficial-code/rupayvibe-games/releases/download/v1.0.1/RupayVibe.apk" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl text-center shadow shrink-0 transition">
-            ⬇️ Download APK
-          </a>
+          <span class="w-full sm:w-auto bg-amber-400/15 border border-amber-400/40 text-amber-300 font-black text-xs px-4 py-2.5 rounded-xl text-center shrink-0">
+            ⏳ Updating Soon...
+          </span>
         </div>
-      </div>
-
-      <!-- Shared Adsterra Native Banner (Visible on Home, Earn/Games & Dashboard Tabs) -->
-      <div id="sharedNativeBanner" class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 space-y-2 overflow-hidden">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Featured Partner Offers</span>
-          <span class="text-[10px] text-slate-600">Ad</span>
-        </div>
-        <script async fetchpriority="high" data-cfasync="false" src="https://bauval.org/21/5a763450dd0a4a9695a9d4cc6e4e33f5"></script>
-        <div id="container-5a763450dd0a4a9695a9d4cc6e4e33f5"></div>
       </div>
 
     </main>
@@ -810,23 +780,9 @@
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
-    // Alternating Adsterra + Monetag Smartlinks (All 4 Links Rotating)
-    const SMARTLINK_URLS = [
-      "https://araplhn.org/4/06c10e2593c78daee4f613bf45f3c8ed", // 1. Adsterra Smartlink (Games)
-      "https://uplcm.com/4/12349603",                          // 2. Monetag Smartlink 1
-      "https://asiafilm.org/4/11743e7be4c0a04ea4fbe3b9eb71414e", // 3. Adsterra Smartlink (Web)
-      "https://uplcm.com/4/12323336"                           // 4. Monetag Smartlink 2
-    ];
-    let smartlinkIndex = 0;
-    function getNextSmartlink() {
-      const url = SMARTLINK_URLS[smartlinkIndex % SMARTLINK_URLS.length];
-      smartlinkIndex++;
-      return url;
-    }
-
     const STREAK_REWARDS = [10, 15, 20, 30, 40, 50, 100];
     const MAX_DAILY_PLAYS = 10;
-    const MAX_AD_SPINS = 3;
+    const MAX_DAILY_SPINS = 4;
     const WELCOME_COINS = 50;
     const GAME_BASE_COINS = 15;
     const REFERRAL_BONUS_COINS = 25;
@@ -838,7 +794,6 @@
     let selectedRs = 10;
     let selectedCoins = 1000;
     let currentWheelDeg = 0;
-    let pending2XClaim = null;
 
     // 5% Lifetime Referral Commission Helper
     async function creditReferrerCommission(earnedCoins) {
@@ -847,7 +802,7 @@
       if (!refUid) return;
 
       const commission = Math.floor(earnedCoins * REFERRAL_COMMISSION_RATE);
-      if (commission <= 0) return; // Minimum 20 coins earned = +1 commission coin
+      if (commission <= 0) return;
 
       try {
         await updateDoc(doc(db, "users", refUid), {
@@ -876,8 +831,7 @@
     const todayStr = getLocalDateStr(0);
     const yesterdayStr = getLocalDateStr(-1);
     const todayKey = "rv_plays_" + todayStr;
-    const spinKey = "rv_spin_" + todayStr;
-    const adSpinCountKey = "rv_ad_spins_" + todayStr;
+    const spinCountKey = "rv_total_spins_" + todayStr;
 
     const urlParams = new URLSearchParams(window.location.search);
     const incomingRef = urlParams.get("ref");
@@ -893,59 +847,6 @@
     };
     document.getElementById("authBtn").onclick = window.triggerGoogleSignIn;
 
-    document.addEventListener("visibilitychange", async () => {
-      if (document.visibilityState === "visible" && pending2XClaim) {
-        const elapsed = (Date.now() - pending2XClaim.startTime) / 1000;
-        const claimData = pending2XClaim;
-        pending2XClaim = null;
-
-        if (elapsed >= 10) {
-          await creditGameCoins(claimData.doubleCoins, `${claimData.gameName} (2X Ad Bonus)`);
-        } else {
-          alert(`⚠️ You returned in ${Math.floor(elapsed)}s. Please keep the sponsor page open for full 10 seconds to unlock 2X (+${claimData.doubleCoins} Coins)!`);
-          showWinScreen(claimData.baseCoins, claimData.gameName);
-        }
-      }
-    });
-
-    function verifySponsorAdView(btn, defaultLabel, actionName, onSuccess) {
-      window.open(getNextSmartlink(), "_blank", "noopener,noreferrer");
-
-      btn.disabled = true;
-      let sec = 10;
-      let aborted = false;
-      btn.innerText = `⏳ Stay on Ad Tab... ${sec}s`;
-
-      const onReturnEarly = () => {
-        if (document.visibilityState === "visible" && sec > 0) {
-          aborted = true;
-          clearInterval(timer);
-          document.removeEventListener("visibilitychange", onReturnEarly);
-          btn.disabled = false;
-          btn.innerText = defaultLabel;
-          alert(`⚠️ Ad closed too early! Please stay on the Sponsor Ad page for full 10 seconds to complete ${actionName}.`);
-        }
-      };
-
-      setTimeout(() => {
-        if (!aborted && sec > 0) {
-          document.addEventListener("visibilitychange", onReturnEarly);
-        }
-      }, 1000);
-
-      const timer = setInterval(async () => {
-        if (aborted) return;
-        sec--;
-        if (sec > 0) {
-          btn.innerText = `⏳ Stay on Ad Tab... ${sec}s`;
-        } else {
-          clearInterval(timer);
-          document.removeEventListener("visibilitychange", onReturnEarly);
-          await onSuccess();
-        }
-      }, 1000);
-    }
-
     window.switchTab = (tabName) => {
       ["home", "earn", "dashboard", "redeem", "profile"].forEach(t => {
         document.getElementById("tab-" + t).classList.add("hidden");
@@ -953,16 +854,6 @@
       });
       document.getElementById("tab-" + tabName).classList.remove("hidden");
       document.getElementById("nav-" + tabName).classList.replace("text-slate-400", "text-amber-400");
-
-      const nativeAdBox = document.getElementById("sharedNativeBanner");
-      if (nativeAdBox) {
-        if (["home", "earn", "dashboard"].includes(tabName)) {
-          nativeAdBox.classList.remove("hidden");
-        } else {
-          nativeAdBox.classList.add("hidden");
-        }
-      }
-
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
@@ -1099,22 +990,17 @@
     }
     updatePlaysBadge();
 
-    function getAdSpinsUsed() {
-      return parseInt(localStorage.getItem(adSpinCountKey) || "0", 10);
+    function getSpinsUsed() {
+      return parseInt(localStorage.getItem(spinCountKey) || "0", 10);
     }
 
     function updateSpinBadge() {
-      const freeUsed = !!localStorage.getItem(spinKey);
-      const adUsed = getAdSpinsUsed();
-      const adLeft = Math.max(0, MAX_AD_SPINS - adUsed);
+      const used = getSpinsUsed();
+      const left = Math.max(0, MAX_DAILY_SPINS - used);
 
-      if (!freeUsed) {
-        document.getElementById("spinStatusBadge").innerText = "1 Free + 3 Ad Spins";
-        document.getElementById("spinNowBtn").innerText = "🎡 Spin Now (Free)";
-        document.getElementById("spinNowBtn").disabled = false;
-      } else if (adLeft > 0) {
-        document.getElementById("spinStatusBadge").innerText = `Ad Spins Left: ${adLeft}/${MAX_AD_SPINS}`;
-        document.getElementById("spinNowBtn").innerText = `📺 Watch Ad & Spin (${adLeft} Left)`;
+      if (left > 0) {
+        document.getElementById("spinStatusBadge").innerText = `${left}/${MAX_DAILY_SPINS} Spins Left`;
+        document.getElementById("spinNowBtn").innerText = `🎡 Spin Now (${left} Left)`;
         document.getElementById("spinNowBtn").disabled = false;
       } else {
         document.getElementById("spinStatusBadge").innerText = "All Spins Used ✓";
@@ -1148,25 +1034,16 @@
     window.spinWheel = async () => {
       if (!currentUser) return alert("Please sign in with Google first!");
       const btn = document.getElementById("spinNowBtn");
+      const used = getSpinsUsed();
 
-      if (!localStorage.getItem(spinKey)) {
-        btn.disabled = true;
-        localStorage.setItem(spinKey, "1");
-        runActualWheelSpin();
-        return;
+      if (used >= MAX_DAILY_SPINS) {
+        return alert("Daily 4 Spins completed! Play Mini-Games in Earn Coins tab.");
       }
 
-      const adUsed = getAdSpinsUsed();
-      if (adUsed >= MAX_AD_SPINS) {
-        return alert("Daily 4 Spins (1 Free + 3 Ad Spins) completed! Play Mini-Games in Earn Coins tab.");
-      }
-
-      const adLeft = MAX_AD_SPINS - adUsed;
-      verifySponsorAdView(btn, `📺 Watch Ad & Spin (${adLeft} Left)`, "Bonus Spin", async () => {
-        localStorage.setItem(adSpinCountKey, String(adUsed + 1));
-        btn.innerText = "🎡 Spinning...";
-        runActualWheelSpin();
-      });
+      btn.disabled = true;
+      btn.innerText = "🎡 Spinning...";
+      localStorage.setItem(spinCountKey, String(used + 1));
+      runActualWheelSpin();
     };
 
     // ==================== 4-TIER MEGA POOLS (SYNCED WITH FLUTTER APP) ====================
@@ -1209,77 +1086,79 @@
 
       const btn = document.getElementById(`joinBtn_${poolId}`);
       const defaultLabel = btn ? btn.innerText : `🎟️ Buy Token (${entryCoins} Coins)`;
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = "⏳ Joining Pool...";
+      }
 
-      verifySponsorAdView(btn, defaultLabel, `${poolLabel} Entry`, async () => {
-        try {
-          const pRef = doc(db, "pools", poolId);
-          const pSnap = await getDoc(pRef);
-          const currentEntries = pSnap.exists() ? (pSnap.data().entries || []) : [];
-          const newEntries = [...currentEntries, { uid: currentUser.uid, name: userData.name || "Player" }];
+      try {
+        const pRef = doc(db, "pools", poolId);
+        const pSnap = await getDoc(pRef);
+        const currentEntries = pSnap.exists() ? (pSnap.data().entries || []) : [];
+        const newEntries = [...currentEntries, { uid: currentUser.uid, name: userData.name || "Player" }];
 
-          await updateDoc(doc(db, "users", currentUser.uid), {
-            coins: increment(-entryCoins),
-            poolEntries: increment(1)
-          });
+        await updateDoc(doc(db, "users", currentUser.uid), {
+          coins: increment(-entryCoins),
+          poolEntries: increment(1)
+        });
 
-          await addDoc(collection(db, "users", currentUser.uid, "history"), {
-            title: `Joined ${poolLabel}`,
-            coins: entryCoins,
-            type: "debit",
-            createdAt: serverTimestamp()
-          });
+        await addDoc(collection(db, "users", currentUser.uid, "history"), {
+          title: `Joined ${poolLabel}`,
+          coins: entryCoins,
+          type: "debit",
+          createdAt: serverTimestamp()
+        });
 
-          if (newEntries.length >= maxTokens) {
-            const shuffled = [...newEntries].sort(() => Math.random() - 0.5);
-            const chosenUids = new Set();
-            const winners = [];
+        if (newEntries.length >= maxTokens) {
+          const shuffled = [...newEntries].sort(() => Math.random() - 0.5);
+          const chosenUids = new Set();
+          const winners = [];
 
-            for (const entry of shuffled) {
-              if (!chosenUids.has(entry.uid)) {
-                chosenUids.add(entry.uid);
-                winners.push({ uid: entry.uid, name: entry.name || "Player" });
-                if (winners.length >= prizes.length) break;
-              }
+          for (const entry of shuffled) {
+            if (!chosenUids.has(entry.uid)) {
+              chosenUids.add(entry.uid);
+              winners.push({ uid: entry.uid, name: entry.name || "Player" });
+              if (winners.length >= prizes.length) break;
             }
-
-            const rankLabels = ["1st Prize 🥇", "2nd Prize 🥈", "3rd Prize 🥉"];
-            const summaryParts = [];
-
-            for (let i = 0; i < winners.length; i++) {
-              const w = winners[i];
-              const wCoins = prizes[i];
-
-              await updateDoc(doc(db, "users", w.uid), { coins: increment(wCoins) });
-              await addDoc(collection(db, "users", w.uid, "history"), {
-                title: `Won ${rankLabels[i]} in ${poolLabel}`,
-                coins: wCoins,
-                type: "credit",
-                createdAt: serverTimestamp()
-              });
-
-              summaryParts.push(`${rankLabels[i]}: ${w.name} (${wCoins})`);
-            }
-
-            const lastWinnersSummary = summaryParts.join(" • ");
-
-            await setDoc(pRef, {
-              entries: [],
-              lastWinner: lastWinnersSummary,
-              round: increment(1)
-            }, { merge: true });
-
-            alert(`🎉 ${poolLabel} Full (${maxTokens}/${maxTokens})!\n${lastWinnersSummary}`);
-          } else {
-            await setDoc(pRef, { entries: newEntries }, { merge: true });
-            alert(`🎟️ Ticket Confirmed for ${poolLabel}! (${newEntries.length}/${maxTokens} Joined).`);
           }
-        } finally {
-          if (btn) {
-            btn.disabled = false;
-            btn.innerText = defaultLabel;
+
+          const rankLabels = ["1st Prize 🥇", "2nd Prize 🥈", "3rd Prize 🥉"];
+          const summaryParts = [];
+
+          for (let i = 0; i < winners.length; i++) {
+            const w = winners[i];
+            const wCoins = prizes[i];
+
+            await updateDoc(doc(db, "users", w.uid), { coins: increment(wCoins) });
+            await addDoc(collection(db, "users", w.uid, "history"), {
+              title: `Won ${rankLabels[i]} in ${poolLabel}`,
+              coins: wCoins,
+              type: "credit",
+              createdAt: serverTimestamp()
+            });
+
+            summaryParts.push(`${rankLabels[i]}: ${w.name} (${wCoins})`);
           }
+
+          const lastWinnersSummary = summaryParts.join(" • ");
+
+          await setDoc(pRef, {
+            entries: [],
+            lastWinner: lastWinnersSummary,
+            round: increment(1)
+          }, { merge: true });
+
+          alert(`🎉 ${poolLabel} Full (${maxTokens}/${maxTokens})!\n${lastWinnersSummary}`);
+        } else {
+          await setDoc(pRef, { entries: newEntries }, { merge: true });
+          alert(`🎟️ Ticket Confirmed for ${poolLabel}! (${newEntries.length}/${maxTokens} Joined).`);
         }
-      });
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = defaultLabel;
+        }
+      }
     };
 
     onAuthStateChanged(auth, async (user) => {
@@ -1307,7 +1186,7 @@
             if (!refSnap.empty) {
               const referrerDoc = refSnap.docs[0];
               validReferrerUid = referrerDoc.id;
-              startingCoins += REFERRAL_BONUS_COINS; // New user also gets +25 Coins!
+              startingCoins += REFERRAL_BONUS_COINS;
 
               await updateDoc(doc(db, "users", validReferrerUid), {
                 coins: increment(REFERRAL_BONUS_COINS),
@@ -1522,38 +1401,39 @@
       if ((userData.coins || 0) < selectedCoins) return alert(`Insufficient coins! You need ${selectedCoins} Coins for ₹${selectedRs}.`);
 
       const btn = document.getElementById("submitWithdrawBtn");
-      verifySponsorAdView(btn, "Request Same-Day UPI Payout", "UPI Withdrawal Request", async () => {
-        try {
-          await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(-selectedCoins) });
+      btn.disabled = true;
+      btn.innerText = "⏳ Submitting Request...";
 
-          await addDoc(collection(db, "users", currentUser.uid, "history"), {
-            title: `UPI Withdrawal (${upi})`,
-            coins: selectedCoins,
-            type: "debit",
-            createdAt: serverTimestamp()
-          });
+      try {
+        await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(-selectedCoins) });
 
-          await addDoc(collection(db, "withdrawals"), {
-            uid: currentUser.uid,
-            email: currentUser.email,
-            name: userData.name || "User",
-            upiId: upi,
-            amount: selectedRs,
-            coinsDeducted: selectedCoins,
-            status: "Pending",
-            source: "games.rupayvibe.online",
-            timestamp: serverTimestamp()
-          });
+        await addDoc(collection(db, "users", currentUser.uid, "history"), {
+          title: `UPI Withdrawal (${upi})`,
+          coins: selectedCoins,
+          type: "debit",
+          createdAt: serverTimestamp()
+        });
 
-          document.getElementById("confirmPayoutAmt").innerText = `₹${selectedRs}`;
-          document.getElementById("confirmPayoutUpi").innerText = upi;
-          document.getElementById("confirmPayoutCoins").innerText = `-${selectedCoins} Coins`;
-          document.getElementById("payoutConfirmModal").classList.remove("hidden");
-        } finally {
-          btn.disabled = false;
-          btn.innerText = "Request Same-Day UPI Payout";
-        }
-      });
+        await addDoc(collection(db, "withdrawals"), {
+          uid: currentUser.uid,
+          email: currentUser.email,
+          name: userData.name || "User",
+          upiId: upi,
+          amount: selectedRs,
+          coinsDeducted: selectedCoins,
+          status: "Pending",
+          source: "games.rupayvibe.online",
+          timestamp: serverTimestamp()
+        });
+
+        document.getElementById("confirmPayoutAmt").innerText = `₹${selectedRs}`;
+        document.getElementById("confirmPayoutUpi").innerText = upi;
+        document.getElementById("confirmPayoutCoins").innerText = `-${selectedCoins} Coins`;
+        document.getElementById("payoutConfirmModal").classList.remove("hidden");
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Request Same-Day UPI Payout";
+      }
     };
 
     function canPlay() {
@@ -1591,7 +1471,7 @@
           <div class="text-4xl">🏆</div>
           <div>
             <h4 class="text-xl font-extrabold text-white">You Won +${baseCoins} Coins!</h4>
-            <p class="text-xs text-slate-400 mt-1">Watch a quick 10s sponsor ad to double your reward!</p>
+            <p class="text-xs text-slate-400 mt-1">Claim your reward or tap 2X Bonus!</p>
           </div>
 
           <div class="grid grid-cols-2 gap-2.5 pt-1">
@@ -1599,7 +1479,7 @@
               Collect +${baseCoins} Coins
             </button>
             <button id="collect2XBtn" class="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-extrabold py-3 px-2 rounded-xl text-xs shadow-lg transition">
-              📺 2X (+${doubleCoins} Coins)
+              ⚡ Claim 2X (+${doubleCoins} Coins)
             </button>
           </div>
         </div>
@@ -1610,20 +1490,7 @@
       };
 
       document.getElementById("collect2XBtn").onclick = () => {
-        pending2XClaim = {
-          baseCoins,
-          doubleCoins,
-          gameName,
-          startTime: Date.now()
-        };
-        window.open(getNextSmartlink(), "_blank", "noopener,noreferrer");
-        document.getElementById("arenaBody").innerHTML = `
-          <div class="text-center space-y-3 py-4">
-            <div class="text-3xl animate-bounce">⏳</div>
-            <h4 class="text-base font-extrabold text-amber-400">Verifying 10s Sponsor Visit...</h4>
-            <p class="text-xs text-slate-300">Keep the sponsor page open for 10 seconds, then return here to get <span class="text-emerald-400 font-bold">+${doubleCoins} Coins</span>!</p>
-          </div>
-        `;
+        creditGameCoins(doubleCoins, `${gameName} (2X Bonus)`);
       };
     }
 
@@ -1645,7 +1512,6 @@
 
     window.closeArena = () => {
       clearInterval(gameTimer);
-      pending2XClaim = null;
       document.getElementById("gameArena").classList.add("hidden");
     };
 
