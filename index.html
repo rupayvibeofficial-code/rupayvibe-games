@@ -29,7 +29,7 @@
   <!-- Live Same-Day UPI Payout Ticker -->
   <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 border-b border-emerald-500/30 py-1.5 overflow-hidden">
     <div class="animate-marquee text-[11px] font-semibold text-emerald-300 tracking-wide">
-      ⚡ LIVE SAME-DAY UPI PAYOUTS: &nbsp;&nbsp; 🥇 Kart*** won 1st Prize (₹8) in Starter Pool #1 &nbsp;•&nbsp; 💸 Divy*** withdrew ₹25 via GPay &nbsp;•&nbsp; 🥇 Arun*** won 1st Prize (₹40) in Silver Pool #2 &nbsp;•&nbsp; 🚀 Manoj*** earned +200 Coins Invite Bonus &nbsp;•&nbsp; 👑 Megh*** won 1st Prize (₹400) in VIP Mega Pool #4
+      ⚡ LIVE SAME-DAY UPI PAYOUTS: &nbsp;&nbsp; 🥇 Kart*** won 1st Prize (₹8) in Starter Pool #1 &nbsp;•&nbsp; 💸 Divy*** withdrew ₹25 via GPay &nbsp;•&nbsp; 🥇 Arun*** won 1st Prize (₹40) in Silver Pool #2 &nbsp;•&nbsp; 🚀 Manoj*** earned +25 Coins + 5% Lifetime Commission &nbsp;•&nbsp; 👑 Megh*** won 1st Prize (₹400) in VIP Mega Pool #4
     </div>
   </div>
 
@@ -96,8 +96,8 @@
           <p class="text-[11px] text-slate-400">Winners Per Pool</p>
         </div>
         <div>
-          <p class="text-lg sm:text-2xl font-black text-indigo-400">+200</p>
-          <p class="text-[11px] text-slate-400">Coins Per Referral</p>
+          <p class="text-lg sm:text-2xl font-black text-indigo-400">+25 &amp; 5%</p>
+          <p class="text-[11px] text-slate-400">Bonus + Lifetime Comm.</p>
         </div>
       </div>
     </div>
@@ -212,7 +212,7 @@
             <span class="text-[10px] uppercase tracking-widest bg-black/30 text-emerald-100 px-3 py-1 rounded-full font-bold">
               ⚡ SAME-DAY UPI CASHOUT
             </span>
-            <span class="text-[11px] text-emerald-100 font-semibold">Invite = +200 Coins</span>
+            <span class="text-[11px] text-emerald-100 font-semibold">Invite = +25 Coins + 5%</span>
           </div>
           <div class="flex items-end justify-between mt-3">
             <div>
@@ -448,14 +448,14 @@
           </div>
         </div>
 
-        <!-- Invite & Earn +200 Coins Card -->
+        <!-- Invite & Earn +25 Coins + 5% Lifetime Commission Card -->
         <div class="bg-gradient-to-r from-indigo-950 to-slate-900 border border-indigo-500/40 rounded-2xl p-4 space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 rounded-full font-bold">UNLIMITED REFERRALS</span>
-            <span class="text-xs font-extrabold text-emerald-400">+200 Coins / Friend</span>
+            <span class="text-xs font-extrabold text-emerald-400">+25 Coins + 5% Lifetime</span>
           </div>
-          <h3 class="text-base font-extrabold text-white">👥 Invite Friends & Get +200 Coins!</h3>
-          <p class="text-xs text-slate-300">Share your referral link. When your friend signs in, you get <span class="text-amber-400 font-bold">+200 Coins</span> instantly.</p>
+          <h3 class="text-base font-extrabold text-white">👥 Invite Friends: +25 Coins + 5% Commission!</h3>
+          <p class="text-xs text-slate-300">When your friend signs in, you both get <span class="text-amber-400 font-bold">+25 Coins</span> instantly, plus you earn <span class="text-emerald-400 font-bold">5% Lifetime Commission</span> on all coins they earn!</p>
           <div class="flex gap-2">
             <input id="refLinkInput" type="text" readonly value="Sign in to get your invite link" class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300" />
             <button onclick="copyRefLink()" class="bg-indigo-500 hover:bg-indigo-400 text-white font-bold px-4 py-2 rounded-xl text-xs">Copy</button>
@@ -678,7 +678,7 @@
           <div class="flex items-center justify-between">
             <div>
               <h3 class="text-base font-extrabold text-white">👥 My Referred Friends</h3>
-              <p class="text-[11px] text-slate-400">Friends who joined using your referral link (+200 Coins each)</p>
+              <p class="text-[11px] text-slate-400">Friends who joined using your link (+25 Coins + 5% Lifetime Commission)</p>
             </div>
             <span id="referredFriendsCountBadge" class="text-xs font-extrabold bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-full border border-indigo-500/30">
               0 Joined
@@ -829,6 +829,8 @@
     const MAX_AD_SPINS = 3;
     const WELCOME_COINS = 50;
     const GAME_BASE_COINS = 15;
+    const REFERRAL_BONUS_COINS = 25;
+    const REFERRAL_COMMISSION_RATE = 0.05; // 5% Lifetime Commission
 
     let currentUser = null;
     let userData = {};
@@ -837,6 +839,30 @@
     let selectedCoins = 1000;
     let currentWheelDeg = 0;
     let pending2XClaim = null;
+
+    // 5% Lifetime Referral Commission Helper
+    async function creditReferrerCommission(earnedCoins) {
+      if (!currentUser || earnedCoins <= 0) return;
+      const refUid = (userData.referredBy || "").trim();
+      if (!refUid) return;
+
+      const commission = Math.floor(earnedCoins * REFERRAL_COMMISSION_RATE);
+      if (commission <= 0) return; // Minimum 20 coins earned = +1 commission coin
+
+      try {
+        await updateDoc(doc(db, "users", refUid), {
+          coins: increment(commission)
+        });
+        await addDoc(collection(db, "users", refUid, "history"), {
+          title: `5% Referral Commission (${userData.name || currentUser.displayName || "Friend"})`,
+          coins: commission,
+          type: "credit",
+          createdAt: serverTimestamp()
+        });
+      } catch (err) {
+        console.warn("Commission credit skipped:", err);
+      }
+    }
 
     function getLocalDateStr(offsetDays = 0) {
       const d = new Date();
@@ -1055,6 +1081,8 @@
           createdAt: serverTimestamp()
         });
 
+        await creditReferrerCommission(claimedReward);
+
         alert(`🔥 Day ${claimedDay} Claimed! +${claimedReward} Coins Added to Your Wallet!`);
       } catch (e) {
         if (typeof e === "string") alert(e);
@@ -1111,6 +1139,7 @@
           type: "credit",
           createdAt: serverTimestamp()
         });
+        await creditReferrerCommission(won);
         updateSpinBadge();
         alert(`🎉 Congrats! You won +${won} Coins from Lucky Spin!`);
       }, 3100);
@@ -1270,6 +1299,7 @@
           const generatedCode = "RV" + user.uid.substring(0, 5).toUpperCase();
           const pendingRef = localStorage.getItem("rv_pending_ref");
           let validReferrerUid = null;
+          let startingCoins = WELCOME_COINS;
 
           if (pendingRef && pendingRef !== generatedCode) {
             const q = query(collection(db, "users"), where("referralCode", "==", pendingRef));
@@ -1277,15 +1307,16 @@
             if (!refSnap.empty) {
               const referrerDoc = refSnap.docs[0];
               validReferrerUid = referrerDoc.id;
+              startingCoins += REFERRAL_BONUS_COINS; // New user also gets +25 Coins!
 
               await updateDoc(doc(db, "users", validReferrerUid), {
-                coins: increment(200),
+                coins: increment(REFERRAL_BONUS_COINS),
                 referralsCount: increment(1)
               });
 
               await addDoc(collection(db, "users", validReferrerUid, "history"), {
                 title: `Referral Bonus (${user.displayName || "Friend"})`,
-                coins: 200,
+                coins: REFERRAL_BONUS_COINS,
                 type: "credit",
                 createdAt: serverTimestamp()
               });
@@ -1294,7 +1325,7 @@
                 uid: user.uid,
                 name: user.displayName || "Player",
                 email: user.email || "",
-                status: "Joined (+200 Coins)",
+                status: `+${REFERRAL_BONUS_COINS} Coins + 5% Comm.`,
                 joinedAt: serverTimestamp()
               });
             }
@@ -1304,7 +1335,7 @@
             email: user.email,
             name: user.displayName || "Player",
             photoUrl: user.photoURL || "",
-            coins: WELCOME_COINS,
+            coins: startingCoins,
             lastCheckIn: "",
             checkInStreak: 0,
             referralCode: generatedCode,
@@ -1321,6 +1352,15 @@
             type: "credit",
             createdAt: serverTimestamp()
           });
+
+          if (validReferrerUid) {
+            await addDoc(collection(db, "users", user.uid, "history"), {
+              title: `Referral Signup Bonus (${pendingRef})`,
+              coins: REFERRAL_BONUS_COINS,
+              type: "credit",
+              createdAt: serverTimestamp()
+            });
+          }
         }
 
         onSnapshot(userRef, (snap) => {
@@ -1360,7 +1400,7 @@
           countBadge.innerText = `${snap.size} Joined`;
 
           if (snap.empty) {
-            refEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">No referred friends yet. Share your link to earn +200 Coins per friend!</p>`;
+            refEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">No referred friends yet. Share your link to earn +25 Coins + 5% lifetime commission!</p>`;
             return;
           }
           refEl.innerHTML = snap.docs.map(d => {
@@ -1373,7 +1413,7 @@
                   <p class="text-[10px] text-slate-400 truncate">${maskedEmail} • ${formatTime(f.joinedAt)}</p>
                 </div>
                 <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-extrabold shrink-0">
-                  ${f.status || "+200 Coins"}
+                  ${f.status || "+25 Coins + 5%"}
                 </span>
               </div>
             `;
@@ -1457,12 +1497,12 @@
       const inp = document.getElementById("refLinkInput");
       inp.select();
       navigator.clipboard.writeText(inp.value);
-      alert("Invite link copied! Share & earn +200 Coins per friend.");
+      alert("Invite link copied! Earn +25 Coins + 5% Lifetime Commission per friend.");
     };
 
     window.shareWhatsApp = () => {
       const link = document.getElementById("refLinkInput").value;
-      const msg = encodeURIComponent(`🏆 Join RupayVibe Mega Arena & get +50 Free Coins! Play free games, spin & join Top-3 Winner UPI pools! Join via my link: ${link}`);
+      const msg = encodeURIComponent(`🏆 Join RupayVibe Mega Arena & get +75 Free Coins (+50 Welcome + 25 Referral)! Play free games, spin & join Top-3 Winner UPI pools! Join via my link: ${link}`);
       window.open(`https://wa.me/?text=${msg}`, "_blank");
     };
 
@@ -1532,6 +1572,7 @@
         type: "credit",
         createdAt: serverTimestamp()
       });
+      await creditReferrerCommission(coinsToAdd);
 
       document.getElementById("arenaBody").innerHTML = `
         <div class="text-center space-y-3">
